@@ -1,6 +1,6 @@
 ## 0.0.2
 
-Update pubsepc.yaml
+Update pubspec.yaml
 
 ## 0.0.1
 
