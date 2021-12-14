@@ -1,12 +1,12 @@
 name: omni_datetime_picker
 description: A datetime picker package with option to use a single datetime picker or a datetime range picker. 
-version: 0.0.2
+version: 0.0.2+2
 repository: "https://github.com/DogeeeXD/OmniDateTimePicker"
 homepage: "https://dogeeexd.com"
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
-  flutter: ">=2.8.0"
+  flutter: ">=2.5.3"
 
 dependencies:
   flutter:
