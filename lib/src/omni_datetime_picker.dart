@@ -63,6 +63,15 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
   DateTime startDateTime = DateTime.now();
 
   @override
+  void initState() {
+    if (widget.startInitialDate != null) {
+      startDateTime = widget.startInitialDate!;
+    }
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.transparent,

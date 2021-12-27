@@ -1,3 +1,6 @@
+## 0.0.3
+Fixed bug where initial DateTime not being used.
+
 ## 0.0.2+2
 Update readme
 

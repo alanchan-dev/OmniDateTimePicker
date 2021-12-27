@@ -94,6 +94,15 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
     _tabController.addListener(() {
       setState(() {});
     });
+
+    if (widget.startInitialDate != null) {
+      startDateTime = widget.startInitialDate!;
+    }
+
+    if (widget.endInitialDate != null) {
+      endDateTime = widget.endInitialDate!;
+    }
+
     super.initState();
   }
 
