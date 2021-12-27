@@ -11,7 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 # Omni DateTime Picker
-A DateTime picker that lets user to select a date and the time, with start & end as a range.
+A DateTime picker that lets user select a date and the time, with start & end as a range.
 
 ## Screenshots
 
