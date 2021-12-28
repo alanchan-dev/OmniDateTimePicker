@@ -217,6 +217,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                                   fontSize: 24,
                                   color:
                                       widget.calendarTextColor ?? Colors.black),
+                          time: startDateTime,
                           onTimeChange: (dateTime) {
                             DateTime tempStartDateTime = DateTime(
                               startDateTime.year,
@@ -269,6 +270,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                                   fontSize: 24,
                                   color:
                                       widget.calendarTextColor ?? Colors.black),
+                          time: endDateTime,
                           onTimeChange: (dateTime) {
                             DateTime tempEndDateTime = DateTime(
                               endDateTime.year,

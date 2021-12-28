@@ -1,3 +1,6 @@
+## 0.0.3+1
+Fixed bug where TimeSpinner is not showing passed startDateTime
+
 ## 0.0.3
 Fixed bug where initial DateTime not being used.
 

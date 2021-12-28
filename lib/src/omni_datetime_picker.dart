@@ -128,6 +128,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                           TextStyle(
                               fontSize: 24,
                               color: widget.calendarTextColor ?? Colors.black),
+                      time: startDateTime,
                       onTimeChange: (dateTime) {
                         DateTime tempStartDateTime = DateTime(
                           startDateTime.year,
