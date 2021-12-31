@@ -125,7 +125,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
   double defaultItemHeight = 60;
   double defaultItemWidth = 45;
   double defaultSpacing = 20;
-  AlignmentGeometry defaultAlignment = Alignment.centerRight;
+  AlignmentGeometry defaultAlignment = Alignment.center;
 
   /// getter
 

@@ -1,3 +1,6 @@
+## 0.0.4
+Fixed time spinner alignment issue.
+
 ## 0.0.3+1
 Fixed bug where TimeSpinner is not showing passed startDateTime
 
