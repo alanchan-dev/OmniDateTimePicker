@@ -1,3 +1,6 @@
+## 0.0.4+1
+Updated homepage and repository link
+
 ## 0.0.4
 Fixed time spinner alignment issue.
 
