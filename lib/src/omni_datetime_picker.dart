@@ -62,13 +62,23 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
   /// Initial value: Current DateTime
   DateTime startDateTime = DateTime.now();
 
+  late MaterialLocalizations _localizations;
+
   @override
   void initState() {
     if (widget.startInitialDate != null) {
       startDateTime = widget.startInitialDate!;
     }
 
+    _localizations = MaterialLocalizations.of(context);
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _localizations = MaterialLocalizations.of(context);
   }
 
   @override
@@ -168,7 +178,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                         Navigator.of(context).pop<DateTime>();
                       },
                       child: Text(
-                        "Cancel",
+                        _localizations.cancelButtonLabel,
                         style: TextStyle(
                             color: widget.buttonTextColor ?? Colors.black),
                       ),
@@ -193,7 +203,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                         );
                       },
                       child: Text(
-                        "Done",
+                        _localizations.saveButtonLabel,
                         style: TextStyle(
                             color: widget.buttonTextColor ?? Colors.black),
                       ),
