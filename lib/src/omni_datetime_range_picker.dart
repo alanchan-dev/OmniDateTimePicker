@@ -77,6 +77,7 @@ class OmniDateTimeRangePicker extends StatefulWidget {
 class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late MaterialLocalizations _localizations;
 
   /// startDateTime will be returned in a List<DateTime> with index 0
   ///
@@ -103,7 +104,15 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
       endDateTime = widget.endInitialDate!;
     }
 
+    _localizations = MaterialLocalizations.of(context);
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _localizations = MaterialLocalizations.of(context);
   }
 
   @override
@@ -145,7 +154,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                             widget.borderRadius ?? const Radius.circular(16),
                       )),
                   child: Text(
-                    "Start",
+                    _localizations.dateRangeStartLabel,
                     style:
                         TextStyle(color: widget.tabTextColor ?? Colors.black87),
                   ),
@@ -165,7 +174,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                             widget.borderRadius ?? const Radius.circular(16),
                       )),
                   child: Text(
-                    "End",
+                    _localizations.dateRangeEndLabel,
                     style:
                         TextStyle(color: widget.tabTextColor ?? Colors.black87),
                   ),
@@ -317,7 +326,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                           Navigator.of(context).pop<List<DateTime>>();
                         },
                         child: Text(
-                          "Cancel",
+                          _localizations.cancelButtonLabel,
                           style: TextStyle(
                               color: widget.buttonTextColor ?? Colors.black),
                         ),
@@ -342,7 +351,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                           ]);
                         },
                         child: Text(
-                          "Done",
+                          _localizations.saveButtonLabel,
                           style: TextStyle(
                               color: widget.buttonTextColor ?? Colors.black),
                         ),
