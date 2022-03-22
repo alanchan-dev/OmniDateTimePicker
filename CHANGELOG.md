@@ -1,3 +1,6 @@
+## 0.0.6
+Fixed breaking error from 0.0.5.
+
 ## 0.0.5+1
 Updated README typo
 

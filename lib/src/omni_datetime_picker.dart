@@ -69,9 +69,6 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
     if (widget.startInitialDate != null) {
       startDateTime = widget.startInitialDate!;
     }
-
-    _localizations = MaterialLocalizations.of(context);
-
     super.initState();
   }
 
@@ -178,6 +175,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                         Navigator.of(context).pop<DateTime>();
                       },
                       child: Text(
+                        // "Cancel",
                         _localizations.cancelButtonLabel,
                         style: TextStyle(
                             color: widget.buttonTextColor ?? Colors.black),
@@ -203,6 +201,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                         );
                       },
                       child: Text(
+                        // "Save",
                         _localizations.saveButtonLabel,
                         style: TextStyle(
                             color: widget.buttonTextColor ?? Colors.black),

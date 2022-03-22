@@ -104,8 +104,6 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
       endDateTime = widget.endInitialDate!;
     }
 
-    _localizations = MaterialLocalizations.of(context);
-
     super.initState();
   }
 
