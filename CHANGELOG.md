@@ -1,3 +1,9 @@
+## 0.0.5+1
+Updated README typo
+
+## 0.0.5
+Replace hardcoded text values by localized defaults
+
 ## 0.0.4+1
 Updated homepage and repository link
 

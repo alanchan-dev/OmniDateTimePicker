@@ -25,7 +25,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^0.0.4+1
+  omni_datetime_picker: ^0.0.5+1
 ```
 Now in your Dart code, you can use:
 
@@ -44,7 +44,7 @@ DateTime? dateTime = await showOmniDateTimePicker(context: context);
 
 OmniDateTimeRangePicker
 ```dart
-List<DateTime>? dateTimeList = await showOmniDateTimePicker(context: context);
+List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(context: context);
 ```
 
 Custom properties:
