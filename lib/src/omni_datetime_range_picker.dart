@@ -179,17 +179,19 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                 ),
               ],
             ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: widget.backgroundColor ?? Colors.white,
-                ),
-                child: TabBarView(
-                  controller: _tabController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    /// Start date
-                    Column(
+            Container(
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height - 180),
+              decoration: BoxDecoration(
+                color: widget.backgroundColor ?? Colors.white,
+              ),
+              child: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  /// Start date
+                  SingleChildScrollView(
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CalendarDatePicker(
@@ -240,9 +242,11 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                         ),
                       ],
                     ),
+                  ),
 
-                    /// End date
-                    Column(
+                  /// End date
+                  SingleChildScrollView(
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CalendarDatePicker(
@@ -293,8 +297,8 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Container(

@@ -95,62 +95,67 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height - 120),
               decoration: BoxDecoration(
                 color: widget.backgroundColor ?? Colors.white,
                 borderRadius: BorderRadius.only(
                     topLeft: widget.borderRadius ?? const Radius.circular(16),
                     topRight: widget.borderRadius ?? const Radius.circular(16)),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CalendarDatePicker(
-                    initialDate: widget.startInitialDate ?? DateTime.now(),
-                    firstDate: widget.startFirstDate ??
-                        DateTime.now().subtract(const Duration(days: 3652)),
-                    lastDate: widget.startLastDate ??
-                        DateTime.now().add(const Duration(days: 3652)),
-                    onDateChanged: (dateTime) {
-                      startDateTime = DateTime(
-                        dateTime.year,
-                        dateTime.month,
-                        dateTime.day,
-                        startDateTime.hour,
-                        startDateTime.minute,
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 48.0),
-                    child: TimePickerSpinner(
-                      is24HourMode: widget.is24HourMode ?? false,
-                      isShowSeconds: widget.isShowSeconds ?? false,
-                      normalTextStyle: widget.timeSpinnerTextStyle ??
-                          TextStyle(
-                              fontSize: 18,
-                              color:
-                                  widget.calendarTextColor ?? Colors.black54),
-                      highlightedTextStyle: widget
-                              .timeSpinnerHighlightedTextStyle ??
-                          TextStyle(
-                              fontSize: 24,
-                              color: widget.calendarTextColor ?? Colors.black),
-                      time: startDateTime,
-                      onTimeChange: (dateTime) {
-                        DateTime tempStartDateTime = DateTime(
-                          startDateTime.year,
-                          startDateTime.month,
-                          startDateTime.day,
-                          dateTime.hour,
-                          dateTime.minute,
-                          dateTime.second,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CalendarDatePicker(
+                      initialDate: widget.startInitialDate ?? DateTime.now(),
+                      firstDate: widget.startFirstDate ??
+                          DateTime.now().subtract(const Duration(days: 3652)),
+                      lastDate: widget.startLastDate ??
+                          DateTime.now().add(const Duration(days: 3652)),
+                      onDateChanged: (dateTime) {
+                        startDateTime = DateTime(
+                          dateTime.year,
+                          dateTime.month,
+                          dateTime.day,
+                          startDateTime.hour,
+                          startDateTime.minute,
                         );
-
-                        startDateTime = tempStartDateTime;
                       },
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: TimePickerSpinner(
+                        is24HourMode: widget.is24HourMode ?? false,
+                        isShowSeconds: widget.isShowSeconds ?? false,
+                        normalTextStyle: widget.timeSpinnerTextStyle ??
+                            TextStyle(
+                                fontSize: 18,
+                                color:
+                                    widget.calendarTextColor ?? Colors.black54),
+                        highlightedTextStyle: widget
+                                .timeSpinnerHighlightedTextStyle ??
+                            TextStyle(
+                                fontSize: 24,
+                                color:
+                                    widget.calendarTextColor ?? Colors.black),
+                        time: startDateTime,
+                        onTimeChange: (dateTime) {
+                          DateTime tempStartDateTime = DateTime(
+                            startDateTime.year,
+                            startDateTime.month,
+                            startDateTime.day,
+                            dateTime.hour,
+                            dateTime.minute,
+                            dateTime.second,
+                          );
+
+                          startDateTime = tempStartDateTime;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(

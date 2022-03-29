@@ -1,3 +1,6 @@
+## 0.0.7
+Fixed overflow issue on smaller device.
+
 ## 0.0.6
 Fixed breaking error from 0.0.5.
 
