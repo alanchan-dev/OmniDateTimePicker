@@ -1,16 +1,18 @@
-<!-- 
+<!--
 This README describes the package. If you publish this package to pub.dev,
 this README's contents appear on the landing page for your package.
 
 For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
 
 For general information about developing packages, see the Dart guide for
 [creating packages](https://dart.dev/guides/libraries/create-library-packages)
 and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
+[developing packages and plugins](https://flutter.dev/developing-packages).
 -->
+
 # Omni DateTime Picker
+
 A DateTime picker that lets user select a date and the time, with start & end as a range.
 
 ## Screenshots
@@ -25,8 +27,9 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^0.0.7
+  omni_datetime_picker: ^0.0.8
 ```
+
 Now in your Dart code, you can use:
 
 ```dart
@@ -35,14 +38,16 @@ import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
 ## Usage
 
-Simple usage: 
+Simple usage:
 
 OmniDateTimePicker
+
 ```dart
 DateTime? dateTime = await showOmniDateTimePicker(context: context);
 ```
 
 OmniDateTimeRangePicker
+
 ```dart
 List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(context: context);
 ```
@@ -50,6 +55,7 @@ List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(context: contex
 Custom properties:
 
 OmniDateTimePicker
+
 ```dart
 DateTime? dateTime = await showOmniDateTimePicker(
               context: context,
@@ -76,6 +82,7 @@ DateTime? dateTime = await showOmniDateTimePicker(
 ```
 
 OmniDateTimeRangePicker
+
 ```dart
 List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(
               context: context,
@@ -105,13 +112,11 @@ List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(
               borderRadius: const Radius.circular(16),
             );
 ```
+
 The returned value of showOmniDateTimeRangePicker() will be a List with two DateTime: [startDateTime, endDateTime].
-
-
-
 
 <!-- ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
+TODO: Tell users more about the package: where to find more information, how to
+contribute to the package, how to file issues, what response they can expect
 from the package authors, and more. -->
