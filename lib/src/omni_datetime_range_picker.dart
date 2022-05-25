@@ -126,244 +126,250 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                 onSurface: widget.calendarTextColor ?? Colors.black,
               ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TabBar(
-              controller: _tabController,
-              padding: const EdgeInsets.all(0),
-              labelPadding: const EdgeInsets.all(0),
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorColor: widget.backgroundColor ?? Colors.white,
-              indicatorWeight: 0.1,
-              tabs: [
-                Container(
-                  height: 48,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: _tabController.index == 0
-                          ? widget.backgroundColor ?? Colors.white
-                          : widget.unselectedTabBackgroundColor ??
-                              Colors.grey[200],
-                      borderRadius: BorderRadius.only(
-                        topLeft:
-                            widget.borderRadius ?? const Radius.circular(16),
-                        topRight:
-                            widget.borderRadius ?? const Radius.circular(16),
-                      )),
-                  child: Text(
-                    _localizations.dateRangeStartLabel,
-                    style:
-                        TextStyle(color: widget.tabTextColor ?? Colors.black87),
-                  ),
-                ),
-                Container(
-                  height: 48,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: _tabController.index == 1
-                          ? widget.backgroundColor ?? Colors.white
-                          : widget.unselectedTabBackgroundColor ??
-                              Colors.grey[200],
-                      borderRadius: BorderRadius.only(
-                        topLeft:
-                            widget.borderRadius ?? const Radius.circular(16),
-                        topRight:
-                            widget.borderRadius ?? const Radius.circular(16),
-                      )),
-                  child: Text(
-                    _localizations.dateRangeEndLabel,
-                    style:
-                        TextStyle(color: widget.tabTextColor ?? Colors.black87),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height - 180),
-              decoration: BoxDecoration(
-                color: widget.backgroundColor ?? Colors.white,
-              ),
-              child: TabBarView(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TabBar(
                 controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  /// Start date
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CalendarDatePicker(
-                          initialDate:
-                              widget.startInitialDate ?? DateTime.now(),
-                          firstDate: widget.startFirstDate ??
-                              DateTime.now()
-                                  .subtract(const Duration(days: 3652)),
-                          lastDate: widget.startLastDate ??
-                              DateTime.now().add(const Duration(days: 3652)),
-                          onDateChanged: (dateTime) {
-                            startDateTime = DateTime(
-                              dateTime.year,
-                              dateTime.month,
-                              dateTime.day,
-                              startDateTime.hour,
-                              startDateTime.minute,
-                            );
-                          },
-                        ),
-                        TimePickerSpinner(
-                          is24HourMode: widget.is24HourMode ?? false,
-                          isShowSeconds: widget.isShowSeconds ?? false,
-                          normalTextStyle: widget.timeSpinnerTextStyle ??
-                              TextStyle(
-                                  fontSize: 18,
-                                  color: widget.calendarTextColor ??
-                                      Colors.black54),
-                          highlightedTextStyle: widget
-                                  .timeSpinnerHighlightedTextStyle ??
-                              TextStyle(
-                                  fontSize: 24,
-                                  color:
-                                      widget.calendarTextColor ?? Colors.black),
-                          time: startDateTime,
-                          onTimeChange: (dateTime) {
-                            DateTime tempStartDateTime = DateTime(
-                              startDateTime.year,
-                              startDateTime.month,
-                              startDateTime.day,
-                              dateTime.hour,
-                              dateTime.minute,
-                              dateTime.second,
-                            );
-
-                            startDateTime = tempStartDateTime;
-                          },
-                        ),
-                      ],
+                padding: const EdgeInsets.all(0),
+                labelPadding: const EdgeInsets.all(0),
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorColor: widget.backgroundColor ?? Colors.white,
+                indicatorWeight: 0.1,
+                tabs: [
+                  Container(
+                    height: 48,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: _tabController.index == 0
+                            ? widget.backgroundColor ?? Colors.white
+                            : widget.unselectedTabBackgroundColor ??
+                                Colors.grey[200],
+                        borderRadius: BorderRadius.only(
+                          topLeft:
+                              widget.borderRadius ?? const Radius.circular(16),
+                          topRight:
+                              widget.borderRadius ?? const Radius.circular(16),
+                        )),
+                    child: Text(
+                      _localizations.dateRangeStartLabel,
+                      style: TextStyle(
+                          color: widget.tabTextColor ?? Colors.black87),
                     ),
                   ),
-
-                  /// End date
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CalendarDatePicker(
-                          initialDate: widget.endInitialDate ??
-                              DateTime.now().add(const Duration(days: 1)),
-                          firstDate: widget.endFirstDate ??
-                              DateTime.now()
-                                  .subtract(const Duration(days: 3652)),
-                          lastDate: widget.endLastDate ??
-                              DateTime.now().add(const Duration(days: 3652)),
-                          onDateChanged: (dateTime) {
-                            endDateTime = DateTime(
-                              dateTime.year,
-                              dateTime.month,
-                              dateTime.day,
-                              endDateTime.hour,
-                              endDateTime.minute,
-                            );
-                          },
-                        ),
-                        TimePickerSpinner(
-                          is24HourMode: widget.is24HourMode ?? false,
-                          isShowSeconds: widget.isShowSeconds ?? false,
-                          normalTextStyle: widget.timeSpinnerTextStyle ??
-                              TextStyle(
-                                  fontSize: 18,
-                                  color: widget.calendarTextColor ??
-                                      Colors.black54),
-                          highlightedTextStyle: widget
-                                  .timeSpinnerHighlightedTextStyle ??
-                              TextStyle(
-                                  fontSize: 24,
-                                  color:
-                                      widget.calendarTextColor ?? Colors.black),
-                          time: endDateTime,
-                          onTimeChange: (dateTime) {
-                            DateTime tempEndDateTime = DateTime(
-                              endDateTime.year,
-                              endDateTime.month,
-                              endDateTime.day,
-                              dateTime.hour,
-                              dateTime.minute,
-                              dateTime.second,
-                            );
-
-                            endDateTime = tempEndDateTime;
-                          },
-                        ),
-                      ],
+                  Container(
+                    height: 48,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: _tabController.index == 1
+                            ? widget.backgroundColor ?? Colors.white
+                            : widget.unselectedTabBackgroundColor ??
+                                Colors.grey[200],
+                        borderRadius: BorderRadius.only(
+                          topLeft:
+                              widget.borderRadius ?? const Radius.circular(16),
+                          topRight:
+                              widget.borderRadius ?? const Radius.circular(16),
+                        )),
+                    child: Text(
+                      _localizations.dateRangeEndLabel,
+                      style: TextStyle(
+                          color: widget.tabTextColor ?? Colors.black87),
                     ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: widget.backgroundColor ?? Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: widget.borderRadius ?? const Radius.circular(16),
-                  bottomRight: widget.borderRadius ?? const Radius.circular(16),
+              Container(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height - 180),
+                decoration: BoxDecoration(
+                  color: widget.backgroundColor ?? Colors.white,
                 ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: widget.borderRadius ?? const Radius.circular(16),
-                  bottomRight: widget.borderRadius ?? const Radius.circular(16),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
+                child: TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(widget.backgroundColor),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop<List<DateTime>>();
-                        },
-                        child: Text(
-                          _localizations.cancelButtonLabel,
-                          style: TextStyle(
-                              color: widget.buttonTextColor ?? Colors.black),
-                        ),
+                    /// Start date
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CalendarDatePicker(
+                            initialDate:
+                                widget.startInitialDate ?? DateTime.now(),
+                            firstDate: widget.startFirstDate ??
+                                DateTime.now()
+                                    .subtract(const Duration(days: 3652)),
+                            lastDate: widget.startLastDate ??
+                                DateTime.now().add(const Duration(days: 3652)),
+                            onDateChanged: (dateTime) {
+                              startDateTime = DateTime(
+                                dateTime.year,
+                                dateTime.month,
+                                dateTime.day,
+                                startDateTime.hour,
+                                startDateTime.minute,
+                              );
+                            },
+                          ),
+                          TimePickerSpinner(
+                            is24HourMode: widget.is24HourMode ?? false,
+                            isShowSeconds: widget.isShowSeconds ?? false,
+                            normalTextStyle: widget.timeSpinnerTextStyle ??
+                                TextStyle(
+                                    fontSize: 18,
+                                    color: widget.calendarTextColor ??
+                                        Colors.black54),
+                            highlightedTextStyle:
+                                widget.timeSpinnerHighlightedTextStyle ??
+                                    TextStyle(
+                                        fontSize: 24,
+                                        color: widget.calendarTextColor ??
+                                            Colors.black),
+                            time: startDateTime,
+                            onTimeChange: (dateTime) {
+                              DateTime tempStartDateTime = DateTime(
+                                startDateTime.year,
+                                startDateTime.month,
+                                startDateTime.day,
+                                dateTime.hour,
+                                dateTime.minute,
+                                dateTime.second,
+                              );
+
+                              startDateTime = tempStartDateTime;
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                      child: VerticalDivider(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(widget.backgroundColor),
-                        ),
-                        onPressed: () {
-                          Navigator.pop<List<DateTime>>(context, [
-                            startDateTime,
-                            endDateTime,
-                          ]);
-                        },
-                        child: Text(
-                          _localizations.saveButtonLabel,
-                          style: TextStyle(
-                              color: widget.buttonTextColor ?? Colors.black),
-                        ),
+
+                    /// End date
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CalendarDatePicker(
+                            initialDate: widget.endInitialDate ??
+                                DateTime.now().add(const Duration(days: 1)),
+                            firstDate: widget.endFirstDate ??
+                                DateTime.now()
+                                    .subtract(const Duration(days: 3652)),
+                            lastDate: widget.endLastDate ??
+                                DateTime.now().add(const Duration(days: 3652)),
+                            onDateChanged: (dateTime) {
+                              endDateTime = DateTime(
+                                dateTime.year,
+                                dateTime.month,
+                                dateTime.day,
+                                endDateTime.hour,
+                                endDateTime.minute,
+                              );
+                            },
+                          ),
+                          TimePickerSpinner(
+                            is24HourMode: widget.is24HourMode ?? false,
+                            isShowSeconds: widget.isShowSeconds ?? false,
+                            normalTextStyle: widget.timeSpinnerTextStyle ??
+                                TextStyle(
+                                    fontSize: 18,
+                                    color: widget.calendarTextColor ??
+                                        Colors.black54),
+                            highlightedTextStyle:
+                                widget.timeSpinnerHighlightedTextStyle ??
+                                    TextStyle(
+                                        fontSize: 24,
+                                        color: widget.calendarTextColor ??
+                                            Colors.black),
+                            time: endDateTime,
+                            onTimeChange: (dateTime) {
+                              DateTime tempEndDateTime = DateTime(
+                                endDateTime.year,
+                                endDateTime.month,
+                                endDateTime.day,
+                                dateTime.hour,
+                                dateTime.minute,
+                                dateTime.second,
+                              );
+
+                              endDateTime = tempEndDateTime;
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                  color: widget.backgroundColor ?? Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft:
+                        widget.borderRadius ?? const Radius.circular(16),
+                    bottomRight:
+                        widget.borderRadius ?? const Radius.circular(16),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft:
+                        widget.borderRadius ?? const Radius.circular(16),
+                    bottomRight:
+                        widget.borderRadius ?? const Radius.circular(16),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                widget.backgroundColor),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop<List<DateTime>>();
+                          },
+                          child: Text(
+                            _localizations.cancelButtonLabel,
+                            style: TextStyle(
+                                color: widget.buttonTextColor ?? Colors.black),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                        child: VerticalDivider(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                widget.backgroundColor),
+                          ),
+                          onPressed: () {
+                            Navigator.pop<List<DateTime>>(context, [
+                              startDateTime,
+                              endDateTime,
+                            ]);
+                          },
+                          child: Text(
+                            _localizations.saveButtonLabel,
+                            style: TextStyle(
+                                color: widget.buttonTextColor ?? Colors.black),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -91,19 +91,20 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                 onSurface: widget.calendarTextColor ?? Colors.black,
               ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height - 120),
-              decoration: BoxDecoration(
-                color: widget.backgroundColor ?? Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: widget.borderRadius ?? const Radius.circular(16),
-                    topRight: widget.borderRadius ?? const Radius.circular(16)),
-              ),
-              child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height - 120),
+                decoration: BoxDecoration(
+                  color: widget.backgroundColor ?? Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: widget.borderRadius ?? const Radius.circular(16),
+                      topRight:
+                          widget.borderRadius ?? const Radius.circular(16)),
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -157,66 +158,68 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                   ],
                 ),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: widget.backgroundColor ?? Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: widget.borderRadius ?? const Radius.circular(16),
-                  bottomRight: widget.borderRadius ?? const Radius.circular(16),
+              Container(
+                decoration: BoxDecoration(
+                  color: widget.backgroundColor ?? Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft:
+                        widget.borderRadius ?? const Radius.circular(16),
+                    bottomRight:
+                        widget.borderRadius ?? const Radius.circular(16),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(widget.backgroundColor),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop<DateTime>();
+                        },
+                        child: Text(
+                          // "Cancel",
+                          _localizations.cancelButtonLabel,
+                          style: TextStyle(
+                              color: widget.buttonTextColor ?? Colors.black),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                      child: VerticalDivider(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(widget.backgroundColor),
+                        ),
+                        onPressed: () {
+                          Navigator.pop<DateTime>(
+                            context,
+                            startDateTime,
+                          );
+                        },
+                        child: Text(
+                          // "Save",
+                          _localizations.saveButtonLabel,
+                          style: TextStyle(
+                              color: widget.buttonTextColor ?? Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(widget.backgroundColor),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop<DateTime>();
-                      },
-                      child: Text(
-                        // "Cancel",
-                        _localizations.cancelButtonLabel,
-                        style: TextStyle(
-                            color: widget.buttonTextColor ?? Colors.black),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                    child: VerticalDivider(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Expanded(
-                    child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(widget.backgroundColor),
-                      ),
-                      onPressed: () {
-                        Navigator.pop<DateTime>(
-                          context,
-                          startDateTime,
-                        );
-                      },
-                      child: Text(
-                        // "Save",
-                        _localizations.saveButtonLabel,
-                        style: TextStyle(
-                            color: widget.buttonTextColor ?? Colors.black),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
