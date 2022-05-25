@@ -1,3 +1,8 @@
+## 0.0.9
+
+- Fixed for Flutter 3.0
+- Fixed overflow when opening
+
 ## 0.0.8
 
 Removed unused properties.

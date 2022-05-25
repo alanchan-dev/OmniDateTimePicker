@@ -99,7 +99,7 @@ class TimePickerSpinner extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TimePickerSpinnerState createState() => _TimePickerSpinnerState();
+  State<TimePickerSpinner> createState() => _TimePickerSpinnerState();
 }
 
 class _TimePickerSpinnerState extends State<TimePickerSpinner> {
@@ -315,7 +315,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     /// flutter: Another exception was thrown: 'package:flutter/src/widgets/scrollable.dart': Failed assertion: line 469 pos 12: '_hold == null || _drag == null': is not true.
     /// maybe later we can find out why this error is happening
 
-    Widget _spinner = NotificationListener<ScrollNotification>(
+    Widget spinner = NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
         if (scrollNotification is UserScrollNotification) {
           if (scrollNotification.direction.toString() ==
@@ -383,7 +383,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
     return Stack(
       children: <Widget>[
-        Positioned.fill(child: _spinner),
+        Positioned.fill(child: spinner),
         isScrolling
             ? Positioned.fill(
                 child: Container(
@@ -395,7 +395,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
   }
 
   Widget apSpinner() {
-    Widget _spinner = NotificationListener<ScrollNotification>(
+    Widget spinner = NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
         if (scrollNotification is UserScrollNotification) {
           if (scrollNotification.direction.toString() ==
@@ -439,7 +439,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
     return Stack(
       children: <Widget>[
-        Positioned.fill(child: _spinner),
+        Positioned.fill(child: spinner),
         isAPScrolling ? Positioned.fill(child: Container()) : Container()
       ],
     );
