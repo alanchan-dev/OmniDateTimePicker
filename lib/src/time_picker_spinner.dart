@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+/// This allows a value of type T or T?
+/// to be treated as a value of type T?.
+///
+/// We use this so that APIs that have become
+/// non-nullable can still be used with `!` and `?`
+/// to support older versions of the API as well.
+/// We can remove this and use the regular API when you no longer
+/// need to support versions of Flutter before 3.0.0,
+T? _ambiguate<T>(T? value) => value;
+
 class ItemScrollPhysics extends ScrollPhysics {
   /// Creates physics for snapping to item.
   /// Based on PageScrollPhysics
@@ -215,7 +225,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     super.initState();
 
     if (widget.onTimeChange != null) {
-      WidgetsBinding.instance
+      _ambiguate(WidgetsBinding.instance)!
           .addPostFrameCallback((_) => widget.onTimeChange!(getDateTime()));
     }
   }
