@@ -27,7 +27,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^0.0.9
+  omni_datetime_picker: ^0.1.0
 ```
 
 Now in your Dart code, you can use:

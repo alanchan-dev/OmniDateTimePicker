@@ -1,3 +1,7 @@
+## 0.1.0
+
+- Enables backward compatibility with Flutter versions prior to v3.0 by using ambiguate
+
 ## 0.0.9
 
 - Fixed for Flutter 3.0
