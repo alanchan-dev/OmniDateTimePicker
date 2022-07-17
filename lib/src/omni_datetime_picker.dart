@@ -32,6 +32,7 @@ class OmniDateTimePicker extends StatefulWidget {
   final TextStyle? timeSpinnerTextStyle;
   final TextStyle? timeSpinnerHighlightedTextStyle;
   final Radius? borderRadius;
+  final int? minutesInterval;
 
   const OmniDateTimePicker({
     Key? key,
@@ -49,6 +50,7 @@ class OmniDateTimePicker extends StatefulWidget {
     this.timeSpinnerTextStyle,
     this.timeSpinnerHighlightedTextStyle,
     this.borderRadius,
+    this.minutesInterval,
   }) : super(key: key);
 
   @override
@@ -127,6 +129,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: TimePickerSpinner(
+                        minutesInterval: widget.minutesInterval ?? 1,
                         is24HourMode: widget.is24HourMode ?? false,
                         isShowSeconds: widget.isShowSeconds ?? false,
                         normalTextStyle: widget.timeSpinnerTextStyle ??
