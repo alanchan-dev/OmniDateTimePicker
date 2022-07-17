@@ -90,6 +90,8 @@ class TimePickerSpinner extends StatefulWidget {
   final double? spacing;
   final bool isForce2Digits;
   final TimePickerCallback? onTimeChange;
+  final String? pmText;
+  final String? amText;
 
   const TimePickerSpinner(
       {Key? key,
@@ -105,7 +107,9 @@ class TimePickerSpinner extends StatefulWidget {
       this.alignment,
       this.spacing,
       this.isForce2Digits = false,
-      this.onTimeChange})
+      this.onTimeChange,
+      this.pmText,
+      this.amText})
       : super(key: key);
 
   @override
@@ -426,7 +430,9 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       },
       child: ListView.builder(
         itemBuilder: (context, index) {
-          String text = index == 1 ? 'AM' : (index == 2 ? 'PM' : '');
+          String text = index == 1
+              ? widget.amText ?? 'AM'
+              : (index == 2 ? widget.pmText ?? 'PM' : '');
           return Container(
             height: _getItemHeight(),
             alignment: Alignment.center,

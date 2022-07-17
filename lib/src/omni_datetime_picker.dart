@@ -129,6 +129,8 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: TimePickerSpinner(
+                        amText: _localizations.anteMeridiemAbbreviation,
+                        pmText: _localizations.postMeridiemAbbreviation,
                         minutesInterval: widget.minutesInterval ?? 1,
                         is24HourMode: widget.is24HourMode ?? false,
                         isShowSeconds: widget.isShowSeconds ?? false,
