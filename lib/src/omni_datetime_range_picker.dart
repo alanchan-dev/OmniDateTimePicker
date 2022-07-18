@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/src/time_picker_spinner.dart';
 
+import '../omni_datetime_picker.dart';
+
 /// Omni DateTimeRange Picker
 ///
 /// If properties are not given, default value will be used.
@@ -35,6 +37,7 @@ class OmniDateTimeRangePicker extends StatefulWidget {
   /// Default value: DateTime.now().add(const Duration(days: 3652))
   final DateTime? endLastDate;
 
+  final OmniDateTimePickerType type;
   final bool? is24HourMode;
   final bool? isShowSeconds;
 
@@ -56,6 +59,7 @@ class OmniDateTimeRangePicker extends StatefulWidget {
     this.endInitialDate,
     this.endFirstDate,
     this.endLastDate,
+    required this.type,
     this.is24HourMode,
     this.isShowSeconds,
     this.primaryColor,
@@ -182,7 +186,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height - 180),
+                    maxHeight: widget.type == OmniDateTimePickerType.dateAndTime ? MediaQuery.of(context).size.height - 180 : MediaQuery.of(context).size.height - 320),
                 decoration: BoxDecoration(
                   color: widget.backgroundColor ?? Colors.white,
                 ),
@@ -208,12 +212,12 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                                 dateTime.year,
                                 dateTime.month,
                                 dateTime.day,
-                                startDateTime.hour,
-                                startDateTime.minute,
+                                widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.hour,
+                                widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.minute,
                               );
                             },
                           ),
-                          TimePickerSpinner(
+                          widget.type == OmniDateTimePickerType.dateAndTime ? TimePickerSpinner(
                             is24HourMode: widget.is24HourMode ?? false,
                             isShowSeconds: widget.isShowSeconds ?? false,
                             normalTextStyle: widget.timeSpinnerTextStyle ??
@@ -240,7 +244,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
 
                               startDateTime = tempStartDateTime;
                             },
-                          ),
+                          ) : Container(),
                         ],
                       ),
                     ),
@@ -263,12 +267,12 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                                 dateTime.year,
                                 dateTime.month,
                                 dateTime.day,
-                                endDateTime.hour,
-                                endDateTime.minute,
+                                widget.type == OmniDateTimePickerType.date ? 23 : startDateTime.hour,
+                                widget.type == OmniDateTimePickerType.date ? 59 : startDateTime.minute,
                               );
                             },
                           ),
-                          TimePickerSpinner(
+                          widget.type == OmniDateTimePickerType.dateAndTime ? TimePickerSpinner(
                             is24HourMode: widget.is24HourMode ?? false,
                             isShowSeconds: widget.isShowSeconds ?? false,
                             normalTextStyle: widget.timeSpinnerTextStyle ??
@@ -295,7 +299,7 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
 
                               endDateTime = tempEndDateTime;
                             },
-                          ),
+                          ) : Container(),
                         ],
                       ),
                     ),

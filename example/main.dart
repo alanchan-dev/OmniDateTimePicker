@@ -59,6 +59,41 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: const Text("Show DateTime Range Picker"),
               ),
+              ElevatedButton(
+                onPressed: () async {
+                  List<DateTime>? dateTimeList =
+                      await showOmniDateTimeRangePicker(
+                    context: context,
+                    primaryColor: Colors.cyan,
+                    backgroundColor: Colors.grey[900],
+                    calendarTextColor: Colors.white,
+                    tabTextColor: Colors.white,
+                    unselectedTabBackgroundColor: Colors.grey[700],
+                    buttonTextColor: Colors.white,
+                    timeSpinnerTextStyle:
+                        const TextStyle(color: Colors.white70, fontSize: 18),
+                    timeSpinnerHighlightedTextStyle:
+                        const TextStyle(color: Colors.white, fontSize: 24),
+                    type: OmniDateTimePickerType.date,
+                    is24HourMode: false,
+                    isShowSeconds: false,
+                    startInitialDate: DateTime.now(),
+                    startFirstDate:
+                        DateTime(1600).subtract(const Duration(days: 3652)),
+                    startLastDate: DateTime.now().add(
+                      const Duration(days: 3652),
+                    ),
+                    endInitialDate: DateTime.now(),
+                    endFirstDate:
+                        DateTime(1600).subtract(const Duration(days: 3652)),
+                    endLastDate: DateTime.now().add(
+                      const Duration(days: 3652),
+                    ),
+                    borderRadius: const Radius.circular(16),
+                  );
+                },
+                child: const Text("Show DateTime Range Picker without Time"),
+              ),
             ],
           ),
         ),
