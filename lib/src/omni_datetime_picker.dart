@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/src/time_picker_spinner.dart';
 
+import '../omni_datetime_picker.dart';
+
 /// Omni DateTime Picker
 ///
 /// If properties are not given, default value will be used.
@@ -20,6 +22,7 @@ class OmniDateTimePicker extends StatefulWidget {
   /// Default value: DateTime.now().add(const Duration(days: 3652))
   final DateTime? startLastDate;
 
+  final OmniDateTimePickerType type;
   final bool? is24HourMode;
   final bool? isShowSeconds;
 
@@ -38,6 +41,7 @@ class OmniDateTimePicker extends StatefulWidget {
     this.startInitialDate,
     this.startFirstDate,
     this.startLastDate,
+    required this.type,
     this.is24HourMode,
     this.isShowSeconds,
     this.primaryColor,
@@ -119,12 +123,12 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                           dateTime.year,
                           dateTime.month,
                           dateTime.day,
-                          startDateTime.hour,
-                          startDateTime.minute,
+                          widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.hour,
+                          widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.minute,
                         );
                       },
                     ),
-                    Padding(
+                    widget.type == OmniDateTimePickerType.dateAndTime ? Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: TimePickerSpinner(
                         is24HourMode: widget.is24HourMode ?? false,
@@ -154,7 +158,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                           startDateTime = tempStartDateTime;
                         },
                       ),
-                    ),
+                    ) : Container(),
                   ],
                 ),
               ),

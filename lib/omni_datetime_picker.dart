@@ -20,6 +20,7 @@ Future<DateTime?> showOmniDateTimePicker({
   DateTime? startInitialDate,
   DateTime? startFirstDate,
   DateTime? startLastDate,
+  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool? is24HourMode,
   bool? isShowSeconds,
   Color? primaryColor,
@@ -39,6 +40,7 @@ Future<DateTime?> showOmniDateTimePicker({
         startInitialDate: startInitialDate,
         startFirstDate: startFirstDate,
         startLastDate: startLastDate,
+        type: type,
         is24HourMode: is24HourMode,
         isShowSeconds: isShowSeconds,
         primaryColor: primaryColor,
@@ -67,6 +69,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   DateTime? endInitialDate,
   DateTime? endFirstDate,
   DateTime? endLastDate,
+  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool? is24HourMode,
   bool? isShowSeconds,
   Color? primaryColor,
@@ -89,6 +92,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
         endInitialDate: endInitialDate,
         endFirstDate: endFirstDate,
         endLastDate: endLastDate,
+        type: type,
         is24HourMode: is24HourMode,
         isShowSeconds: isShowSeconds,
         primaryColor: primaryColor,
@@ -103,4 +107,10 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
       );
     },
   );
+}
+
+/// Type of the [OmniDateTimePicker]
+enum OmniDateTimePickerType {
+  date,
+  dateAndTime,
 }
