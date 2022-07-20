@@ -64,6 +64,7 @@ class _MyAppState extends State<MyApp> {
                   List<DateTime>? dateTimeList =
                       await showOmniDateTimeRangePicker(
                     context: context,
+                    type: OmniDateTimePickerType.date,
                     primaryColor: Colors.cyan,
                     backgroundColor: Colors.grey[900],
                     calendarTextColor: Colors.white,
@@ -74,7 +75,6 @@ class _MyAppState extends State<MyApp> {
                         const TextStyle(color: Colors.white70, fontSize: 18),
                     timeSpinnerHighlightedTextStyle:
                         const TextStyle(color: Colors.white, fontSize: 24),
-                    type: OmniDateTimePickerType.date,
                     is24HourMode: false,
                     isShowSeconds: false,
                     startInitialDate: DateTime.now(),

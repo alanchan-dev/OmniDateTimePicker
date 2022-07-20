@@ -27,7 +27,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^0.1.0
+  omni_datetime_picker: ^0.1.2
 ```
 
 Now in your Dart code, you can use:
@@ -59,6 +59,7 @@ OmniDateTimePicker
 ```dart
 DateTime? dateTime = await showOmniDateTimePicker(
               context: context,
+              type: OmniDateTimePickerType.dateAndTime,
               primaryColor: Colors.cyan,
               backgroundColor: Colors.grey[900],
               calendarTextColor: Colors.white,
@@ -86,6 +87,7 @@ OmniDateTimeRangePicker
 ```dart
 List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(
               context: context,
+              type: OmniDateTimePickerType.dateAndTime,
               primaryColor: Colors.cyan,
               backgroundColor: Colors.grey[900],
               calendarTextColor: Colors.white,
@@ -114,9 +116,3 @@ List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(
 ```
 
 The returned value of showOmniDateTimeRangePicker() will be a List with two DateTime: [startDateTime, endDateTime].
-
-<!-- ## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more. -->

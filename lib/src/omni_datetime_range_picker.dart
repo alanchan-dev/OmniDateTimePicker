@@ -186,7 +186,9 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: widget.type == OmniDateTimePickerType.dateAndTime ? MediaQuery.of(context).size.height - 180 : MediaQuery.of(context).size.height - 320),
+                    maxHeight: widget.type == OmniDateTimePickerType.dateAndTime
+                        ? MediaQuery.of(context).size.height - 200
+                        : MediaQuery.of(context).size.height - 320),
                 decoration: BoxDecoration(
                   color: widget.backgroundColor ?? Colors.white,
                 ),
@@ -212,39 +214,52 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                                 dateTime.year,
                                 dateTime.month,
                                 dateTime.day,
-                                widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.hour,
-                                widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.minute,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 0
+                                    : startDateTime.hour,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 0
+                                    : startDateTime.minute,
                               );
                             },
                           ),
-                          widget.type == OmniDateTimePickerType.dateAndTime ? TimePickerSpinner(
-                            is24HourMode: widget.is24HourMode ?? false,
-                            isShowSeconds: widget.isShowSeconds ?? false,
-                            normalTextStyle: widget.timeSpinnerTextStyle ??
-                                TextStyle(
-                                    fontSize: 18,
-                                    color: widget.calendarTextColor ??
-                                        Colors.black54),
-                            highlightedTextStyle:
-                                widget.timeSpinnerHighlightedTextStyle ??
-                                    TextStyle(
-                                        fontSize: 24,
-                                        color: widget.calendarTextColor ??
-                                            Colors.black),
-                            time: startDateTime,
-                            onTimeChange: (dateTime) {
-                              DateTime tempStartDateTime = DateTime(
-                                startDateTime.year,
-                                startDateTime.month,
-                                startDateTime.day,
-                                dateTime.hour,
-                                dateTime.minute,
-                                dateTime.second,
-                              );
+                          widget.type == OmniDateTimePickerType.dateAndTime
+                              ? Wrap(
+                                  children: [
+                                    TimePickerSpinner(
+                                      is24HourMode:
+                                          widget.is24HourMode ?? false,
+                                      isShowSeconds:
+                                          widget.isShowSeconds ?? false,
+                                      normalTextStyle: widget
+                                              .timeSpinnerTextStyle ??
+                                          TextStyle(
+                                              fontSize: 18,
+                                              color: widget.calendarTextColor ??
+                                                  Colors.black54),
+                                      highlightedTextStyle: widget
+                                              .timeSpinnerHighlightedTextStyle ??
+                                          TextStyle(
+                                              fontSize: 24,
+                                              color: widget.calendarTextColor ??
+                                                  Colors.black),
+                                      time: startDateTime,
+                                      onTimeChange: (dateTime) {
+                                        DateTime tempStartDateTime = DateTime(
+                                          startDateTime.year,
+                                          startDateTime.month,
+                                          startDateTime.day,
+                                          dateTime.hour,
+                                          dateTime.minute,
+                                          dateTime.second,
+                                        );
 
-                              startDateTime = tempStartDateTime;
-                            },
-                          ) : Container(),
+                                        startDateTime = tempStartDateTime;
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : Container(),
                         ],
                       ),
                     ),
@@ -267,39 +282,46 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
                                 dateTime.year,
                                 dateTime.month,
                                 dateTime.day,
-                                widget.type == OmniDateTimePickerType.date ? 23 : startDateTime.hour,
-                                widget.type == OmniDateTimePickerType.date ? 59 : startDateTime.minute,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 23
+                                    : startDateTime.hour,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 59
+                                    : startDateTime.minute,
                               );
                             },
                           ),
-                          widget.type == OmniDateTimePickerType.dateAndTime ? TimePickerSpinner(
-                            is24HourMode: widget.is24HourMode ?? false,
-                            isShowSeconds: widget.isShowSeconds ?? false,
-                            normalTextStyle: widget.timeSpinnerTextStyle ??
-                                TextStyle(
-                                    fontSize: 18,
-                                    color: widget.calendarTextColor ??
-                                        Colors.black54),
-                            highlightedTextStyle:
-                                widget.timeSpinnerHighlightedTextStyle ??
-                                    TextStyle(
-                                        fontSize: 24,
-                                        color: widget.calendarTextColor ??
-                                            Colors.black),
-                            time: endDateTime,
-                            onTimeChange: (dateTime) {
-                              DateTime tempEndDateTime = DateTime(
-                                endDateTime.year,
-                                endDateTime.month,
-                                endDateTime.day,
-                                dateTime.hour,
-                                dateTime.minute,
-                                dateTime.second,
-                              );
+                          widget.type == OmniDateTimePickerType.dateAndTime
+                              ? TimePickerSpinner(
+                                  is24HourMode: widget.is24HourMode ?? false,
+                                  isShowSeconds: widget.isShowSeconds ?? false,
+                                  normalTextStyle:
+                                      widget.timeSpinnerTextStyle ??
+                                          TextStyle(
+                                              fontSize: 18,
+                                              color: widget.calendarTextColor ??
+                                                  Colors.black54),
+                                  highlightedTextStyle:
+                                      widget.timeSpinnerHighlightedTextStyle ??
+                                          TextStyle(
+                                              fontSize: 24,
+                                              color: widget.calendarTextColor ??
+                                                  Colors.black),
+                                  time: endDateTime,
+                                  onTimeChange: (dateTime) {
+                                    DateTime tempEndDateTime = DateTime(
+                                      endDateTime.year,
+                                      endDateTime.month,
+                                      endDateTime.day,
+                                      dateTime.hour,
+                                      dateTime.minute,
+                                      dateTime.second,
+                                    );
 
-                              endDateTime = tempEndDateTime;
-                            },
-                          ) : Container(),
+                                    endDateTime = tempEndDateTime;
+                                  },
+                                )
+                              : Container(),
                         ],
                       ),
                     ),

@@ -1,3 +1,12 @@
+## 0.1.2
+
+- Tweak UI spacing
+- Updated documents
+
+## 0.1.1
+
+- Added type to only use Date without Time
+
 ## 0.1.0
 
 - Enables backward compatibility with Flutter versions prior to v3.0 by using ambiguate
