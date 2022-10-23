@@ -31,6 +31,7 @@ class OmniDateTimePicker extends StatefulWidget {
   final Color? calendarTextColor;
   final Color? tabTextColor;
   final Color? unselectedTabBackgroundColor;
+  final Color? unselectedTabTextColor;
   final Color? buttonTextColor;
   final TextStyle? timeSpinnerTextStyle;
   final TextStyle? timeSpinnerHighlightedTextStyle;
@@ -50,6 +51,7 @@ class OmniDateTimePicker extends StatefulWidget {
     this.calendarTextColor,
     this.tabTextColor,
     this.unselectedTabBackgroundColor,
+    this.unselectedTabTextColor,
     this.buttonTextColor,
     this.timeSpinnerTextStyle,
     this.timeSpinnerHighlightedTextStyle,
