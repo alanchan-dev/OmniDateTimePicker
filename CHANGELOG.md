@@ -1,3 +1,8 @@
+## 0.1.3
+
+- Use Custom TabView
+- Expose minutesInterval and localize am-pm
+
 ## 0.1.2
 
 - Tweak UI spacing
