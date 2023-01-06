@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -361,37 +362,46 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
         }
         return true;
       },
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          String text = '';
-          if (isLoop(max)) {
-            text = ((index % max) * interval).toString();
-          } else if (index != 0 && index != max + 1) {
-            text = (((index - 1) % max) * interval).toString();
-          }
-          if (!widget.is24HourMode &&
-              controller == hourController &&
-              text == '0') {
-            text = '12';
-          }
-          if (widget.isForce2Digits && text != '') {
-            text = text.padLeft(2, '0');
-          }
-          return Container(
-            height: _getItemHeight(),
-            alignment: _getAlignment(),
-            child: Text(
-              text,
-              style: selectedIndex == index
-                  ? _getHighlightedTextStyle()
-                  : _getNormalTextStyle(),
-            ),
-          );
-        },
-        controller: controller,
-        itemCount: isLoop(max) ? max * 3 : max + 2,
-        physics: ItemScrollPhysics(itemHeight: _getItemHeight()),
-        padding: EdgeInsets.zero,
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+          },
+          scrollbars: false,
+        ),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            String text = '';
+            if (isLoop(max)) {
+              text = ((index % max) * interval).toString();
+            } else if (index != 0 && index != max + 1) {
+              text = (((index - 1) % max) * interval).toString();
+            }
+            if (!widget.is24HourMode &&
+                controller == hourController &&
+                text == '0') {
+              text = '12';
+            }
+            if (widget.isForce2Digits && text != '') {
+              text = text.padLeft(2, '0');
+            }
+            return Container(
+              height: _getItemHeight(),
+              alignment: _getAlignment(),
+              child: Text(
+                text,
+                style: selectedIndex == index
+                    ? _getHighlightedTextStyle()
+                    : _getNormalTextStyle(),
+              ),
+            );
+          },
+          controller: controller,
+          itemCount: isLoop(max) ? max * 3 : max + 2,
+          physics: ItemScrollPhysics(itemHeight: _getItemHeight()),
+          padding: EdgeInsets.zero,
+        ),
       ),
     );
 
@@ -428,27 +438,36 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
         }
         return true;
       },
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          String text = index == 1
-              ? widget.amText ?? 'AM'
-              : (index == 2 ? widget.pmText ?? 'PM' : '');
-          return Container(
-            height: _getItemHeight(),
-            alignment: Alignment.center,
-            child: Text(
-              text,
-              style: currentSelectedAPIndex == index
-                  ? _getHighlightedTextStyle()
-                  : _getNormalTextStyle(),
-            ),
-          );
-        },
-        controller: apController,
-        itemCount: 4,
-        physics: ItemScrollPhysics(
-          itemHeight: _getItemHeight(),
-          targetPixelsLimit: 1,
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+          },
+          scrollbars: false,
+        ),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            String text = index == 1
+                ? widget.amText ?? 'AM'
+                : (index == 2 ? widget.pmText ?? 'PM' : '');
+            return Container(
+              height: _getItemHeight(),
+              alignment: Alignment.center,
+              child: Text(
+                text,
+                style: currentSelectedAPIndex == index
+                    ? _getHighlightedTextStyle()
+                    : _getNormalTextStyle(),
+              ),
+            );
+          },
+          controller: apController,
+          itemCount: 4,
+          physics: ItemScrollPhysics(
+            itemHeight: _getItemHeight(),
+            targetPixelsLimit: 1,
+          ),
         ),
       ),
     );

@@ -1,3 +1,8 @@
+## 0.1.4
+
+- Use drag scroll on web (same behavior as mobile)
+- Removed scrollbar on web
+
 ## 0.1.3
 
 - Use Custom TabView
