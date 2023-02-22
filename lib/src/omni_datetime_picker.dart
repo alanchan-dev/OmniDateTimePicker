@@ -13,11 +13,13 @@ class OmniDateTimePicker extends StatefulWidget {
   final DateTime? startInitialDate;
 
   /// Minimum date that can be selected
+  /// Will not have effect on Hours, minutes, seconds
   ///
   /// Default value: DateTime.now().subtract(const Duration(days: 3652))
   final DateTime? startFirstDate;
 
   /// Maximum date that can be selected
+  /// Will not have effect on Hours, minutes, seconds
   ///
   /// Default value: DateTime.now().add(const Duration(days: 3652))
   final DateTime? startLastDate;
@@ -89,15 +91,20 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.transparent,
+      backgroundColor:
+          Theme.of(context).useMaterial3 ? null : Colors.transparent,
       alignment: Alignment.center,
       child: Theme(
         data: ThemeData(
-          colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: widget.primaryColor ?? Colors.blue,
-                surface: widget.backgroundColor ?? Colors.white,
-                onSurface: widget.calendarTextColor ?? Colors.black,
-              ),
+          useMaterial3: Theme.of(context).useMaterial3,
+          brightness: Theme.of(context).brightness,
+          colorScheme: Theme.of(context).useMaterial3
+              ? Theme.of(context).colorScheme
+              : Theme.of(context).colorScheme.copyWith(
+                    primary: widget.primaryColor ?? Colors.blue,
+                    surface: widget.backgroundColor ?? Colors.white,
+                    onSurface: widget.calendarTextColor ?? Colors.black,
+                  ),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -107,7 +114,9 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                 constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height - 120),
                 decoration: BoxDecoration(
-                  color: widget.backgroundColor ?? Colors.white,
+                  color: Theme.of(context).useMaterial3
+                      ? null
+                      : widget.backgroundColor ?? Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: widget.borderRadius ?? const Radius.circular(16),
                       topRight:
@@ -127,51 +136,64 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                           dateTime.year,
                           dateTime.month,
                           dateTime.day,
-                          widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.hour,
-                          widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.minute,
+                          widget.type == OmniDateTimePickerType.date
+                              ? 0
+                              : startDateTime.hour,
+                          widget.type == OmniDateTimePickerType.date
+                              ? 0
+                              : startDateTime.minute,
                         );
                       },
                     ),
-                    widget.type == OmniDateTimePickerType.dateAndTime ? Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: TimePickerSpinner(
-                        amText: _localizations.anteMeridiemAbbreviation,
-                        pmText: _localizations.postMeridiemAbbreviation,
-                        minutesInterval: widget.minutesInterval ?? 1,
-                        is24HourMode: widget.is24HourMode ?? false,
-                        isShowSeconds: widget.isShowSeconds ?? false,
-                        normalTextStyle: widget.timeSpinnerTextStyle ??
-                            TextStyle(
-                                fontSize: 18,
-                                color:
-                                    widget.calendarTextColor ?? Colors.black54),
-                        highlightedTextStyle: widget
-                                .timeSpinnerHighlightedTextStyle ??
-                            TextStyle(
-                                fontSize: 24,
-                                color:
-                                    widget.calendarTextColor ?? Colors.black),
-                        time: startDateTime,
-                        onTimeChange: (dateTime) {
-                          DateTime tempStartDateTime = DateTime(
-                            startDateTime.year,
-                            startDateTime.month,
-                            startDateTime.day,
-                            dateTime.hour,
-                            dateTime.minute,
-                            dateTime.second,
-                          );
+                    widget.type == OmniDateTimePickerType.dateAndTime
+                        ? Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: TimePickerSpinner(
+                              amText: _localizations.anteMeridiemAbbreviation,
+                              pmText: _localizations.postMeridiemAbbreviation,
+                              minutesInterval: widget.minutesInterval ?? 1,
+                              is24HourMode: widget.is24HourMode ?? false,
+                              isShowSeconds: widget.isShowSeconds ?? false,
+                              normalTextStyle: widget.timeSpinnerTextStyle ??
+                                  TextStyle(
+                                    fontSize: 18,
+                                    color: Theme.of(context).useMaterial3
+                                        ? null
+                                        : widget.calendarTextColor ??
+                                            Colors.black54,
+                                  ),
+                              highlightedTextStyle:
+                                  widget.timeSpinnerHighlightedTextStyle ??
+                                      TextStyle(
+                                          fontSize: 24,
+                                          color: Theme.of(context).useMaterial3
+                                              ? null
+                                              : widget.calendarTextColor ??
+                                                  Colors.black),
+                              time: startDateTime,
+                              onTimeChange: (dateTime) {
+                                DateTime tempStartDateTime = DateTime(
+                                  startDateTime.year,
+                                  startDateTime.month,
+                                  startDateTime.day,
+                                  dateTime.hour,
+                                  dateTime.minute,
+                                  dateTime.second,
+                                );
 
-                          startDateTime = tempStartDateTime;
-                        },
-                      ),
-                    ) : Container(),
+                                startDateTime = tempStartDateTime;
+                              },
+                            ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: widget.backgroundColor ?? Colors.white,
+                  color: Theme.of(context).useMaterial3
+                      ? null
+                      : widget.backgroundColor ?? Colors.white,
                   borderRadius: BorderRadius.only(
                     bottomLeft:
                         widget.borderRadius ?? const Radius.circular(16),
@@ -179,54 +201,72 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker>
                         widget.borderRadius ?? const Radius.circular(16),
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(widget.backgroundColor),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop<DateTime>();
-                        },
-                        child: Text(
-                          // "Cancel",
-                          _localizations.cancelButtonLabel,
-                          style: TextStyle(
-                              color: widget.buttonTextColor ?? Colors.black),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                      child: VerticalDivider(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(widget.backgroundColor),
-                        ),
-                        onPressed: () {
-                          Navigator.pop<DateTime>(
-                            context,
-                            startDateTime,
-                          );
-                        },
-                        child: Text(
-                          // "Save",
-                          _localizations.saveButtonLabel,
-                          style: TextStyle(
-                              color: widget.buttonTextColor ?? Colors.black),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft:
+                        widget.borderRadius ?? const Radius.circular(16),
+                    bottomRight:
+                        widget.borderRadius ?? const Radius.circular(16),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Theme.of(context).useMaterial3
+                                    ? null
+                                    : widget.backgroundColor),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop<DateTime>();
+                          },
+                          child: Text(
+                            // "Cancel",
+                            _localizations.cancelButtonLabel,
+                            style: TextStyle(
+                                color: Theme.of(context).useMaterial3
+                                    ? null
+                                    : widget.buttonTextColor ?? Colors.black),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 20,
+                        child: VerticalDivider(
+                          color: Theme.of(context).useMaterial3
+                              ? null
+                              : Colors.grey,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Theme.of(context).useMaterial3
+                                    ? null
+                                    : widget.backgroundColor),
+                          ),
+                          onPressed: () {
+                            Navigator.pop<DateTime>(
+                              context,
+                              startDateTime,
+                            );
+                          },
+                          child: Text(
+                            // "Save",
+                            _localizations.saveButtonLabel,
+                            style: TextStyle(
+                                color: Theme.of(context).useMaterial3
+                                    ? null
+                                    : widget.buttonTextColor ?? Colors.black),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -35,9 +35,23 @@ Future<DateTime?> showOmniDateTimePicker({
   Radius? borderRadius,
   int? minutesInterval,
 }) {
-  return showDialog(
+  return showGeneralDialog(
     context: context,
-    builder: (BuildContext context) {
+    transitionBuilder: (context, anim1, anim2, child) {
+      return FadeTransition(
+        opacity: anim1.drive(
+          Tween(
+            begin: 0,
+            end: 1,
+          ),
+        ),
+        child: child,
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 200),
+    barrierDismissible: true,
+    barrierLabel: '',
+    pageBuilder: (BuildContext context, anim1, anim2) {
       return OmniDateTimePicker(
         startInitialDate: startInitialDate,
         startFirstDate: startFirstDate,
@@ -87,9 +101,23 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   TextStyle? timeSpinnerHighlightedTextStyle,
   Radius? borderRadius,
 }) {
-  return showDialog(
+  return showGeneralDialog(
     context: context,
-    builder: (BuildContext context) {
+    transitionBuilder: (context, anim1, anim2, child) {
+      return FadeTransition(
+        opacity: anim1.drive(
+          Tween(
+            begin: 0,
+            end: 1,
+          ),
+        ),
+        child: child,
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 200),
+    barrierDismissible: true,
+    barrierLabel: '',
+    pageBuilder: (BuildContext context, anim1, anim2) {
       return OmniDateTimeRangePicker(
         startInitialDate: startInitialDate,
         startFirstDate: startFirstDate,

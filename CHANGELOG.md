@@ -1,3 +1,14 @@
+## 0.2.0+1
+
+- Fixed Changelog mistake
+
+## 0.2.0
+
+- Flutter 2.10 and above is required
+- Fixed borderRadius issue in OmniDateTimePicker
+- Support for Material3, just set useMaterial3 in your app's theme and it will work.
+- Readme update (Overhaul planned)
+
 ## 0.1.4
 
 - Use drag scroll on web (same behavior as mobile)

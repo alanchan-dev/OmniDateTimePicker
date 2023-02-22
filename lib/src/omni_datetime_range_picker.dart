@@ -13,11 +13,13 @@ class OmniDateTimeRangePicker extends StatefulWidget {
   final DateTime? startInitialDate;
 
   /// Minimum date that can be selected
+  /// Will not have effect on Hours, minutes, seconds
   ///
   /// Default value: DateTime.now().subtract(const Duration(days: 3652))
   final DateTime? startFirstDate;
 
   /// Maximum date that can be selected
+  /// Will not have effect on Hours, minutes, seconds
   ///
   /// Default value: DateTime.now().add(const Duration(days: 3652))
   final DateTime? startLastDate;
@@ -28,11 +30,13 @@ class OmniDateTimeRangePicker extends StatefulWidget {
   final DateTime? endInitialDate;
 
   /// Minimum date that can be selected
+  /// Will not have effect on Hours, minutes, seconds
   ///
   /// Default value: DateTime.now().subtract(const Duration(days: 3652))
   final DateTime? endFirstDate;
 
   /// Maximum date that can be selected
+  /// Will not have effect on Hours, minutes, seconds
   ///
   /// Default value: DateTime.now().add(const Duration(days: 3652))
   final DateTime? endLastDate;
@@ -76,10 +80,12 @@ class OmniDateTimeRangePicker extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OmniDateTimeRangePicker> createState() => _OmniDateTimeRangePickerState();
+  State<OmniDateTimeRangePicker> createState() =>
+      _OmniDateTimeRangePickerState();
 }
 
-class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with SingleTickerProviderStateMixin {
+class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late MaterialLocalizations _localizations;
 
@@ -122,15 +128,20 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.transparent,
+      backgroundColor:
+          Theme.of(context).useMaterial3 ? null : Colors.transparent,
       alignment: Alignment.center,
       child: Theme(
         data: ThemeData(
-          colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: widget.primaryColor ?? Colors.blue,
-                surface: widget.backgroundColor ?? Colors.white,
-                onSurface: widget.calendarTextColor ?? Colors.black,
-              ),
+          useMaterial3: Theme.of(context).useMaterial3,
+          brightness: Theme.of(context).brightness,
+          colorScheme: Theme.of(context).useMaterial3
+              ? Theme.of(context).colorScheme
+              : Theme.of(context).colorScheme.copyWith(
+                    primary: widget.primaryColor ?? Colors.blue,
+                    surface: widget.backgroundColor ?? Colors.white,
+                    onSurface: widget.calendarTextColor ?? Colors.black,
+                  ),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -141,7 +152,9 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                 padding: const EdgeInsets.all(0),
                 labelPadding: const EdgeInsets.all(0),
                 indicatorSize: TabBarIndicatorSize.tab,
-                indicatorColor: widget.backgroundColor ?? Colors.white,
+                indicatorColor: Theme.of(context).useMaterial3
+                    ? null
+                    : widget.backgroundColor ?? Colors.white,
                 indicatorWeight: 0.1,
                 onTap: (index) {
                   setState(() {
@@ -154,18 +167,30 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: _tabController.index == 0
-                            ? widget.backgroundColor ?? Colors.white
-                            : widget.unselectedTabBackgroundColor ?? Colors.grey[200],
+                            ? Theme.of(context).useMaterial3
+                                ? null
+                                : widget.backgroundColor ?? Colors.white
+                            : Theme.of(context).useMaterial3
+                                ? null
+                                : widget.unselectedTabBackgroundColor ??
+                                    Colors.grey[200],
                         borderRadius: BorderRadius.only(
-                          topLeft: widget.borderRadius ?? const Radius.circular(16),
-                          topRight: widget.borderRadius ?? const Radius.circular(16),
+                          topLeft:
+                              widget.borderRadius ?? const Radius.circular(16),
+                          topRight:
+                              widget.borderRadius ?? const Radius.circular(16),
                         )),
                     child: Text(
                       _localizations.dateRangeStartLabel,
                       style: TextStyle(
                           color: _tabController.index == 0
-                              ? (widget.tabTextColor ?? Colors.black87)
-                              : (widget.unselectedTabTextColor ?? Colors.black87)),
+                              ? Theme.of(context).useMaterial3
+                                  ? null
+                                  : (widget.tabTextColor ?? Colors.black87)
+                              : Theme.of(context).useMaterial3
+                                  ? null
+                                  : (widget.unselectedTabTextColor ??
+                                      Colors.black87)),
                     ),
                   ),
                   Container(
@@ -173,18 +198,30 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: _tabController.index == 1
-                            ? widget.backgroundColor ?? Colors.white
-                            : widget.unselectedTabBackgroundColor ?? Colors.grey[200],
+                            ? Theme.of(context).useMaterial3
+                                ? null
+                                : widget.backgroundColor ?? Colors.white
+                            : Theme.of(context).useMaterial3
+                                ? null
+                                : widget.unselectedTabBackgroundColor ??
+                                    Colors.grey[200],
                         borderRadius: BorderRadius.only(
-                          topLeft: widget.borderRadius ?? const Radius.circular(16),
-                          topRight: widget.borderRadius ?? const Radius.circular(16),
+                          topLeft:
+                              widget.borderRadius ?? const Radius.circular(16),
+                          topRight:
+                              widget.borderRadius ?? const Radius.circular(16),
                         )),
                     child: Text(
                       _localizations.dateRangeEndLabel,
                       style: TextStyle(
                           color: _tabController.index == 1
-                              ? (widget.tabTextColor ?? Colors.black87)
-                              : (widget.unselectedTabTextColor ?? Colors.black87)),
+                              ? Theme.of(context).useMaterial3
+                                  ? null
+                                  : (widget.tabTextColor ?? Colors.black87)
+                              : Theme.of(context).useMaterial3
+                                  ? null
+                                  : (widget.unselectedTabTextColor ??
+                                      Colors.black87)),
                     ),
                   ),
                 ],
@@ -192,7 +229,9 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 decoration: BoxDecoration(
-                  color: widget.backgroundColor ?? Colors.white,
+                  color: Theme.of(context).useMaterial3
+                      ? null
+                      : widget.backgroundColor ?? Colors.white,
                 ),
                 child: Builder(builder: (_) {
                   if (_selectedTabbarIndex == 1) {
@@ -201,16 +240,24 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CalendarDatePicker(
-                            initialDate: widget.endInitialDate ?? DateTime.now().add(const Duration(days: 1)),
-                            firstDate: widget.endFirstDate ?? DateTime.now().subtract(const Duration(days: 3652)),
-                            lastDate: widget.endLastDate ?? DateTime.now().add(const Duration(days: 3652)),
+                            initialDate: widget.endInitialDate ??
+                                DateTime.now().add(const Duration(days: 1)),
+                            firstDate: widget.endFirstDate ??
+                                DateTime.now()
+                                    .subtract(const Duration(days: 3652)),
+                            lastDate: widget.endLastDate ??
+                                DateTime.now().add(const Duration(days: 3652)),
                             onDateChanged: (dateTime) {
                               endDateTime = DateTime(
                                 dateTime.year,
                                 dateTime.month,
                                 dateTime.day,
-                                widget.type == OmniDateTimePickerType.date ? 23 : startDateTime.hour,
-                                widget.type == OmniDateTimePickerType.date ? 59 : startDateTime.minute,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 23
+                                    : startDateTime.hour,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 59
+                                    : startDateTime.minute,
                               );
                             },
                           ),
@@ -218,10 +265,22 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                               ? TimePickerSpinner(
                                   is24HourMode: widget.is24HourMode ?? false,
                                   isShowSeconds: widget.isShowSeconds ?? false,
-                                  normalTextStyle: widget.timeSpinnerTextStyle ??
-                                      TextStyle(fontSize: 18, color: widget.calendarTextColor ?? Colors.black54),
-                                  highlightedTextStyle: widget.timeSpinnerHighlightedTextStyle ??
-                                      TextStyle(fontSize: 24, color: widget.calendarTextColor ?? Colors.black),
+                                  normalTextStyle: widget
+                                          .timeSpinnerTextStyle ??
+                                      TextStyle(
+                                          fontSize: 18,
+                                          color: Theme.of(context).useMaterial3
+                                              ? null
+                                              : widget.calendarTextColor ??
+                                                  Colors.black54),
+                                  highlightedTextStyle: widget
+                                          .timeSpinnerHighlightedTextStyle ??
+                                      TextStyle(
+                                          fontSize: 24,
+                                          color: Theme.of(context).useMaterial3
+                                              ? null
+                                              : widget.calendarTextColor ??
+                                                  Colors.black),
                                   time: endDateTime,
                                   onTimeChange: (dateTime) {
                                     DateTime tempEndDateTime = DateTime(
@@ -246,16 +305,24 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CalendarDatePicker(
-                            initialDate: widget.startInitialDate ?? DateTime.now(),
-                            firstDate: widget.startFirstDate ?? DateTime.now().subtract(const Duration(days: 3652)),
-                            lastDate: widget.startLastDate ?? DateTime.now().add(const Duration(days: 3652)),
+                            initialDate:
+                                widget.startInitialDate ?? DateTime.now(),
+                            firstDate: widget.startFirstDate ??
+                                DateTime.now()
+                                    .subtract(const Duration(days: 3652)),
+                            lastDate: widget.startLastDate ??
+                                DateTime.now().add(const Duration(days: 3652)),
                             onDateChanged: (dateTime) {
                               startDateTime = DateTime(
                                 dateTime.year,
                                 dateTime.month,
                                 dateTime.day,
-                                widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.hour,
-                                widget.type == OmniDateTimePickerType.date ? 0 : startDateTime.minute,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 0
+                                    : startDateTime.hour,
+                                widget.type == OmniDateTimePickerType.date
+                                    ? 0
+                                    : startDateTime.minute,
                               );
                             },
                           ),
@@ -263,12 +330,28 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                               ? Wrap(
                                   children: [
                                     TimePickerSpinner(
-                                      is24HourMode: widget.is24HourMode ?? false,
-                                      isShowSeconds: widget.isShowSeconds ?? false,
-                                      normalTextStyle: widget.timeSpinnerTextStyle ??
-                                          TextStyle(fontSize: 18, color: widget.calendarTextColor ?? Colors.black54),
-                                      highlightedTextStyle: widget.timeSpinnerHighlightedTextStyle ??
-                                          TextStyle(fontSize: 24, color: widget.calendarTextColor ?? Colors.black),
+                                      is24HourMode:
+                                          widget.is24HourMode ?? false,
+                                      isShowSeconds:
+                                          widget.isShowSeconds ?? false,
+                                      normalTextStyle: widget
+                                              .timeSpinnerTextStyle ??
+                                          TextStyle(
+                                              fontSize: 18,
+                                              color: Theme.of(context)
+                                                      .useMaterial3
+                                                  ? null
+                                                  : widget.calendarTextColor ??
+                                                      Colors.black54),
+                                      highlightedTextStyle: widget
+                                              .timeSpinnerHighlightedTextStyle ??
+                                          TextStyle(
+                                              fontSize: 24,
+                                              color: Theme.of(context)
+                                                      .useMaterial3
+                                                  ? null
+                                                  : widget.calendarTextColor ??
+                                                      Colors.black),
                                       time: startDateTime,
                                       onTimeChange: (dateTime) {
                                         DateTime tempStartDateTime = DateTime(
@@ -294,16 +377,22 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: widget.backgroundColor ?? Colors.white,
+                  color: Theme.of(context).useMaterial3
+                      ? null
+                      : widget.backgroundColor ?? Colors.white,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: widget.borderRadius ?? const Radius.circular(16),
-                    bottomRight: widget.borderRadius ?? const Radius.circular(16),
+                    bottomLeft:
+                        widget.borderRadius ?? const Radius.circular(16),
+                    bottomRight:
+                        widget.borderRadius ?? const Radius.circular(16),
                   ),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: widget.borderRadius ?? const Radius.circular(16),
-                    bottomRight: widget.borderRadius ?? const Radius.circular(16),
+                    bottomLeft:
+                        widget.borderRadius ?? const Radius.circular(16),
+                    bottomRight:
+                        widget.borderRadius ?? const Radius.circular(16),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -312,27 +401,34 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                       Expanded(
                         child: TextButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(widget.backgroundColor),
+                            backgroundColor: MaterialStateProperty.all(
+                                widget.backgroundColor),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop<List<DateTime>>();
                           },
                           child: Text(
                             _localizations.cancelButtonLabel,
-                            style: TextStyle(color: widget.buttonTextColor ?? Colors.black),
+                            style: TextStyle(
+                                color: Theme.of(context).useMaterial3
+                                    ? null
+                                    : widget.buttonTextColor ?? Colors.black),
                           ),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 20,
                         child: VerticalDivider(
-                          color: Colors.grey,
+                          color: Theme.of(context).useMaterial3
+                              ? null
+                              : Colors.grey,
                         ),
                       ),
                       Expanded(
                         child: TextButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(widget.backgroundColor),
+                            backgroundColor: MaterialStateProperty.all(
+                                widget.backgroundColor),
                           ),
                           onPressed: () {
                             Navigator.pop<List<DateTime>>(context, [
@@ -342,7 +438,10 @@ class _OmniDateTimeRangePickerState extends State<OmniDateTimeRangePicker> with 
                           },
                           child: Text(
                             _localizations.saveButtonLabel,
-                            style: TextStyle(color: widget.buttonTextColor ?? Colors.black),
+                            style: TextStyle(
+                                color: Theme.of(context).useMaterial3
+                                    ? null
+                                    : widget.buttonTextColor ?? Colors.black),
                           ),
                         ),
                       ),

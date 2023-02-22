@@ -15,11 +15,25 @@ and the Flutter guide for
 
 A DateTime picker that lets user select a date and the time, with start & end as a range.
 
+### Upcoming plan
+
+Currently I plan to rewrite this package by stripping away the fields for passing in colors and textStyles.
+In the upcoming major version, you will need to use Theme to customize these.
+Version after 1.0 will stop support for these fields.
+
+### Material 3 support
+
+Material 3 is currently supported, if useMaterial3 is true in your app's Theme, passing in colors field will have no effect.
+
 ## Screenshots
 
-![Omni DateTime Picker - Light](https://raw.githubusercontent.com/DogeeeXD/OmniDateTimePicker/master/screenshots/screenshot_light.png)
+![Omni DateTime Range Picker - Material 3 Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_lightmode.png)
 
-![Omni DateTime Range Picker - Dark](https://raw.githubusercontent.com/DogeeeXD/OmniDateTimePicker/master/screenshots/screenshot_dark.png)
+![Omni DateTime Range Picker - Material 3 Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_darkmode.png)
+
+![Omni DateTime Picker - Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/screenshot_light.png)
+
+![Omni DateTime Range Picker - Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/screenshot_dark.png)
 
 ## Getting started
 
@@ -27,7 +41,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^0.1.4
+  omni_datetime_picker: ^0.2.0+1
 ```
 
 Now in your Dart code, you can use:
