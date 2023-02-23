@@ -1,3 +1,13 @@
+## 1.0.0
+
+- Breaking: Styling fields (colors, text style), Theme widget can be used to have a more consistent design
+- Breaking: borderRadius now requires a BorderRadiusGeometry instead of double for more control over the look (borderRadius won't have effect if useMaterial3 is true)
+- Add: Preserve state when switching tabs using OmniDateTimeRangePicker
+- Add: Constraints can now be passed to limit the size, else a preferred default value will be used
+- Add: Expose selectableDayPredicate to let user disable certain day
+- Add: transitionBuilder & transitionDuration field to customize animation of dialog
+- Fix: AM PM offset not aligned correctly in mobile
+
 ## 0.2.0+1
 
 - Fixed Changelog mistake

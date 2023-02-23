@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 /// This allows a value of type T or T?
 /// to be treated as a value of type T?.
@@ -83,14 +84,14 @@ class TimePickerSpinner extends StatefulWidget {
   final int secondsInterval;
   final bool is24HourMode;
   final bool isShowSeconds;
-  final TextStyle? highlightedTextStyle;
-  final TextStyle? normalTextStyle;
+  // final TextStyle? highlightedTextStyle;
+  // final TextStyle? normalTextStyle;
   final double? itemHeight;
   final double? itemWidth;
   final AlignmentGeometry? alignment;
   final double? spacing;
   final bool isForce2Digits;
-  final TimePickerCallback? onTimeChange;
+  final TimePickerCallback onTimeChange;
   final String? pmText;
   final String? amText;
 
@@ -101,14 +102,14 @@ class TimePickerSpinner extends StatefulWidget {
       this.secondsInterval = 1,
       this.is24HourMode = true,
       this.isShowSeconds = false,
-      this.highlightedTextStyle,
-      this.normalTextStyle,
+      // this.highlightedTextStyle,
+      // this.normalTextStyle,
       this.itemHeight,
       this.itemWidth,
       this.alignment,
       this.spacing,
       this.isForce2Digits = false,
-      this.onTimeChange,
+      required this.onTimeChange,
       this.pmText,
       this.amText})
       : super(key: key);
@@ -133,10 +134,10 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
   bool isAPScrolling = false;
 
   /// default settings
-  TextStyle defaultHighlightTextStyle =
-      const TextStyle(fontSize: 32, color: Colors.black);
-  TextStyle defaultNormalTextStyle =
-      const TextStyle(fontSize: 32, color: Colors.black54);
+  // TextStyle defaultHighlightTextStyle =
+  //     const TextStyle(fontSize: 32, color: Colors.black);
+  // TextStyle defaultNormalTextStyle =
+  //     const TextStyle(fontSize: 32, color: Colors.black54);
   double defaultItemHeight = 60;
   double defaultItemWidth = 45;
   double defaultSpacing = 20;
@@ -144,13 +145,13 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
   /// getter
 
-  TextStyle? _getHighlightedTextStyle() {
-    return widget.highlightedTextStyle ?? defaultHighlightTextStyle;
-  }
+  // TextStyle? _getHighlightedTextStyle() {
+  //   return widget.highlightedTextStyle ?? defaultHighlightTextStyle;
+  // }
 
-  TextStyle? _getNormalTextStyle() {
-    return widget.normalTextStyle ?? defaultNormalTextStyle;
-  }
+  // TextStyle? _getNormalTextStyle() {
+  //   return widget.normalTextStyle ?? defaultNormalTextStyle;
+  // }
 
   int _getHourCount() {
     return widget.is24HourMode ? 24 : 12;
@@ -229,10 +230,8 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
     super.initState();
 
-    if (widget.onTimeChange != null) {
-      _ambiguate(WidgetsBinding.instance)!
-          .addPostFrameCallback((_) => widget.onTimeChange!(getDateTime()));
-    }
+    _ambiguate(WidgetsBinding.instance)!
+        .addPostFrameCallback((_) => widget.onTimeChange(getDateTime()));
   }
 
   @override
@@ -349,9 +348,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
             }
             setState(() {
               onScrollEnd();
-              if (widget.onTimeChange != null) {
-                widget.onTimeChange!(getDateTime());
-              }
+              widget.onTimeChange(getDateTime());
             });
           }
         } else if (scrollNotification is ScrollUpdateNotification) {
@@ -392,8 +389,8 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
               child: Text(
                 text,
                 style: selectedIndex == index
-                    ? _getHighlightedTextStyle()
-                    : _getNormalTextStyle(),
+                    ? Theme.of(context).textTheme.headlineSmall
+                    : Theme.of(context).textTheme.bodyLarge,
               ),
             );
           },
@@ -425,14 +422,13 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           if (scrollNotification.direction.toString() ==
               "ScrollDirection.idle") {
             isAPScrolling = false;
-            if (widget.onTimeChange != null) {
-              widget.onTimeChange!(getDateTime());
-            }
+            widget.onTimeChange(getDateTime());
           }
         } else if (scrollNotification is ScrollUpdateNotification) {
           setState(() {
             currentSelectedAPIndex =
                 (apController.offset / _getItemHeight()!).round() + 1;
+
             isAPScrolling = true;
           });
         }
@@ -457,8 +453,8 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
               child: Text(
                 text,
                 style: currentSelectedAPIndex == index
-                    ? _getHighlightedTextStyle()
-                    : _getNormalTextStyle(),
+                    ? Theme.of(context).textTheme.headlineSmall
+                    : Theme.of(context).textTheme.bodyLarge,
               ),
             );
           },
@@ -468,6 +464,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
             itemHeight: _getItemHeight(),
             targetPixelsLimit: 1,
           ),
+          padding: EdgeInsets.zero,
         ),
       ),
     );

@@ -15,25 +15,27 @@ and the Flutter guide for
 
 A DateTime picker that lets user select a date and the time, with start & end as a range.
 
-### Upcoming plan
-
-Currently I plan to rewrite this package by stripping away the fields for passing in colors and textStyles.
-In the upcoming major version, you will need to use Theme to customize these.
-Version after 1.0 will stop support for these fields.
-
 ### Material 3 support
 
-Material 3 is currently supported, if useMaterial3 is true in your app's Theme, passing in colors field will have no effect.
+Material 3 is currently supported, set useMaterial3 is true in your app's Theme.
+
+### Changes in version 1.0.0
+
+- Breaking: Styling fields (colors, text style), Theme widget can be used to have a more consistent design
+- Breaking: borderRadius now requires a BorderRadiusGeometry instead of double for more control over the look. (borderRadius won't have effect if useMaterial3 is true)
+- Add: Preserve state when switching tabs using OmniDateTimeRangePicker
+- Add: Constraints can now be passed to limit the size, else a preferred default value will be used
+- Add: Expose selectableDayPredicate to let user disable certain day
+- Add: transitionBuilder & transitionDuration field to customize animation of dialog
+- Fix: AM PM offset not aligned correctly in mobile
+
+Refer to example for usage.
 
 ## Screenshots
 
-![Omni DateTime Range Picker - Material 3 Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_lightmode.png)
+![Omni DateTime Range Picker - Material 3 Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_lightmode_v1.png)
 
-![Omni DateTime Range Picker - Material 3 Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_darkmode.png)
-
-![Omni DateTime Picker - Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/screenshot_light.png)
-
-![Omni DateTime Range Picker - Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/screenshot_dark.png)
+![Omni DateTime Range Picker - Material 3 Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_darkmode_v1.png)
 
 ## Getting started
 
@@ -41,7 +43,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^0.2.0+1
+  omni_datetime_picker: ^1.0.0
 ```
 
 Now in your Dart code, you can use:
@@ -72,61 +74,99 @@ OmniDateTimePicker
 
 ```dart
 DateTime? dateTime = await showOmniDateTimePicker(
-              context: context,
-              type: OmniDateTimePickerType.dateAndTime,
-              primaryColor: Colors.cyan,
-              backgroundColor: Colors.grey[900],
-              calendarTextColor: Colors.white,
-              tabTextColor: Colors.white,
-              unselectedTabBackgroundColor: Colors.grey[700],
-              buttonTextColor: Colors.white,
-              timeSpinnerTextStyle:
-                  const TextStyle(color: Colors.white70, fontSize: 18),
-              timeSpinnerHighlightedTextStyle:
-                  const TextStyle(color: Colors.white, fontSize: 24),
-              is24HourMode: false,
-              isShowSeconds: false,
-              startInitialDate: DateTime.now(),
-              startFirstDate:
-                  DateTime(1600).subtract(const Duration(days: 3652)),
-              startLastDate: DateTime.now().add(
-                const Duration(days: 3652),
-              ),
-              borderRadius: const Radius.circular(16),
-            );
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate:
+                        DateTime(1600).subtract(const Duration(days: 3652)),
+                    lastDate: DateTime.now().add(
+                      const Duration(days: 3652),
+                    ),
+                    is24HourMode: false,
+                    isShowSeconds: false,
+                    minutesInterval: 1,
+                    secondsInterval: 1,
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    constraints: const BoxConstraints(
+                      maxWidth: 350,
+                      maxHeight: 650,
+                    ),
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      return FadeTransition(
+                        opacity: anim1.drive(
+                          Tween(
+                            begin: 0,
+                            end: 1,
+                          ),
+                        ),
+                        child: child,
+                      );
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                    barrierDismissible: true,
+                    selectableDayPredicate: (dateTime) {
+                      // Disable 25th Feb 2023
+                      if (dateTime == DateTime(2023, 2, 25)) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
+                  );
 ```
 
 OmniDateTimeRangePicker
 
 ```dart
-List<DateTime>? dateTimeList = await showOmniDateTimeRangePicker(
-              context: context,
-              type: OmniDateTimePickerType.dateAndTime,
-              primaryColor: Colors.cyan,
-              backgroundColor: Colors.grey[900],
-              calendarTextColor: Colors.white,
-              tabTextColor: Colors.white,
-              unselectedTabBackgroundColor: Colors.grey[700],
-              buttonTextColor: Colors.white,
-              timeSpinnerTextStyle:
-                  const TextStyle(color: Colors.white70, fontSize: 18),
-              timeSpinnerHighlightedTextStyle:
-                  const TextStyle(color: Colors.white, fontSize: 24),
-              is24HourMode: false,
-              isShowSeconds: false,
-              startInitialDate: DateTime.now(),
-              startFirstDate:
-                  DateTime(1600).subtract(const Duration(days: 3652)),
-              startLastDate: DateTime.now().add(
-                const Duration(days: 3652),
-              ),
-              endInitialDate: DateTime.now(),
-              endFirstDate: DateTime(1600).subtract(const Duration(days: 3652)),
-              endLastDate: DateTime.now().add(
-                const Duration(days: 3652),
-              ),
-              borderRadius: const Radius.circular(16),
-            );
+List<DateTime>? dateTimeList =
+                      await showOmniDateTimeRangePicker(
+                    context: context,
+                    startInitialDate: DateTime.now(),
+                    startFirstDate:
+                        DateTime(1600).subtract(const Duration(days: 3652)),
+                    startLastDate: DateTime.now().add(
+                      const Duration(days: 3652),
+                    ),
+                    endInitialDate: DateTime.now(),
+                    endFirstDate:
+                        DateTime(1600).subtract(const Duration(days: 3652)),
+                    endLastDate: DateTime.now().add(
+                      const Duration(days: 3652),
+                    ),
+                    is24HourMode: false,
+                    isShowSeconds: false,
+                    minutesInterval: 1,
+                    secondsInterval: 1,
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    constraints: const BoxConstraints(
+                      maxWidth: 350,
+                      maxHeight: 650,
+                    ),
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      return FadeTransition(
+                        opacity: anim1.drive(
+                          Tween(
+                            begin: 0,
+                            end: 1,
+                          ),
+                        ),
+                        child: child,
+                      );
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                    barrierDismissible: true,
+                    selectableDayPredicate: (dateTime) {
+                      // Disable 25th Feb 2023
+                      if (dateTime == DateTime(2023, 2, 25)) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
+                  );
 ```
 
-The returned value of showOmniDateTimeRangePicker() will be a List with two DateTime: [startDateTime, endDateTime].
+The returned value of showOmniDateTimeRangePicker() will be a List<DateTime> with two DateTime:
+
+```dart
+[startDateTime, endDateTime].
+```

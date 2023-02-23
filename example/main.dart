@@ -1,27 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Omni DateTime Picker',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.deepPurple,
+      ),
       home: Scaffold(
         body: Center(
           child: Column(
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  DateTime? dateTime =
-                      await showOmniDateTimePicker(context: context);
+                  DateTime? dateTime = await showOmniDateTimePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate:
+                        DateTime(1600).subtract(const Duration(days: 3652)),
+                    lastDate: DateTime.now().add(
+                      const Duration(days: 3652),
+                    ),
+                    is24HourMode: false,
+                    isShowSeconds: false,
+                    minutesInterval: 1,
+                    secondsInterval: 1,
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    constraints: const BoxConstraints(
+                      maxWidth: 350,
+                      maxHeight: 650,
+                    ),
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      return FadeTransition(
+                        opacity: anim1.drive(
+                          Tween(
+                            begin: 0,
+                            end: 1,
+                          ),
+                        ),
+                        child: child,
+                      );
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                    barrierDismissible: true,
+                    selectableDayPredicate: (dateTime) {
+                      // Disable 25th Feb 2023
+                      if (dateTime == DateTime(2023, 2, 25)) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
+                  );
+
+                  print("dateTime: $dateTime");
                 },
                 child: const Text("Show DateTime Picker"),
               ),
@@ -30,18 +68,6 @@ class _MyAppState extends State<MyApp> {
                   List<DateTime>? dateTimeList =
                       await showOmniDateTimeRangePicker(
                     context: context,
-                    primaryColor: Colors.cyan,
-                    backgroundColor: Colors.grey[900],
-                    calendarTextColor: Colors.white,
-                    tabTextColor: Colors.white,
-                    unselectedTabBackgroundColor: Colors.grey[700],
-                    buttonTextColor: Colors.white,
-                    timeSpinnerTextStyle:
-                        const TextStyle(color: Colors.white70, fontSize: 18),
-                    timeSpinnerHighlightedTextStyle:
-                        const TextStyle(color: Colors.white, fontSize: 24),
-                    is24HourMode: false,
-                    isShowSeconds: false,
                     startInitialDate: DateTime.now(),
                     startFirstDate:
                         DateTime(1600).subtract(const Duration(days: 3652)),
@@ -54,45 +80,42 @@ class _MyAppState extends State<MyApp> {
                     endLastDate: DateTime.now().add(
                       const Duration(days: 3652),
                     ),
-                    borderRadius: const Radius.circular(16),
+                    is24HourMode: false,
+                    isShowSeconds: false,
+                    minutesInterval: 1,
+                    secondsInterval: 1,
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    constraints: const BoxConstraints(
+                      maxWidth: 350,
+                      maxHeight: 650,
+                    ),
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      return FadeTransition(
+                        opacity: anim1.drive(
+                          Tween(
+                            begin: 0,
+                            end: 1,
+                          ),
+                        ),
+                        child: child,
+                      );
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                    barrierDismissible: true,
+                    selectableDayPredicate: (dateTime) {
+                      // Disable 25th Feb 2023
+                      if (dateTime == DateTime(2023, 2, 25)) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
                   );
+
+                  print("Start dateTime: ${dateTimeList?[0]}");
+                  print("End dateTime: ${dateTimeList?[1]}");
                 },
                 child: const Text("Show DateTime Range Picker"),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  List<DateTime>? dateTimeList =
-                      await showOmniDateTimeRangePicker(
-                    context: context,
-                    type: OmniDateTimePickerType.date,
-                    primaryColor: Colors.cyan,
-                    backgroundColor: Colors.grey[900],
-                    calendarTextColor: Colors.white,
-                    tabTextColor: Colors.white,
-                    unselectedTabBackgroundColor: Colors.grey[700],
-                    buttonTextColor: Colors.white,
-                    timeSpinnerTextStyle:
-                        const TextStyle(color: Colors.white70, fontSize: 18),
-                    timeSpinnerHighlightedTextStyle:
-                        const TextStyle(color: Colors.white, fontSize: 24),
-                    is24HourMode: false,
-                    isShowSeconds: false,
-                    startInitialDate: DateTime.now(),
-                    startFirstDate:
-                        DateTime(1600).subtract(const Duration(days: 3652)),
-                    startLastDate: DateTime.now().add(
-                      const Duration(days: 3652),
-                    ),
-                    endInitialDate: DateTime.now(),
-                    endFirstDate:
-                        DateTime(1600).subtract(const Duration(days: 3652)),
-                    endLastDate: DateTime.now().add(
-                      const Duration(days: 3652),
-                    ),
-                    borderRadius: const Radius.circular(16),
-                  );
-                },
-                child: const Text("Show DateTime Range Picker without Time"),
               ),
             ],
           ),

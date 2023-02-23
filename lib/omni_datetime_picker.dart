@@ -7,77 +7,71 @@
 library omni_datetime_picker;
 
 import 'package:flutter/material.dart';
+import 'package:omni_datetime_picker/src/omni_datetime_picker.dart';
+import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 
-import 'src/omni_datetime_picker.dart';
-import 'src/omni_datetime_range_picker.dart';
-
-/// Show a dialog of the [OmniDateTimePicker]
+/// Show dialog of the [OmniDateTimePicker]
 ///
-/// Returns a List<DateTime> with startDateTime & endDateTime
+/// Returns a DateTime
 ///
 Future<DateTime?> showOmniDateTimePicker({
   required BuildContext context,
-  DateTime? startInitialDate,
-  DateTime? startFirstDate,
-  DateTime? startLastDate,
-  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
+  DateTime? initialDate,
+  DateTime? firstDate,
+  DateTime? lastDate,
   bool? is24HourMode,
   bool? isShowSeconds,
-  Color? primaryColor,
-  Color? backgroundColor,
-  Color? calendarTextColor,
-  Color? tabTextColor,
-  Color? unselectedTabBackgroundColor,
-  Color? unselectedTabTextColor,
-  Color? buttonTextColor,
-  TextStyle? timeSpinnerTextStyle,
-  TextStyle? timeSpinnerHighlightedTextStyle,
-  Radius? borderRadius,
   int? minutesInterval,
+  int? secondsInterval,
+  BorderRadiusGeometry? borderRadius,
+  BoxConstraints? constraints,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+      transitionBuilder,
+  Duration? transitionDuration,
+  bool? barrierDismissible,
+  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
+  final bool Function(DateTime)? selectableDayPredicate,
 }) {
   return showGeneralDialog(
     context: context,
-    transitionBuilder: (context, anim1, anim2, child) {
-      return FadeTransition(
-        opacity: anim1.drive(
-          Tween(
-            begin: 0,
-            end: 1,
-          ),
-        ),
-        child: child,
-      );
-    },
-    transitionDuration: const Duration(milliseconds: 200),
-    barrierDismissible: true,
-    barrierLabel: '',
+    transitionBuilder: transitionBuilder ??
+        (context, anim1, anim2, child) {
+          return FadeTransition(
+            opacity: anim1.drive(
+              Tween(
+                begin: 0,
+                end: 1,
+              ),
+            ),
+            child: child,
+          );
+        },
+    transitionDuration: transitionDuration ?? const Duration(milliseconds: 200),
+    barrierDismissible: barrierDismissible ?? true,
+    barrierLabel: 'OmniDateTimePicker',
     pageBuilder: (BuildContext context, anim1, anim2) {
       return OmniDateTimePicker(
-        startInitialDate: startInitialDate,
-        startFirstDate: startFirstDate,
-        startLastDate: startLastDate,
         type: type,
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate,
         is24HourMode: is24HourMode,
         isShowSeconds: isShowSeconds,
-        primaryColor: primaryColor,
-        backgroundColor: backgroundColor,
-        calendarTextColor: calendarTextColor,
-        tabTextColor: tabTextColor,
-        unselectedTabBackgroundColor: unselectedTabBackgroundColor,
-        unselectedTabTextColor: unselectedTabTextColor,
-        buttonTextColor: buttonTextColor,
-        timeSpinnerTextStyle: timeSpinnerTextStyle,
-        timeSpinnerHighlightedTextStyle: timeSpinnerHighlightedTextStyle,
-        borderRadius: borderRadius,
         minutesInterval: minutesInterval,
+        secondsInterval: secondsInterval,
+        borderRadius: borderRadius,
+        constraints: constraints,
+        selectableDayPredicate: selectableDayPredicate,
       );
     },
   );
 }
 
-/// Show a dialog of the [OmniDateTimeRangePicker]
+/// Show a dialog of the [OmniDateTimePicker]
 ///
-/// Returns a List<DateTime> with startDateTime & endDateTime
+/// Returns a List<DateTime>
+/// with index 0 as startDateTime
+/// and index 1 as endDateTime
 ///
 Future<List<DateTime>?> showOmniDateTimeRangePicker({
   required BuildContext context,
@@ -87,63 +81,57 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   DateTime? endInitialDate,
   DateTime? endFirstDate,
   DateTime? endLastDate,
-  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool? is24HourMode,
   bool? isShowSeconds,
-  Color? primaryColor,
-  Color? backgroundColor,
-  Color? calendarTextColor,
-  Color? tabTextColor,
-  Color? unselectedTabBackgroundColor,
-  Color? unselectedTabTextColor,
-  Color? buttonTextColor,
-  TextStyle? timeSpinnerTextStyle,
-  TextStyle? timeSpinnerHighlightedTextStyle,
-  Radius? borderRadius,
+  int? minutesInterval,
+  int? secondsInterval,
+  BorderRadiusGeometry? borderRadius,
+  BoxConstraints? constraints,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+      transitionBuilder,
+  Duration? transitionDuration,
+  bool? barrierDismissible,
+  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
+  bool Function(DateTime)? selectableDayPredicate,
 }) {
   return showGeneralDialog(
     context: context,
-    transitionBuilder: (context, anim1, anim2, child) {
-      return FadeTransition(
-        opacity: anim1.drive(
-          Tween(
-            begin: 0,
-            end: 1,
-          ),
-        ),
-        child: child,
-      );
-    },
-    transitionDuration: const Duration(milliseconds: 200),
-    barrierDismissible: true,
-    barrierLabel: '',
+    transitionBuilder: transitionBuilder ??
+        (context, anim1, anim2, child) {
+          return FadeTransition(
+            opacity: anim1.drive(
+              Tween(
+                begin: 0,
+                end: 1,
+              ),
+            ),
+            child: child,
+          );
+        },
+    transitionDuration: transitionDuration ?? const Duration(milliseconds: 200),
+    barrierDismissible: barrierDismissible ?? true,
+    barrierLabel: 'OmniDateTimeRangePicker',
     pageBuilder: (BuildContext context, anim1, anim2) {
       return OmniDateTimeRangePicker(
+        type: type,
         startInitialDate: startInitialDate,
         startFirstDate: startFirstDate,
         startLastDate: startLastDate,
         endInitialDate: endInitialDate,
         endFirstDate: endFirstDate,
         endLastDate: endLastDate,
-        type: type,
         is24HourMode: is24HourMode,
         isShowSeconds: isShowSeconds,
-        primaryColor: primaryColor,
-        backgroundColor: backgroundColor,
-        calendarTextColor: calendarTextColor,
-        tabTextColor: tabTextColor,
-        unselectedTabBackgroundColor: unselectedTabBackgroundColor,
-        unselectedTabTextColor: unselectedTabTextColor,
-        buttonTextColor: buttonTextColor,
-        timeSpinnerTextStyle: timeSpinnerTextStyle,
-        timeSpinnerHighlightedTextStyle: timeSpinnerHighlightedTextStyle,
         borderRadius: borderRadius,
+        constraints: constraints,
+        selectableDayPredicate: selectableDayPredicate,
       );
     },
   );
 }
 
 /// Type of the [OmniDateTimePicker]
+/// default to dateAndTime if not selected
 enum OmniDateTimePickerType {
   date,
   dateAndTime,
