@@ -13,6 +13,8 @@ and the Flutter guide for
 
 # Omni DateTime Picker
 
+[![pub package](https://img.shields.io/pub/v/omni_datetime_picker.svg)](https://pub.dev/packages/omni_datetime_picker)
+
 A DateTime picker that lets user select a date and the time, with start & end as a range.
 
 ### Material 3 support
