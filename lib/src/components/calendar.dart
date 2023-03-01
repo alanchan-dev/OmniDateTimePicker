@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'calendar_date_picker.dart' as cdp;
 
 class Calendar extends StatelessWidget {
   const Calendar(
@@ -21,7 +22,7 @@ class Calendar extends StatelessWidget {
     final defaultFirstDate = DateTime.fromMillisecondsSinceEpoch(0);
     final defaultLastDate = DateTime.now().add(const Duration(days: 3652));
 
-    return CalendarDatePicker(
+    return cdp.CalendarDatePicker(
       initialDate: initialDate ?? defaultInitialDate,
       firstDate: firstDate ?? defaultFirstDate,
       lastDate: lastDate ?? defaultLastDate,

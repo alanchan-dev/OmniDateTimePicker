@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Fix: Set padding of CalendarDatePicker to 0 to prevent some days being cut off.
+
 ## 1.0.0
 
 - Breaking: Styling fields (colors, text style), Theme widget can be used to have a more consistent design
