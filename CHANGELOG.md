@@ -1,6 +1,6 @@
 ## 1.0.1
 
-- Fix: Set padding of CalendarDatePicker to 0 to prevent some days being cut off.
+- Fix: Set padding of \_DayPicker's GridView to 0 to prevent some days being cut off.
 
 ## 1.0.0
 
