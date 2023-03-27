@@ -68,6 +68,7 @@ class OmniDtpBasic extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),
                 child: TimePickerSpinner(
+                  time: initialDate,
                   amText: localizations.anteMeridiemAbbreviation,
                   pmText: localizations.postMeridiemAbbreviation,
                   isShowSeconds: isShowSeconds ?? false,

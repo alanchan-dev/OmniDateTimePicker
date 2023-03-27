@@ -215,6 +215,7 @@ class _PickerViewState extends State<PickerView>
             Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: TimePickerSpinner(
+                time: widget.initialDate,
                 amText: localizations.anteMeridiemAbbreviation,
                 pmText: localizations.postMeridiemAbbreviation,
                 isShowSeconds: widget.isShowSeconds ?? false,

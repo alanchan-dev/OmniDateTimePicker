@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Fix: initialDate not taking effect on the time spinner
+
 ## 1.0.1
 
 - Fix: Set padding of \_DayPicker's GridView to 0 to prevent some days being cut off.
