@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Fix: minuteInterval property does not working on the OmniDateTimeRangePicker
+
 ## 1.0.2
 
 - Fix: initialDate not taking effect on the time spinner
