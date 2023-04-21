@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Add: theme property that accepts a ThemeData to customize the look of the picker regardless of the app's theme.
+
 ## 1.0.6
 
 - Fix: is24HourMode not working on OmniDateTimeRangePicker

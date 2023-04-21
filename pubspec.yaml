@@ -1,6 +1,6 @@
 name: omni_datetime_picker
 description: A datetime picker package with option to use a single datetime picker or a datetime range picker.
-version: 1.0.6
+version: 1.0.7
 repository: "https://github.com/alanchan-dev/OmniDateTimePicker"
 homepage: "https://alanchan.dev"
 

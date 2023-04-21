@@ -32,6 +32,7 @@ Future<DateTime?> showOmniDateTimePicker({
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   final bool Function(DateTime)? selectableDayPredicate,
+  ThemeData? theme,
 }) {
   return showGeneralDialog(
     context: context,
@@ -51,19 +52,22 @@ Future<DateTime?> showOmniDateTimePicker({
     barrierDismissible: barrierDismissible ?? true,
     barrierLabel: 'OmniDateTimePicker',
     pageBuilder: (BuildContext context, anim1, anim2) {
-      return OmniDateTimePicker(
-        type: type,
-        initialDate: initialDate,
-        firstDate: firstDate,
-        lastDate: lastDate,
-        is24HourMode: is24HourMode,
-        isShowSeconds: isShowSeconds,
-        minutesInterval: minutesInterval,
-        secondsInterval: secondsInterval,
-        isForce2Digits: isForce2Digits,
-        borderRadius: borderRadius,
-        constraints: constraints,
-        selectableDayPredicate: selectableDayPredicate,
+      return Theme(
+        data: theme ?? Theme.of(context),
+        child: OmniDateTimePicker(
+          type: type,
+          initialDate: initialDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          is24HourMode: is24HourMode,
+          isShowSeconds: isShowSeconds,
+          minutesInterval: minutesInterval,
+          secondsInterval: secondsInterval,
+          isForce2Digits: isForce2Digits,
+          borderRadius: borderRadius,
+          constraints: constraints,
+          selectableDayPredicate: selectableDayPredicate,
+        ),
       );
     },
   );
@@ -96,6 +100,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool Function(DateTime)? selectableDayPredicate,
+  ThemeData? theme,
 }) {
   return showGeneralDialog(
     context: context,
@@ -115,22 +120,25 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
     barrierDismissible: barrierDismissible ?? true,
     barrierLabel: 'OmniDateTimeRangePicker',
     pageBuilder: (BuildContext context, anim1, anim2) {
-      return OmniDateTimeRangePicker(
-        type: type,
-        startInitialDate: startInitialDate,
-        startFirstDate: startFirstDate,
-        startLastDate: startLastDate,
-        endInitialDate: endInitialDate,
-        endFirstDate: endFirstDate,
-        endLastDate: endLastDate,
-        is24HourMode: is24HourMode,
-        isShowSeconds: isShowSeconds,
-        minutesInterval: minutesInterval,
-        secondsInterval: secondsInterval,
-        isForce2Digits: isForce2Digits,
-        borderRadius: borderRadius,
-        constraints: constraints,
-        selectableDayPredicate: selectableDayPredicate,
+      return Theme(
+        data: theme ?? Theme.of(context),
+        child: OmniDateTimeRangePicker(
+          type: type,
+          startInitialDate: startInitialDate,
+          startFirstDate: startFirstDate,
+          startLastDate: startLastDate,
+          endInitialDate: endInitialDate,
+          endFirstDate: endFirstDate,
+          endLastDate: endLastDate,
+          is24HourMode: is24HourMode,
+          isShowSeconds: isShowSeconds,
+          minutesInterval: minutesInterval,
+          secondsInterval: secondsInterval,
+          isForce2Digits: isForce2Digits,
+          borderRadius: borderRadius,
+          constraints: constraints,
+          selectableDayPredicate: selectableDayPredicate,
+        ),
       );
     },
   );
