@@ -122,6 +122,8 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
         endLastDate: endLastDate,
         is24HourMode: is24HourMode,
         isShowSeconds: isShowSeconds,
+        minutesInterval: minutesInterval,
+        secondsInterval: secondsInterval,
         borderRadius: borderRadius,
         constraints: constraints,
         selectableDayPredicate: selectableDayPredicate,

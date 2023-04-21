@@ -82,6 +82,8 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                     firstDate: widget.startFirstDate,
                     lastDate: widget.startLastDate,
                     isShowSeconds: widget.isShowSeconds,
+                    minutesInterval: widget.minutesInterval,
+                    secondsInterval: widget.secondsInterval,
                     onDateChange: (value) {
                       DateTime tempDateTime = DateTime(
                         value.year,
@@ -115,6 +117,8 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                     firstDate: widget.endFirstDate,
                     lastDate: widget.endLastDate,
                     isShowSeconds: widget.isShowSeconds,
+                    minutesInterval: widget.minutesInterval,
+                    secondsInterval: widget.secondsInterval,
                     onDateChange: (value) {
                       DateTime tempDateTime = DateTime(
                         value.year,
