@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Fix: Issue #27
+
 ## 1.0.3
 
 - Fix: minuteInterval property does not working on the OmniDateTimeRangePicker

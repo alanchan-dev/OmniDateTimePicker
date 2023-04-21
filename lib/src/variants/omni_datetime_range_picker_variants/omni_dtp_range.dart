@@ -54,8 +54,8 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
 
   @override
   Widget build(BuildContext context) {
-    DateTime selectedStartDateTime = DateTime.now();
-    DateTime selectedEndDateTime = DateTime.now();
+    DateTime selectedStartDateTime = widget.startInitialDate ?? DateTime.now();
+    DateTime selectedEndDateTime = widget.endInitialDate ?? DateTime.now();
 
     return SingleChildScrollView(
       child: ConstrainedBox(
