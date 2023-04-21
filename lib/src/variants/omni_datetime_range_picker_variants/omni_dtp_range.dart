@@ -18,6 +18,7 @@ class OmniDtpRange extends StatefulWidget {
       this.is24HourMode,
       this.minutesInterval,
       this.secondsInterval,
+      this.isForce2Digits,
       this.constraints,
       this.type,
       this.selectableDayPredicate});
@@ -34,6 +35,7 @@ class OmniDtpRange extends StatefulWidget {
   final bool? is24HourMode;
   final int? minutesInterval;
   final int? secondsInterval;
+  final bool? isForce2Digits;
   final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
@@ -84,6 +86,7 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                     isShowSeconds: widget.isShowSeconds,
                     minutesInterval: widget.minutesInterval,
                     secondsInterval: widget.secondsInterval,
+                    isForce2Digits: widget.isForce2Digits ?? false,
                     onDateChange: (value) {
                       DateTime tempDateTime = DateTime(
                         value.year,
@@ -119,6 +122,7 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                     isShowSeconds: widget.isShowSeconds,
                     minutesInterval: widget.minutesInterval,
                     secondsInterval: widget.secondsInterval,
+                    isForce2Digits: widget.isForce2Digits ?? false,
                     onDateChange: (value) {
                       DateTime tempDateTime = DateTime(
                         value.year,
@@ -172,6 +176,7 @@ class PickerView extends StatefulWidget {
       this.is24HourMode,
       this.minutesInterval,
       this.secondsInterval,
+      this.isForce2Digits,
       this.type,
       this.selectableDayPredicate});
 
@@ -183,6 +188,7 @@ class PickerView extends StatefulWidget {
   final bool? is24HourMode;
   final int? minutesInterval;
   final int? secondsInterval;
+  final bool? isForce2Digits;
 
   final void Function(DateTime) onDateChange;
   final void Function(DateTime) onTimeChange;
@@ -226,6 +232,7 @@ class _PickerViewState extends State<PickerView>
                 is24HourMode: widget.is24HourMode ?? false,
                 minutesInterval: widget.minutesInterval ?? 1,
                 secondsInterval: widget.secondsInterval ?? 1,
+                isForce2Digits: widget.isForce2Digits ?? false,
                 onTimeChange: widget.onTimeChange,
               ),
             ),

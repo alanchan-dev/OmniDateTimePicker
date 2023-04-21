@@ -14,6 +14,7 @@ class OmniDtpBasic extends StatelessWidget {
     this.is24HourMode,
     this.minutesInterval,
     this.secondsInterval,
+    this.isForce2Digits,
     this.constraints,
     this.type,
     this.selectableDayPredicate,
@@ -26,6 +27,7 @@ class OmniDtpBasic extends StatelessWidget {
   final bool? is24HourMode;
   final int? minutesInterval;
   final int? secondsInterval;
+  final bool? isForce2Digits;
   final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
@@ -75,7 +77,7 @@ class OmniDtpBasic extends StatelessWidget {
                   is24HourMode: is24HourMode ?? false,
                   minutesInterval: minutesInterval ?? 1,
                   secondsInterval: secondsInterval ?? 1,
-                  isForce2Digits: false,
+                  isForce2Digits: isForce2Digits ?? false,
                   onTimeChange: (value) {
                     DateTime tempDateTime = DateTime(
                       selectedDateTime.year,

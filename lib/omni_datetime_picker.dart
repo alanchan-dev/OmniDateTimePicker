@@ -23,6 +23,7 @@ Future<DateTime?> showOmniDateTimePicker({
   bool? isShowSeconds,
   int? minutesInterval,
   int? secondsInterval,
+  bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
@@ -59,6 +60,7 @@ Future<DateTime?> showOmniDateTimePicker({
         isShowSeconds: isShowSeconds,
         minutesInterval: minutesInterval,
         secondsInterval: secondsInterval,
+        isForce2Digits: isForce2Digits,
         borderRadius: borderRadius,
         constraints: constraints,
         selectableDayPredicate: selectableDayPredicate,
@@ -85,6 +87,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   bool? isShowSeconds,
   int? minutesInterval,
   int? secondsInterval,
+  bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
@@ -124,6 +127,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
         isShowSeconds: isShowSeconds,
         minutesInterval: minutesInterval,
         secondsInterval: secondsInterval,
+        isForce2Digits: isForce2Digits,
         borderRadius: borderRadius,
         constraints: constraints,
         selectableDayPredicate: selectableDayPredicate,

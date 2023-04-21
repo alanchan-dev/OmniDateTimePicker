@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
                     isShowSeconds: false,
                     minutesInterval: 1,
                     secondsInterval: 1,
+                    isForce2Digits: true,
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                     constraints: const BoxConstraints(
                       maxWidth: 350,
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
                     isShowSeconds: false,
                     minutesInterval: 1,
                     secondsInterval: 1,
+                    isForce2Digits: true,
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                     constraints: const BoxConstraints(
                       maxWidth: 350,

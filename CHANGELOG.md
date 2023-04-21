@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Add: isForce2Digits property to force 2 digits on TimeSpinner
+
 ## 1.0.4+1
 
 - Update: ReadMe
