@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Fix: is24HourMode not working on OmniDateTimeRangePicker
+
 ## 1.0.5
 
 - Add: isForce2Digits property to force 2 digits on TimeSpinner
