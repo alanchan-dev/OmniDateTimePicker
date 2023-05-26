@@ -7,6 +7,7 @@
 library omni_datetime_picker;
 
 import 'package:flutter/material.dart';
+import 'package:omni_datetime_picker/src/components/default_view.dart';
 import 'package:omni_datetime_picker/src/omni_datetime_picker.dart';
 import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 
@@ -101,6 +102,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool Function(DateTime)? selectableDayPredicate,
   ThemeData? theme,
+  DefaultView defaultView = DefaultView.start,
 }) {
   return showGeneralDialog(
     context: context,
@@ -138,6 +140,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
           borderRadius: borderRadius,
           constraints: constraints,
           selectableDayPredicate: selectableDayPredicate,
+          defaultView: defaultView,
         ),
       );
     },

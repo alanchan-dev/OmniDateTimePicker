@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
+import 'package:omni_datetime_picker/src/components/default_view.dart';
 import 'package:omni_datetime_picker/src/variants/omni_datetime_range_picker_variants/omni_dtp_range.dart';
 
 class OmniDateTimeRangePicker extends StatelessWidget {
@@ -19,7 +20,9 @@ class OmniDateTimeRangePicker extends StatelessWidget {
       this.borderRadius,
       this.constraints,
       required this.type,
-      this.selectableDayPredicate});
+      this.selectableDayPredicate,
+      this.defaultView = DefaultView.start,
+  });
 
   final DateTime? startInitialDate;
   final DateTime? startFirstDate;
@@ -37,6 +40,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   final BoxConstraints? constraints;
   final OmniDateTimePickerType type;
   final bool Function(DateTime)? selectableDayPredicate;
+  final DefaultView defaultView;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +68,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
         constraints: constraints,
         type: type,
         selectableDayPredicate: selectableDayPredicate,
+        defaultView: defaultView,
       ),
     );
   }
