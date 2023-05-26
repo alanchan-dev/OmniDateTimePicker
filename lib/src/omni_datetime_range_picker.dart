@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
-import 'package:omni_datetime_picker/src/components/default_view.dart';
 import 'package:omni_datetime_picker/src/variants/omni_datetime_range_picker_variants/omni_dtp_range.dart';
 
 class OmniDateTimeRangePicker extends StatelessWidget {

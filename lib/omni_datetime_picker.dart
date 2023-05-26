@@ -7,7 +7,6 @@
 library omni_datetime_picker;
 
 import 'package:flutter/material.dart';
-import 'package:omni_datetime_picker/src/components/default_view.dart';
 import 'package:omni_datetime_picker/src/omni_datetime_picker.dart';
 import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 
@@ -152,4 +151,10 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
 enum OmniDateTimePickerType {
   date,
   dateAndTime,
+}
+
+/// Decides which tab open by default
+enum DefaultView {
+  start,
+  end
 }

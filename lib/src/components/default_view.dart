@@ -1,4 +1,0 @@
-enum DefaultView {
-  start,
-  end
-}
