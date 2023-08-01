@@ -5,6 +5,7 @@ import 'package:omni_datetime_picker/src/variants/omni_datetime_picker_variants/
 class OmniDateTimePicker extends StatelessWidget {
   const OmniDateTimePicker(
       {super.key,
+      this.title,
       this.initialDate,
       this.firstDate,
       this.lastDate,
@@ -18,6 +19,7 @@ class OmniDateTimePicker extends StatelessWidget {
       required this.type,
       this.selectableDayPredicate});
 
+  final String? title;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -43,6 +45,8 @@ class OmniDateTimePicker extends StatelessWidget {
                 )
               : null,
       child: OmniDtpBasic(
+        title: title,
+        // textStyle: textStyle,
         initialDate: initialDate,
         firstDate: firstDate,
         lastDate: lastDate,

@@ -16,6 +16,7 @@ import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 ///
 Future<DateTime?> showOmniDateTimePicker({
   required BuildContext context,
+  String? title,
   DateTime? initialDate,
   DateTime? firstDate,
   DateTime? lastDate,
@@ -26,8 +27,7 @@ Future<DateTime?> showOmniDateTimePicker({
   bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
   Duration? transitionDuration,
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
@@ -55,6 +55,7 @@ Future<DateTime?> showOmniDateTimePicker({
       return Theme(
         data: theme ?? Theme.of(context),
         child: OmniDateTimePicker(
+          title: title,
           type: type,
           initialDate: initialDate,
           firstDate: firstDate,
@@ -94,8 +95,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
   Duration? transitionDuration,
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
