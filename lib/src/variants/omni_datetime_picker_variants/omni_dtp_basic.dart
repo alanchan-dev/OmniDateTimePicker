@@ -7,7 +7,12 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 class OmniDtpBasic extends StatelessWidget {
   const OmniDtpBasic({
     super.key,
+    this.useDivider,
     this.title,
+    this.titleStyle,
+    this.dividerEndIndent,
+    this.dividerIndent,
+    this.dividerThickness,
     this.initialDate,
     this.firstDate,
     this.lastDate,
@@ -21,7 +26,12 @@ class OmniDtpBasic extends StatelessWidget {
     this.selectableDayPredicate,
   });
 
+  final bool? useDivider;
   final String? title;
+  final TextStyle? titleStyle;
+  final double? dividerEndIndent;
+  final double? dividerIndent;
+  final double? dividerThickness;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -51,9 +61,18 @@ class OmniDtpBasic extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (title != null)
-              Text(
-                title!,
-                style: Theme.of(context).textTheme.headlineMedium,
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  title ?? '',
+                  style: titleStyle ?? Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+            if (title != null && (useDivider ?? false))
+              Divider(
+                thickness: dividerThickness ?? 1,
+                indent: dividerIndent ?? 0,
+                endIndent: dividerEndIndent ?? 0,
               ),
             Calendar(
               initialDate: initialDate,
@@ -73,6 +92,12 @@ class OmniDtpBasic extends StatelessWidget {
               },
               selectableDayPredicate: selectableDayPredicate,
             ),
+            if (type == OmniDateTimePickerType.dateAndTime && (useDivider ?? false))
+              Divider(
+                thickness: dividerThickness ?? 1,
+                indent: dividerIndent ?? 0,
+                endIndent: dividerEndIndent ?? 0,
+              ),
             if (type == OmniDateTimePickerType.dateAndTime)
               Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),

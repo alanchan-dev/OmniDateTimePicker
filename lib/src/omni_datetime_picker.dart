@@ -5,7 +5,12 @@ import 'package:omni_datetime_picker/src/variants/omni_datetime_picker_variants/
 class OmniDateTimePicker extends StatelessWidget {
   const OmniDateTimePicker(
       {super.key,
+      this.useDivider,
       this.title,
+      this.titleStyle,
+      this.dividerIndent,
+      this.dividerEndIndent,
+      this.dividerThickness,
       this.initialDate,
       this.firstDate,
       this.lastDate,
@@ -19,7 +24,12 @@ class OmniDateTimePicker extends StatelessWidget {
       required this.type,
       this.selectableDayPredicate});
 
+  final bool? useDivider;
   final String? title;
+  final TextStyle? titleStyle;
+  final double? dividerIndent;
+  final double? dividerEndIndent;
+  final double? dividerThickness;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -46,7 +56,11 @@ class OmniDateTimePicker extends StatelessWidget {
               : null,
       child: OmniDtpBasic(
         title: title,
-        // textStyle: textStyle,
+        useDivider: useDivider,
+        titleStyle: titleStyle,
+        dividerIndent: dividerIndent,
+        dividerEndIndent: dividerEndIndent,
+        dividerThickness: dividerThickness,
         initialDate: initialDate,
         firstDate: firstDate,
         lastDate: lastDate,
