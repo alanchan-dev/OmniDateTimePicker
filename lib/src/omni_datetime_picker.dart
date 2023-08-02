@@ -8,6 +8,7 @@ class OmniDateTimePicker extends StatelessWidget {
       this.useDivider,
       this.title,
       this.titleStyle,
+      this.altTitle,
       this.dividerIndent,
       this.dividerEndIndent,
       this.dividerThickness,
@@ -27,6 +28,7 @@ class OmniDateTimePicker extends StatelessWidget {
   final bool? useDivider;
   final String? title;
   final TextStyle? titleStyle;
+  final String? altTitle;
   final double? dividerIndent;
   final double? dividerEndIndent;
   final double? dividerThickness;
@@ -56,6 +58,7 @@ class OmniDateTimePicker extends StatelessWidget {
               : null,
       child: OmniDtpBasic(
         title: title,
+        altTitle: altTitle,
         useDivider: useDivider,
         titleStyle: titleStyle,
         dividerIndent: dividerIndent,

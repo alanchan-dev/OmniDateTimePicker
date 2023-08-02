@@ -17,6 +17,7 @@ import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 Future<DateTime?> showOmniDateTimePicker({
   required BuildContext context,
   String? title,
+  String? altTitle,
   bool? useDivider,
   TextStyle? titleStyle,
   double? dividerEndIndent,
@@ -66,6 +67,7 @@ Future<DateTime?> showOmniDateTimePicker({
           dividerThickness: dividerThickness,
           title: title,
           titleStyle: titleStyle,
+          altTitle: altTitle,
           type: type,
           initialDate: initialDate,
           firstDate: firstDate,

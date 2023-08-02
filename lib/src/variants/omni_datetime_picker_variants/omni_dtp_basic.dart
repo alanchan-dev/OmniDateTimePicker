@@ -10,6 +10,7 @@ class OmniDtpBasic extends StatelessWidget {
     this.useDivider,
     this.title,
     this.titleStyle,
+    this.altTitle,
     this.dividerEndIndent,
     this.dividerIndent,
     this.dividerThickness,
@@ -29,6 +30,7 @@ class OmniDtpBasic extends StatelessWidget {
   final bool? useDivider;
   final String? title;
   final TextStyle? titleStyle;
+  final String? altTitle;
   final double? dividerEndIndent;
   final double? dividerIndent;
   final double? dividerThickness;
@@ -60,13 +62,21 @@ class OmniDtpBasic extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (title != null)
+            if (title != null || title == '')
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.all(8),
                 child: Text(
                   title ?? '',
                   style: titleStyle ?? Theme.of(context).textTheme.headlineSmall,
                 ),
+              ),
+            if (altTitle != null)
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                    child: Text(
+                  altTitle ?? '',
+                )),
               ),
             if (title != null && (useDivider ?? false))
               Divider(
