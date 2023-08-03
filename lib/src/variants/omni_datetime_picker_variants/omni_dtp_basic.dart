@@ -10,10 +10,6 @@ class OmniDtpBasic extends StatelessWidget {
     this.useDivider,
     this.title,
     this.titleStyle,
-    this.altTitle,
-    this.dividerEndIndent,
-    this.dividerIndent,
-    this.dividerThickness,
     this.initialDate,
     this.firstDate,
     this.lastDate,
@@ -30,10 +26,6 @@ class OmniDtpBasic extends StatelessWidget {
   final bool? useDivider;
   final String? title;
   final TextStyle? titleStyle;
-  final String? altTitle;
-  final double? dividerEndIndent;
-  final double? dividerIndent;
-  final double? dividerThickness;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -64,25 +56,18 @@ class OmniDtpBasic extends StatelessWidget {
           children: [
             if (title != null || title == '')
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.only(top: 16, left: 20, right: 20, bottom: 8),
                 child: Text(
                   title ?? '',
                   style: titleStyle ?? Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-            if (altTitle != null)
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Center(
-                    child: Text(
-                  altTitle ?? '',
-                )),
-              ),
-            if (title != null && (useDivider ?? false))
-              Divider(
-                thickness: dividerThickness ?? 1,
-                indent: dividerIndent ?? 0,
-                endIndent: dividerEndIndent ?? 0,
+            if ((title != null) && (useDivider ?? false))
+              const Divider(
+                thickness: 1,
+                indent: 20,
+                endIndent: 20,
+                height: 8,
               ),
             Calendar(
               initialDate: initialDate,
@@ -103,10 +88,10 @@ class OmniDtpBasic extends StatelessWidget {
               selectableDayPredicate: selectableDayPredicate,
             ),
             if (type == OmniDateTimePickerType.dateAndTime && (useDivider ?? false))
-              Divider(
-                thickness: dividerThickness ?? 1,
-                indent: dividerIndent ?? 0,
-                endIndent: dividerEndIndent ?? 0,
+              const Divider(
+                thickness: 1,
+                indent: 20,
+                endIndent: 20,
               ),
             if (type == OmniDateTimePickerType.dateAndTime)
               Padding(
