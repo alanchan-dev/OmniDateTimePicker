@@ -19,7 +19,9 @@ class OmniDateTimeRangePicker extends StatelessWidget {
       this.borderRadius,
       this.constraints,
       required this.type,
-      this.selectableDayPredicate});
+      this.selectableDayPredicate,
+      this.defaultView = DefaultView.start,
+  });
 
   final DateTime? startInitialDate;
   final DateTime? startFirstDate;
@@ -37,6 +39,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   final BoxConstraints? constraints;
   final OmniDateTimePickerType type;
   final bool Function(DateTime)? selectableDayPredicate;
+  final DefaultView defaultView;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +67,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
         constraints: constraints,
         type: type,
         selectableDayPredicate: selectableDayPredicate,
+        defaultView: defaultView,
       ),
     );
   }

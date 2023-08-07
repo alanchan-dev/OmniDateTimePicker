@@ -103,6 +103,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool Function(DateTime)? selectableDayPredicate,
   ThemeData? theme,
+  DefaultView defaultView = DefaultView.start,
 }) {
   return showGeneralDialog(
     context: context,
@@ -140,6 +141,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
           borderRadius: borderRadius,
           constraints: constraints,
           selectableDayPredicate: selectableDayPredicate,
+          defaultView: defaultView,
         ),
       );
     },
@@ -151,4 +153,10 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
 enum OmniDateTimePickerType {
   date,
   dateAndTime,
+}
+
+/// Decides which tab open by default
+enum DefaultView {
+  start,
+  end
 }

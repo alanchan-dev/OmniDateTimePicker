@@ -21,7 +21,9 @@ class OmniDtpRange extends StatefulWidget {
       this.isForce2Digits,
       this.constraints,
       this.type,
-      this.selectableDayPredicate});
+      this.selectableDayPredicate,
+      this.defaultView = DefaultView.start
+  });
 
   final DateTime? startInitialDate;
   final DateTime? startFirstDate;
@@ -39,6 +41,7 @@ class OmniDtpRange extends StatefulWidget {
   final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
+  final DefaultView defaultView;
 
   @override
   State<OmniDtpRange> createState() => _OmniDtpRangeState();
@@ -51,6 +54,7 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
+    _tabController.index = widget.defaultView.index;
     super.initState();
   }
 
