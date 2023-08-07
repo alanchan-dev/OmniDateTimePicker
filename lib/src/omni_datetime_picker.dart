@@ -5,7 +5,7 @@ import 'package:omni_datetime_picker/src/variants/omni_datetime_picker_variants/
 class OmniDateTimePicker extends StatelessWidget {
   const OmniDateTimePicker(
       {super.key,
-      this.divider,
+      this.separator,
       this.title,
       this.initialDate,
       this.firstDate,
@@ -20,7 +20,8 @@ class OmniDateTimePicker extends StatelessWidget {
       required this.type,
       this.selectableDayPredicate});
 
-  final Widget? divider;
+  /// A widget that separates the [title] - if not null - and the calendar, also separates between date and time pickers
+  final Widget? separator;
   final Widget? title;
   final DateTime? initialDate;
   final DateTime? firstDate;
@@ -48,7 +49,7 @@ class OmniDateTimePicker extends StatelessWidget {
               : null,
       child: OmniDtpBasic(
         title: title,
-        divider: divider,
+        separator: separator,
         initialDate: initialDate,
         firstDate: firstDate,
         lastDate: lastDate,
