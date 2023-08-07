@@ -7,6 +7,8 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 class OmniDtpBasic extends StatelessWidget {
   const OmniDtpBasic({
     super.key,
+    this.separator,
+    this.title,
     this.initialDate,
     this.firstDate,
     this.lastDate,
@@ -20,6 +22,8 @@ class OmniDtpBasic extends StatelessWidget {
     this.selectableDayPredicate,
   });
 
+  final Widget? separator;
+  final Widget? title;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -48,6 +52,8 @@ class OmniDtpBasic extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (title != null) title!,
+            if (title != null && separator != null) separator!,
             Calendar(
               initialDate: initialDate,
               firstDate: firstDate,
@@ -66,6 +72,7 @@ class OmniDtpBasic extends StatelessWidget {
               },
               selectableDayPredicate: selectableDayPredicate,
             ),
+            if (type == OmniDateTimePickerType.dateAndTime && (separator != null)) separator!,
             if (type == OmniDateTimePickerType.dateAndTime)
               Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),
