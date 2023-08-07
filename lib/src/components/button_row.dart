@@ -31,7 +31,7 @@ class ButtonRow extends StatelessWidget {
           child: TextButton(
             onPressed: onSavePressed,
             child: Text(
-              localizations.saveButtonLabel,
+              localizations.okButtonLabel,
             ),
           ),
         ),

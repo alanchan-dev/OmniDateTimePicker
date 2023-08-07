@@ -1,3 +1,8 @@
+## 1.0.8
+
+- Added DefaultView to choose which tab to open by default for showOmniDateTimeRangePicker (#35)
+- Added optional title and divider arguments to showOmniDateTimePicker (#39)
+
 ## 1.0.7
 
 - Add: theme property that accepts a ThemeData to customize the look of the picker regardless of the app's theme.

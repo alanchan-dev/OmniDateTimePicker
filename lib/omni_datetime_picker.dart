@@ -16,6 +16,8 @@ import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 ///
 Future<DateTime?> showOmniDateTimePicker({
   required BuildContext context,
+  Widget? title,
+  Widget? separator,
   DateTime? initialDate,
   DateTime? firstDate,
   DateTime? lastDate,
@@ -26,8 +28,7 @@ Future<DateTime?> showOmniDateTimePicker({
   bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
   Duration? transitionDuration,
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
@@ -55,6 +56,8 @@ Future<DateTime?> showOmniDateTimePicker({
       return Theme(
         data: theme ?? Theme.of(context),
         child: OmniDateTimePicker(
+          separator: separator,
+          title: title,
           type: type,
           initialDate: initialDate,
           firstDate: firstDate,
@@ -94,13 +97,13 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
   Duration? transitionDuration,
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
   bool Function(DateTime)? selectableDayPredicate,
   ThemeData? theme,
+  DefaultView defaultView = DefaultView.start,
 }) {
   return showGeneralDialog(
     context: context,
@@ -138,6 +141,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
           borderRadius: borderRadius,
           constraints: constraints,
           selectableDayPredicate: selectableDayPredicate,
+          defaultView: defaultView,
         ),
       );
     },
@@ -149,4 +153,10 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
 enum OmniDateTimePickerType {
   date,
   dateAndTime,
+}
+
+/// Decides which tab open by default
+enum DefaultView {
+  start,
+  end
 }
