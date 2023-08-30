@@ -28,7 +28,8 @@ Future<DateTime?> showOmniDateTimePicker({
   bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+      transitionBuilder,
   Duration? transitionDuration,
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
@@ -97,7 +98,8 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   bool? isForce2Digits,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
+  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+      transitionBuilder,
   Duration? transitionDuration,
   bool? barrierDismissible,
   OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
@@ -156,7 +158,4 @@ enum OmniDateTimePickerType {
 }
 
 /// Decides which tab open by default
-enum DefaultView {
-  start,
-  end
-}
+enum DefaultView { start, end }

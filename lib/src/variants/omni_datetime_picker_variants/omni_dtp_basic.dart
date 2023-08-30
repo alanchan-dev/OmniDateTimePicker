@@ -72,7 +72,9 @@ class OmniDtpBasic extends StatelessWidget {
               },
               selectableDayPredicate: selectableDayPredicate,
             ),
-            if (type == OmniDateTimePickerType.dateAndTime && (separator != null)) separator!,
+            if (type == OmniDateTimePickerType.dateAndTime &&
+                (separator != null))
+              separator!,
             if (type == OmniDateTimePickerType.dateAndTime)
               Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),

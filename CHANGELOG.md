@@ -1,3 +1,7 @@
+## 1.0.8+1
+
+- Fix: dart formatting
+
 ## 1.0.8
 
 - Added DefaultView to choose which tab to open by default for showOmniDateTimeRangePicker (#35)

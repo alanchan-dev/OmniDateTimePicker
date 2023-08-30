@@ -6,23 +6,23 @@ import 'package:omni_datetime_picker/src/components/custom_tab_bar.dart';
 import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 
 class OmniDtpRange extends StatefulWidget {
-  const OmniDtpRange(
-      {super.key,
-      this.startInitialDate,
-      this.startFirstDate,
-      this.startLastDate,
-      this.endInitialDate,
-      this.endFirstDate,
-      this.endLastDate,
-      this.isShowSeconds,
-      this.is24HourMode,
-      this.minutesInterval,
-      this.secondsInterval,
-      this.isForce2Digits,
-      this.constraints,
-      this.type,
-      this.selectableDayPredicate,
-      this.defaultView = DefaultView.start
+  const OmniDtpRange({
+    super.key,
+    this.startInitialDate,
+    this.startFirstDate,
+    this.startLastDate,
+    this.endInitialDate,
+    this.endFirstDate,
+    this.endLastDate,
+    this.isShowSeconds,
+    this.is24HourMode,
+    this.minutesInterval,
+    this.secondsInterval,
+    this.isForce2Digits,
+    this.constraints,
+    this.type,
+    this.selectableDayPredicate,
+    this.defaultView = DefaultView.start,
   });
 
   final DateTime? startInitialDate;

@@ -3,24 +3,24 @@ import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:omni_datetime_picker/src/variants/omni_datetime_range_picker_variants/omni_dtp_range.dart';
 
 class OmniDateTimeRangePicker extends StatelessWidget {
-  const OmniDateTimeRangePicker(
-      {super.key,
-      this.startInitialDate,
-      this.startFirstDate,
-      this.startLastDate,
-      this.endInitialDate,
-      this.endFirstDate,
-      this.endLastDate,
-      this.isShowSeconds,
-      this.is24HourMode,
-      this.minutesInterval,
-      this.secondsInterval,
-      this.isForce2Digits,
-      this.borderRadius,
-      this.constraints,
-      required this.type,
-      this.selectableDayPredicate,
-      this.defaultView = DefaultView.start,
+  const OmniDateTimeRangePicker({
+    super.key,
+    this.startInitialDate,
+    this.startFirstDate,
+    this.startLastDate,
+    this.endInitialDate,
+    this.endFirstDate,
+    this.endLastDate,
+    this.isShowSeconds,
+    this.is24HourMode,
+    this.minutesInterval,
+    this.secondsInterval,
+    this.isForce2Digits,
+    this.borderRadius,
+    this.constraints,
+    required this.type,
+    this.selectableDayPredicate,
+    this.defaultView = DefaultView.start,
   });
 
   final DateTime? startInitialDate;
