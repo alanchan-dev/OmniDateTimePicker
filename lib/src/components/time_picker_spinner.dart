@@ -354,13 +354,9 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
             }
           },
           (hour, selectedStartDate) {
-            int realHour = widget.is24HourMode
+            final realHour = widget.is24HourMode
                 ? hour
-                : (currentSelectedAPIndex == 2 ? hour + 12 : hour);
-            if (realHour == 24) {
-              realHour = 0;
-            }
-
+                : (currentSelectedAPIndex == 2 ? (hour % 12) + 12 : hour % 12);
             return realHour < selectedStartDate.hour;
           },
         ),
@@ -751,7 +747,13 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           if (isAPScrolling != true ||
               currentSelectedAPIndex != newCurrentSelectedAPIndex) {
             setState(() {
-              currentSelectedAPIndex = newCurrentSelectedAPIndex;
+              if (!isMeridianDisabled(
+                  newCurrentSelectedAPIndex,
+                  widget.dynamicSelectedStartDate?.value,
+                  widget.dynamicSelectedEndDate?.value)) {
+                currentSelectedAPIndex = newCurrentSelectedAPIndex;
+              }
+
               isAPScrolling = true;
             });
           }
