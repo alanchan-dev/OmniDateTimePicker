@@ -274,19 +274,9 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
     widget.dynamicSelectedStartDate?.addListener(handleStartTimeChange);
 
-    if (widget.dynamicSelectedStartDate != null) {
-      final currentStartTime = DateTime(
-        currentTime!.year,
-        currentTime!.month,
-        currentTime!.day,
-        widget.dynamicSelectedStartDate!.value.hour,
-        widget.dynamicSelectedStartDate!.value.minute,
-        widget.dynamicSelectedStartDate!.value.second,
-      );
-
-      if (currentTime!.isBefore(currentStartTime)) {
-        currentTime = currentStartTime;
-      }
+    if (widget.dynamicSelectedStartDate != null &&
+        currentTime!.isBefore(widget.dynamicSelectedStartDate!.value)) {
+      currentTime = widget.dynamicSelectedStartDate!.value.copyWith();
     }
 
     currentSelectedHourIndex =
@@ -512,12 +502,14 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
 
       if (lower >= 0 &&
           !shouldDisableItem(
-              getItemNumber(controller, lower, max, interval), startDate))
+              getItemNumber(controller, lower, max, interval), startDate)) {
         return lower;
+      }
       if (upper < scrollMax &&
           !shouldDisableItem(
-              getItemNumber(controller, upper, max, interval), startDate))
+              getItemNumber(controller, upper, max, interval), startDate)) {
         return upper;
+      }
 
       lower = (lower - 1);
       upper = (upper + 1);
