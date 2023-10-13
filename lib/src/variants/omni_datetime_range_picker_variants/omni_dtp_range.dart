@@ -195,8 +195,14 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
               ),
             ),
             ButtonRow(onSavePressed: () {
-              Navigator.pop<List<DateTime>>(context,
-                  [_selectedStartDateTime.value, _selectedEndDateTime.value]);
+              Navigator.pop<List<DateTime>>(context, [
+                _selectedStartDateTime.value,
+                _selectedEndDateTime.value
+                            .isBefore(_selectedStartDateTime.value) &&
+                        widget.isForceEndDateAfterStartDate
+                    ? _selectedStartDateTime.value.copyWith()
+                    : _selectedEndDateTime.value
+              ]);
             }),
           ],
         ),
