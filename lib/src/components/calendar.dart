@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'calendar_date_picker.dart' as cdp;
 
 class Calendar extends StatelessWidget {
-  const Calendar(
-      {super.key,
-      this.initialDate,
-      this.firstDate,
-      this.lastDate,
-      required this.onDateChanged,
-      this.selectableDayPredicate});
+  const Calendar({
+    super.key,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    required this.onDateChanged,
+    this.selectableDayPredicate,
+    this.dynamicFirstDate,
+  });
 
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
+  final ValueNotifier<DateTime>? dynamicFirstDate;
   final void Function(DateTime) onDateChanged;
   final bool Function(DateTime)? selectableDayPredicate;
 
@@ -28,6 +31,7 @@ class Calendar extends StatelessWidget {
       lastDate: lastDate ?? defaultLastDate,
       onDateChanged: onDateChanged,
       selectableDayPredicate: selectableDayPredicate,
+      dynamicFirstDate: dynamicFirstDate,
     );
   }
 }

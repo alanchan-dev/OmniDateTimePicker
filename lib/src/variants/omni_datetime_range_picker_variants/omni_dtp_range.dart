@@ -19,11 +19,12 @@ class OmniDtpRange extends StatefulWidget {
     this.minutesInterval,
     this.secondsInterval,
     this.isForce2Digits,
+    bool? isForceEndDateAfterStartDate,
     this.constraints,
     this.type,
     this.selectableDayPredicate,
     this.defaultView = DefaultView.start,
-  });
+  }) : isForceEndDateAfterStartDate = isForceEndDateAfterStartDate ?? false;
 
   final DateTime? startInitialDate;
   final DateTime? startFirstDate;
@@ -38,6 +39,7 @@ class OmniDtpRange extends StatefulWidget {
   final int? minutesInterval;
   final int? secondsInterval;
   final bool? isForce2Digits;
+  final bool isForceEndDateAfterStartDate;
   final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
@@ -50,19 +52,44 @@ class OmniDtpRange extends StatefulWidget {
 class _OmniDtpRangeState extends State<OmniDtpRange>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late final ValueNotifier<DateTime> _selectedStartDateTime =
+      ValueNotifier(widget.startInitialDate ?? DateTime.now());
+  late final ValueNotifier<DateTime> _selectedEndDateTime =
+      ValueNotifier(widget.endInitialDate ?? DateTime.now());
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     _tabController.index = widget.defaultView.index;
+
+    assert(
+      !(widget.isForceEndDateAfterStartDate &&
+          (widget.startLastDate == null && widget.endLastDate != null)),
+      'endLastDate cannot be set when startLastDate is null and forceEndDateAfterStartDate is true',
+    );
+    assert(
+      !(widget.isForceEndDateAfterStartDate &&
+          (widget.startLastDate != null &&
+              widget.endLastDate != null &&
+              (widget.startLastDate!.isAfter(widget.endLastDate!) ||
+                  widget.startLastDate!
+                      .isAtSameMomentAs(widget.endLastDate!)))),
+      'endLastDate cannot less than startLastDate when forceEndDateAfterStartDate is true',
+    );
+
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    DateTime selectedStartDateTime = widget.startInitialDate ?? DateTime.now();
-    DateTime selectedEndDateTime = widget.endInitialDate ?? DateTime.now();
+  void dispose() {
+    _tabController.dispose();
+    _selectedStartDateTime.dispose();
+    _selectedEndDateTime.dispose();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: widget.constraints ??
@@ -97,30 +124,37 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                         value.year,
                         value.month,
                         value.day,
-                        selectedStartDateTime.hour,
-                        selectedStartDateTime.minute,
+                        _selectedStartDateTime.value.hour,
+                        _selectedStartDateTime.value.minute,
                         widget.isShowSeconds ?? false
-                            ? selectedStartDateTime.second
+                            ? _selectedStartDateTime.value.second
                             : 0,
                       );
 
-                      selectedStartDateTime = tempDateTime;
+                      _selectedStartDateTime.value = tempDateTime;
                     },
                     onTimeChange: (value) {
                       DateTime tempDateTime = DateTime(
-                        selectedStartDateTime.year,
-                        selectedStartDateTime.month,
-                        selectedStartDateTime.day,
+                        _selectedStartDateTime.value.year,
+                        _selectedStartDateTime.value.month,
+                        _selectedStartDateTime.value.day,
                         value.hour,
                         value.minute,
                         widget.isShowSeconds ?? false ? value.second : 0,
                       );
 
-                      selectedStartDateTime = tempDateTime;
+                      _selectedStartDateTime.value = tempDateTime;
                     },
+                    selectableDayPredicate: widget.selectableDayPredicate,
                   ),
                   PickerView(
                     type: widget.type,
+                    selectedStartDate: widget.isForceEndDateAfterStartDate
+                        ? _selectedStartDateTime
+                        : null,
+                    selectedEndDate: widget.isForceEndDateAfterStartDate
+                        ? _selectedEndDateTime
+                        : null,
                     initialDate: widget.endInitialDate,
                     firstDate: widget.endFirstDate,
                     lastDate: widget.endLastDate,
@@ -134,34 +168,35 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                         value.year,
                         value.month,
                         value.day,
-                        selectedEndDateTime.hour,
-                        selectedEndDateTime.minute,
+                        _selectedEndDateTime.value.hour,
+                        _selectedEndDateTime.value.minute,
                         widget.isShowSeconds ?? false
-                            ? selectedEndDateTime.second
+                            ? _selectedEndDateTime.value.second
                             : 0,
                       );
 
-                      selectedEndDateTime = tempDateTime;
+                      _selectedEndDateTime.value = tempDateTime;
                     },
                     onTimeChange: (value) {
                       DateTime tempDateTime = DateTime(
-                        selectedEndDateTime.year,
-                        selectedEndDateTime.month,
-                        selectedEndDateTime.day,
+                        _selectedEndDateTime.value.year,
+                        _selectedEndDateTime.value.month,
+                        _selectedEndDateTime.value.day,
                         value.hour,
                         value.minute,
                         widget.isShowSeconds ?? false ? value.second : 0,
                       );
 
-                      selectedEndDateTime = tempDateTime;
+                      _selectedEndDateTime.value = tempDateTime;
                     },
+                    selectableDayPredicate: widget.selectableDayPredicate,
                   ),
                 ],
               ),
             ),
             ButtonRow(onSavePressed: () {
-              Navigator.pop<List<DateTime>>(
-                  context, [selectedStartDateTime, selectedEndDateTime]);
+              Navigator.pop<List<DateTime>>(context,
+                  [_selectedStartDateTime.value, _selectedEndDateTime.value]);
             }),
           ],
         ),
@@ -171,24 +206,29 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
 }
 
 class PickerView extends StatefulWidget {
-  const PickerView(
-      {super.key,
-      this.initialDate,
-      this.firstDate,
-      this.lastDate,
-      this.isShowSeconds,
-      required this.onTimeChange,
-      required this.onDateChange,
-      this.is24HourMode,
-      this.minutesInterval,
-      this.secondsInterval,
-      this.isForce2Digits,
-      this.type,
-      this.selectableDayPredicate});
+  const PickerView({
+    super.key,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    this.selectedStartDate,
+    this.selectedEndDate,
+    this.isShowSeconds,
+    required this.onTimeChange,
+    required this.onDateChange,
+    this.is24HourMode,
+    this.minutesInterval,
+    this.secondsInterval,
+    this.isForce2Digits,
+    this.type,
+    this.selectableDayPredicate,
+  });
 
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
+  final ValueNotifier<DateTime>? selectedStartDate;
+  final ValueNotifier<DateTime>? selectedEndDate;
 
   final bool? isShowSeconds;
   final bool? is24HourMode;
@@ -225,6 +265,7 @@ class _PickerViewState extends State<PickerView>
             firstDate: widget.firstDate,
             lastDate: widget.lastDate,
             onDateChanged: widget.onDateChange,
+            dynamicFirstDate: widget.selectedStartDate,
             selectableDayPredicate: widget.selectableDayPredicate,
           ),
           if (widget.type == OmniDateTimePickerType.dateAndTime)
@@ -240,6 +281,8 @@ class _PickerViewState extends State<PickerView>
                 secondsInterval: widget.secondsInterval ?? 1,
                 isForce2Digits: widget.isForce2Digits ?? false,
                 onTimeChange: widget.onTimeChange,
+                dynamicSelectedStartDate: widget.selectedStartDate,
+                dynamicSelectedEndDate: widget.selectedEndDate,
               ),
             ),
         ],
