@@ -83,6 +83,7 @@ class CalendarDatePicker extends StatefulWidget {
     this.onDisplayedMonthChanged,
     this.initialCalendarMode = DatePickerMode.day,
     this.selectableDayPredicate,
+    this.dynamicFirstDate,
   })  : initialDate = DateUtils.dateOnly(initialDate),
         firstDate = DateUtils.dateOnly(firstDate),
         lastDate = DateUtils.dateOnly(lastDate),
@@ -118,6 +119,9 @@ class CalendarDatePicker extends StatefulWidget {
   /// The [DateTime] representing today. It will be highlighted in the day grid.
   final DateTime currentDate;
 
+  /// The [ValueNotifier] for the currently selected start [DateTime]
+  final ValueNotifier<DateTime>? dynamicFirstDate;
+
   /// Called when the user selects a date in the picker.
   final ValueChanged<DateTime> onDateChanged;
 
@@ -144,6 +148,21 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
   late MaterialLocalizations _localizations;
   late TextDirection _textDirection;
 
+  void changeDateWithFirstDate() {
+    if (widget.dynamicFirstDate != null &&
+        widget.dynamicFirstDate!.value.isAfter(_selectedDate)) {
+      setState(() {
+        _currentDisplayedMonthDate = DateTime(
+          widget.dynamicFirstDate!.value.year,
+          widget.dynamicFirstDate!.value.month,
+        );
+
+        _selectedDate = widget.dynamicFirstDate!.value;
+        widget.onDateChanged(_selectedDate);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -151,6 +170,15 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
     _currentDisplayedMonthDate =
         DateTime(widget.initialDate.year, widget.initialDate.month);
     _selectedDate = widget.initialDate;
+
+    widget.dynamicFirstDate?.addListener(changeDateWithFirstDate);
+  }
+
+  @override
+  void dispose() {
+    widget.dynamicFirstDate?.removeListener(changeDateWithFirstDate);
+
+    super.dispose();
   }
 
   @override
@@ -248,16 +276,16 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
     });
   }
 
-  Widget _buildPicker() {
+  Widget _buildPicker(DateTime selectedDate, DateTime firstDate) {
     switch (_mode) {
       case DatePickerMode.day:
         return _MonthPicker(
           key: _monthPickerKey,
           initialMonth: _currentDisplayedMonthDate,
           currentDate: widget.currentDate,
-          firstDate: widget.firstDate,
+          firstDate: firstDate,
           lastDate: widget.lastDate,
-          selectedDate: _selectedDate,
+          selectedDate: selectedDate,
           onChanged: _handleDayChanged,
           onDisplayedMonthChanged: _handleMonthChanged,
           selectableDayPredicate: widget.selectableDayPredicate,
@@ -268,10 +296,10 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
           child: YearPicker(
             key: _yearPickerKey,
             currentDate: widget.currentDate,
-            firstDate: widget.firstDate,
+            firstDate: firstDate,
             lastDate: widget.lastDate,
             initialDate: _currentDisplayedMonthDate,
-            selectedDate: _selectedDate,
+            selectedDate: selectedDate,
             onChanged: _handleYearChanged,
           ),
         );
@@ -287,7 +315,21 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
       children: <Widget>[
         SizedBox(
           height: _subHeaderHeight + _maxDayPickerHeight,
-          child: _buildPicker(),
+          child: widget.dynamicFirstDate != null
+              ? ValueListenableBuilder(
+                  valueListenable: widget.dynamicFirstDate!,
+                  builder: (context, dynamicFirstDate, _) {
+                    return _buildPicker(
+                      dynamicFirstDate.isAfter(_selectedDate)
+                          ? dynamicFirstDate
+                          : _selectedDate,
+                      dynamicFirstDate.isAfter(widget.firstDate)
+                          ? DateTime(dynamicFirstDate.year,
+                              dynamicFirstDate.month, dynamicFirstDate.day)
+                          : widget.firstDate,
+                    );
+                  })
+              : _buildPicker(_selectedDate, widget.firstDate),
         ),
         // Put the mode toggle button on top so that it won't be covered up by the _MonthPicker
         _DatePickerModeToggleButton(
