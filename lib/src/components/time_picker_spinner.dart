@@ -275,6 +275,7 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
+      textDirection: TextDirection.ltr,
       children: contents,
     );
   }
