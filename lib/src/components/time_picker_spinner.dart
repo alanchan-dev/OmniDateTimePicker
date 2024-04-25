@@ -22,11 +22,11 @@ class ItemScrollPhysics extends ScrollPhysics {
   final double? Function(ScrollPosition position)? customTarget;
 
   const ItemScrollPhysics({
-    ScrollPhysics? parent,
+    super.parent,
     this.itemHeight,
     this.targetPixelsLimit = 3.0,
     this.customTarget,
-  }) : super(parent: parent);
+  });
 
   @override
   ItemScrollPhysics applyTo(ScrollPhysics? ancestor) {
@@ -102,7 +102,7 @@ class TimePickerSpinner extends StatefulWidget {
   final ValueNotifier<DateTime>? dynamicSelectedEndDate;
 
   const TimePickerSpinner({
-    Key? key,
+    super.key,
     this.time,
     this.minutesInterval = 1,
     this.secondsInterval = 1,
@@ -118,7 +118,7 @@ class TimePickerSpinner extends StatefulWidget {
     this.amText,
     this.dynamicSelectedStartDate,
     this.dynamicSelectedEndDate,
-  }) : super(key: key);
+  });
 
   @override
   State<TimePickerSpinner> createState() => _TimePickerSpinnerState();
