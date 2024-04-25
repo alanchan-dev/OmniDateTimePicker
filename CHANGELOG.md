@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Add: isForceEndDateAfterStartDate option to showOmniDateTimeRangePicker
+
 ## 1.0.9
 
 - Fix: dart formatting
