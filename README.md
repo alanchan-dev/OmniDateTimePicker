@@ -17,9 +17,6 @@ and the Flutter guide for
 
 A DateTime picker that lets user select a date and the time, with start & end as a range.
 
-## Support my passion
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/alanchan)
 
 ### Material 3 support
 
