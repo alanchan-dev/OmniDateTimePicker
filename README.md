@@ -25,8 +25,6 @@ Light             |  Dark
 :-------------------------:|:-------------------------:
 ![Omni DateTime Range Picker - Material 3 Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_lightmode_v1.png)  |  ![Omni DateTime Range Picker - Material 3 Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_darkmode_v1.png)
 
-![Omni DateTime Range Picker - Material 3 Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_lightmode_v1.png) ![Omni DateTime Range Picker - Material 3 Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_darkmode_v1.png)
-
 ## Getting started
 
 Add this to your package's pubspec.yaml file and run `flutter pub get`:
