@@ -19,11 +19,11 @@ A DateTime picker that lets user select a date and the time, with start & end as
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X2YYHL7)
 
-
 ## Screenshots
-Light             |  Dark
-:-------------------------:|:-------------------------:
-![Omni DateTime Range Picker - Material 3 Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_lightmode_v1.png)  |  ![Omni DateTime Range Picker - Material 3 Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/m3_darkmode_v1.png)
+
+|                                                                    Light                                                                     |                                                                    Dark                                                                    |
+| :------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: |
+| ![Omni DateTime Range Picker - Light](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/lightmode_v2.png) | ![Omni DateTime Range Picker - Dark](https://raw.githubusercontent.com/alanchan-dev/OmniDateTimePicker/master/screenshots/darkmode_v2.png) |
 
 ## Getting started
 
@@ -31,7 +31,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^1.1.0
+  omni_datetime_picker: ^2.0.0
 ```
 
 Now in your Dart code, you can use:
@@ -158,3 +158,7 @@ The returned value of showOmniDateTimeRangePicker() will be a List<DateTime> wit
 ```dart
 [startDateTime, endDateTime].
 ```
+
+## Usage with more flexibility
+
+`OmniDateTimePicker` is now available for use directly as a widget instead of the prebuilt dialogs.

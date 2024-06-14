@@ -1,3 +1,18 @@
+## 2.0.0
+
+- Breaking: `DefaultView` enum is now `DefaultTab`
+- Breaking: `separator` is now split into `titleSeparator` (The widget after title, only shows if `title` is non-null) and `separator` (The widget between Date and Time)
+- Breaking: `constraints` are now default to `BoxConstraints.expand()` if null.
+- Breaking: Disabled swipe to change tabs for OmniDateTimeRangePicker.
+- Fix: TimePickerSpinner is now left to right regardless of language
+- Add: `selectionOverlay` to customize TimePickerSpinner selected time
+- Add: `time` option to `OmniDateTimePickerType` enum
+- Add: `onStartDateAfterEndDateError` is a function that runs if `isForceEndDateAfterStartDate` is true and the selectedStartDate is after selectedEndDate. (Only for range picker)
+- Add: `padding` option to dialog
+- Add: `insetPadding` option to dialog
+- Add: `startLabelWidget` and `endLabelWidget` to have custom tab titles (#48)
+- Add: Direct usage of `OmniDateTimePicker` without using it as dialog, by using `onDateTimeChanged` for more flexibility. (#38)
+
 ## 1.1.0
 
 - Add: isForceEndDateAfterStartDate option to showOmniDateTimeRangePicker

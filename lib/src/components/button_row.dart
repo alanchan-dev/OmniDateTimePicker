@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ButtonRow extends StatelessWidget {
-  const ButtonRow({super.key, required this.onSavePressed});
+  const ButtonRow({
+    super.key,
+    required this.onCancelPressed,
+    required this.onSavePressed,
+  });
 
+  final void Function() onCancelPressed;
   final void Function() onSavePressed;
 
   @override
@@ -11,13 +16,10 @@ class ButtonRow extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
           child: TextButton(
-            onPressed: () {
-              Navigator.of(context).pop<DateTime>();
-            },
+            onPressed: onCancelPressed,
             child: Text(
               localizations.cancelButtonLabel,
             ),

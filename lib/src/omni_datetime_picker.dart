@@ -1,66 +1,115 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:omni_datetime_picker/omni_datetime_picker.dart';
-import 'package:omni_datetime_picker/src/variants/omni_datetime_picker_variants/omni_dtp_basic.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OmniDateTimePicker extends StatelessWidget {
-  const OmniDateTimePicker(
-      {super.key,
-      this.separator,
-      this.title,
-      this.initialDate,
-      this.firstDate,
-      this.lastDate,
-      this.isShowSeconds,
-      this.is24HourMode,
-      this.minutesInterval,
-      this.secondsInterval,
-      this.isForce2Digits,
-      this.borderRadius,
-      this.constraints,
-      required this.type,
-      this.selectableDayPredicate});
+import 'bloc/omni_datetime_picker_bloc.dart';
+import 'components/calendar/calendar.dart';
+import 'components/custom_scroll_behavior.dart';
+import 'components/time_picker_spinner/time_picker_spinner.dart';
+import 'enums/omni_datetime_picker_type.dart';
 
-  /// A widget that separates the [title] - if not null - and the calendar, also separates between date and time pickers
-  final Widget? separator;
-  final Widget? title;
+class OmniDateTimePicker extends StatefulWidget {
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
-  final bool? isShowSeconds;
-  final bool? is24HourMode;
-  final int? minutesInterval;
-  final int? secondsInterval;
-  final bool? isForce2Digits;
-  final BorderRadiusGeometry? borderRadius;
-  final BoxConstraints? constraints;
-  final OmniDateTimePickerType type;
   final bool Function(DateTime)? selectableDayPredicate;
+  final ValueChanged<DateTime> onDateTimeChanged;
+
+  final String? amText;
+  final String? pmText;
+  final bool isShowSeconds;
+  final bool is24HourMode;
+  final int minutesInterval;
+  final int secondsInterval;
+  final bool isForce2Digits;
+  final bool looping;
+
+  final Widget selectionOverlay;
+
+  final Widget? separator;
+  final OmniDateTimePickerType type;
+
+  const OmniDateTimePicker({
+    super.key,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    this.selectableDayPredicate,
+    required this.onDateTimeChanged,
+    this.amText,
+    this.pmText,
+    this.isShowSeconds = false,
+    this.is24HourMode = false,
+    this.minutesInterval = 1,
+    this.secondsInterval = 1,
+    this.isForce2Digits = true,
+    this.looping = true,
+    this.selectionOverlay = const CupertinoPickerDefaultSelectionOverlay(),
+    this.separator,
+    this.type = OmniDateTimePickerType.dateAndTime,
+  });
 
   @override
+  State<OmniDateTimePicker> createState() => _OmniDateTimePickerState();
+}
+
+class _OmniDateTimePickerState extends State<OmniDateTimePicker> {
+  @override
   Widget build(BuildContext context) {
-    return Dialog(
-      alignment: Alignment.center,
-      shape: Theme.of(context).useMaterial3
-          ? null
-          : borderRadius != null
-              ? RoundedRectangleBorder(
-                  borderRadius: borderRadius!,
-                )
-              : null,
-      child: OmniDtpBasic(
-        title: title,
-        separator: separator,
-        initialDate: initialDate,
-        firstDate: firstDate,
-        lastDate: lastDate,
-        is24HourMode: is24HourMode,
-        isShowSeconds: isShowSeconds,
-        minutesInterval: minutesInterval,
-        secondsInterval: secondsInterval,
-        isForce2Digits: isForce2Digits,
-        constraints: constraints,
-        type: type,
-        selectableDayPredicate: selectableDayPredicate,
+    final localizations = MaterialLocalizations.of(context);
+    final defaultInitialDate = DateTime.now();
+    final defaultFirstDate = DateTime.fromMillisecondsSinceEpoch(0);
+    final defaultLastDate = DateTime(2100);
+
+    return BlocProvider(
+      create: (context) => OmniDatetimePickerBloc(
+        initialDateTime: widget.initialDate ?? defaultInitialDate,
+        firstDate: widget.firstDate ?? defaultFirstDate,
+        lastDate: widget.lastDate ?? defaultLastDate,
+      ),
+      child: BlocConsumer<OmniDatetimePickerBloc, OmniDatetimePickerState>(
+        listener: (context, state) {
+          widget.onDateTimeChanged(state.dateTime);
+        },
+        builder: (context, state) {
+          return ScrollConfiguration(
+            behavior: CustomScrollBehavior(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.type == OmniDateTimePickerType.dateAndTime ||
+                    widget.type == OmniDateTimePickerType.date)
+                  Calendar(
+                    initialDate: state.dateTime,
+                    firstDate: state.firstDate,
+                    lastDate: state.lastDate,
+                    selectableDayPredicate: widget.selectableDayPredicate,
+                    onDateChanged: (datetime) {
+                      context
+                          .read<OmniDatetimePickerBloc>()
+                          .add(UpdateDate(dateTime: datetime));
+                    },
+                  ),
+                if (widget.separator != null) widget.separator!,
+                if (widget.type == OmniDateTimePickerType.dateAndTime ||
+                    widget.type == OmniDateTimePickerType.time)
+                  TimePickerSpinner(
+                    amText:
+                        widget.amText ?? localizations.anteMeridiemAbbreviation,
+                    pmText:
+                        widget.pmText ?? localizations.postMeridiemAbbreviation,
+                    isShowSeconds: widget.isShowSeconds,
+                    is24HourMode: widget.is24HourMode,
+                    minutesInterval: widget.minutesInterval,
+                    secondsInterval: widget.secondsInterval,
+                    isForce2Digits: widget.isForce2Digits,
+                    looping: widget.looping,
+                    selectionOverlay: widget.selectionOverlay,
+                  ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
