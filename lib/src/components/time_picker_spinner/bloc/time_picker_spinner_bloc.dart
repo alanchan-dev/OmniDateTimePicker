@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:omni_datetime_picker/src/components/time_picker_spinner/bloc/utils.dart';
 
 part 'time_picker_spinner_event.dart';
 part 'time_picker_spinner_state.dart';
@@ -16,6 +17,7 @@ class TimePickerSpinnerBloc
   final bool isForce2Digits;
   final DateTime firstDateTime;
   final DateTime lastDateTime;
+  final DateTime initialDateTime;
 
   TimePickerSpinnerBloc({
     required this.amText,
@@ -27,6 +29,7 @@ class TimePickerSpinnerBloc
     required this.isForce2Digits,
     required this.firstDateTime,
     required this.lastDateTime,
+    required this.initialDateTime,
   }) : super(TimePickerSpinnerInitial()) {
     on<Initialize>(_initialize);
 
@@ -42,7 +45,7 @@ class TimePickerSpinnerBloc
     final seconds = _generateSeconds();
     final abbreviations = _generateAbbreviations();
 
-    final now = DateTime.now();
+    final now = initialDateTime;
     final initialHourIndex = _getInitialHourIndex(hours: hours, now: now);
     final initialMinuteIndex =
         _getInitialMinuteIndex(minutes: minutes, now: now);
@@ -86,14 +89,20 @@ class TimePickerSpinnerBloc
     required List<String> minutes,
     required DateTime now,
   }) {
-    return minutes.indexWhere((e) => e == now.minute.toString());
+    final index = findClosestIndex(minutes, now.minute);
+    return index;
+    // return minutes.indexWhere((e) => e == now.minute.toString());
   }
 
   int _getInitialSecondIndex({
     required List<String> seconds,
     required DateTime now,
   }) {
-    return seconds.indexWhere((e) => e == now.second.toString());
+    final index = findClosestIndex(seconds, now.minute);
+
+    return index;
+
+    // return seconds.indexWhere((e) => e == now.second.toString());
   }
 
   int _getInitialAbbreviationIndex({

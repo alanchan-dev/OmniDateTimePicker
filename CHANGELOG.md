@@ -1,3 +1,10 @@
+## 2.0.1
+
+- Fix: Issue #57 #58
+- Fix: `constraints` not working correctly
+- Add: `barrierColor` to prebuilt dialogs
+- Lower Dart SDK constraint to >= 3.4.0
+
 ## 2.0.0
 
 - Breaking: `DefaultView` enum is now `DefaultTab`

@@ -38,6 +38,7 @@ class RangePickerDialog extends StatefulWidget {
   final EdgeInsets? padding;
   final EdgeInsets? insetPadding;
   final BorderRadiusGeometry? borderRadius;
+  final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
 
   final bool isForceEndDateAfterStartDate;
@@ -71,6 +72,7 @@ class RangePickerDialog extends StatefulWidget {
     this.padding,
     this.insetPadding,
     this.borderRadius,
+    this.constraints,
     this.type,
     bool? isForceEndDateAfterStartDate,
     this.onStartDateAfterEndDateError,
@@ -130,95 +132,99 @@ class _RangePickerDialogState extends State<RangePickerDialog>
       shape: RoundedRectangleBorder(
           borderRadius: widget.borderRadius ??
               const BorderRadius.all(Radius.circular(16))),
-      child: Padding(
-        padding: widget.padding ?? EdgeInsets.zero,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.title != null) widget.title!,
-            if (widget.title != null && widget.titleSeparator != null)
-              widget.titleSeparator!,
-            RangeTabBar(
-              tabController: _tabController,
-              startWidget: widget.startLabelWidget,
-              endWidget: widget.endLabelWidget,
-            ),
-            CustomTabView(
-              controller: _tabController,
-              children: [
-                // Start
-                OmniDateTimePicker(
-                  key: const ValueKey('start'),
-                  onDateTimeChanged: (dateTime) {
-                    _selectedStartDateTime = dateTime;
-                  },
-                  initialDate: widget.startInitialDate,
-                  firstDate: widget.startFirstDate,
-                  lastDate: widget.startLastDate,
-                  selectableDayPredicate: widget.startSelectableDayPredicate,
-                  amText: widget.amText,
-                  pmText: widget.pmText,
-                  isShowSeconds: widget.isShowSeconds ?? false,
-                  is24HourMode: widget.is24HourMode ?? false,
-                  minutesInterval: widget.minutesInterval ?? 1,
-                  secondsInterval: widget.secondsInterval ?? 1,
-                  isForce2Digits: widget.isForce2Digits ?? true,
-                  looping: widget.looping ?? true,
-                  selectionOverlay: widget.selectionOverlay ??
-                      const CupertinoPickerDefaultSelectionOverlay(),
-                  separator: widget.separator,
-                  type: widget.type ?? OmniDateTimePickerType.dateAndTime,
-                ),
-                // End
-                OmniDateTimePicker(
-                  key: const ValueKey('end'),
-                  onDateTimeChanged: (dateTime) {
-                    _selectedEndDateTime = dateTime;
-                  },
-                  initialDate: widget.endInitialDate,
-                  firstDate: widget.endFirstDate,
-                  lastDate: widget.endLastDate,
-                  selectableDayPredicate: widget.endSelectableDayPredicate,
-                  amText: widget.amText,
-                  pmText: widget.pmText,
-                  isShowSeconds: widget.isShowSeconds ?? false,
-                  is24HourMode: widget.is24HourMode ?? false,
-                  minutesInterval: widget.minutesInterval ?? 1,
-                  secondsInterval: widget.secondsInterval ?? 1,
-                  isForce2Digits: widget.isForce2Digits ?? true,
-                  looping: widget.looping ?? true,
-                  selectionOverlay: widget.selectionOverlay ??
-                      const CupertinoPickerDefaultSelectionOverlay(),
-                  separator: widget.separator,
-                  type: widget.type ?? OmniDateTimePickerType.dateAndTime,
-                ),
-              ],
-            ),
-            ButtonRow(
-              onCancelPressed: () {
-                Navigator.of(context).pop<DateTime>();
-              },
-              onSavePressed: () {
-                if (widget.isForceEndDateAfterStartDate) {
-                  if (_selectedEndDateTime!.isBefore(_selectedStartDateTime!)) {
-                    if (widget.onStartDateAfterEndDateError != null) {
-                      widget.onStartDateAfterEndDateError!();
+      child: ConstrainedBox(
+        constraints: widget.constraints ?? const BoxConstraints.tightFor(),
+        child: Padding(
+          padding: widget.padding ?? EdgeInsets.zero,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.title != null) widget.title!,
+              if (widget.title != null && widget.titleSeparator != null)
+                widget.titleSeparator!,
+              RangeTabBar(
+                tabController: _tabController,
+                startWidget: widget.startLabelWidget,
+                endWidget: widget.endLabelWidget,
+              ),
+              CustomTabView(
+                controller: _tabController,
+                children: [
+                  // Start
+                  OmniDateTimePicker(
+                    key: const ValueKey('start'),
+                    onDateTimeChanged: (dateTime) {
+                      _selectedStartDateTime = dateTime;
+                    },
+                    initialDate: widget.startInitialDate,
+                    firstDate: widget.startFirstDate,
+                    lastDate: widget.startLastDate,
+                    selectableDayPredicate: widget.startSelectableDayPredicate,
+                    amText: widget.amText,
+                    pmText: widget.pmText,
+                    isShowSeconds: widget.isShowSeconds ?? false,
+                    is24HourMode: widget.is24HourMode ?? false,
+                    minutesInterval: widget.minutesInterval ?? 1,
+                    secondsInterval: widget.secondsInterval ?? 1,
+                    isForce2Digits: widget.isForce2Digits ?? true,
+                    looping: widget.looping ?? true,
+                    selectionOverlay: widget.selectionOverlay ??
+                        const CupertinoPickerDefaultSelectionOverlay(),
+                    separator: widget.separator,
+                    type: widget.type ?? OmniDateTimePickerType.dateAndTime,
+                  ),
+                  // End
+                  OmniDateTimePicker(
+                    key: const ValueKey('end'),
+                    onDateTimeChanged: (dateTime) {
+                      _selectedEndDateTime = dateTime;
+                    },
+                    initialDate: widget.endInitialDate,
+                    firstDate: widget.endFirstDate,
+                    lastDate: widget.endLastDate,
+                    selectableDayPredicate: widget.endSelectableDayPredicate,
+                    amText: widget.amText,
+                    pmText: widget.pmText,
+                    isShowSeconds: widget.isShowSeconds ?? false,
+                    is24HourMode: widget.is24HourMode ?? false,
+                    minutesInterval: widget.minutesInterval ?? 1,
+                    secondsInterval: widget.secondsInterval ?? 1,
+                    isForce2Digits: widget.isForce2Digits ?? true,
+                    looping: widget.looping ?? true,
+                    selectionOverlay: widget.selectionOverlay ??
+                        const CupertinoPickerDefaultSelectionOverlay(),
+                    separator: widget.separator,
+                    type: widget.type ?? OmniDateTimePickerType.dateAndTime,
+                  ),
+                ],
+              ),
+              ButtonRow(
+                onCancelPressed: () {
+                  Navigator.of(context).pop<DateTime>();
+                },
+                onSavePressed: () {
+                  if (widget.isForceEndDateAfterStartDate) {
+                    if (_selectedEndDateTime!
+                        .isBefore(_selectedStartDateTime!)) {
+                      if (widget.onStartDateAfterEndDateError != null) {
+                        widget.onStartDateAfterEndDateError!();
+                      }
+
+                      return;
                     }
-
-                    return;
                   }
-                }
 
-                Navigator.pop<List<DateTime>>(
-                  context,
-                  [
-                    _selectedStartDateTime!,
-                    _selectedEndDateTime!,
-                  ],
-                );
-              },
-            ),
-          ],
+                  Navigator.pop<List<DateTime>>(
+                    context,
+                    [
+                      _selectedStartDateTime!,
+                      _selectedEndDateTime!,
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -54,8 +54,26 @@ class TimePickerSpinner extends StatelessWidget {
         isForce2Digits: isForce2Digits,
         firstDateTime: datetimeBloc.state.firstDate,
         lastDateTime: datetimeBloc.state.lastDate,
+        initialDateTime: datetimeBloc.state.dateTime,
       ),
-      child: BlocBuilder<TimePickerSpinnerBloc, TimePickerSpinnerState>(
+      child: BlocConsumer<TimePickerSpinnerBloc, TimePickerSpinnerState>(
+        listenWhen: (previous, current) {
+          if (previous is TimePickerSpinnerInitial &&
+              current is TimePickerSpinnerLoaded) {
+            return true;
+          }
+
+          return false;
+        },
+        listener: (context, state) {
+          if (state is TimePickerSpinnerLoaded) {
+            datetimeBloc.add(UpdateMinute(
+                minute: int.parse(state.minutes[state.initialMinuteIndex])));
+
+            datetimeBloc.add(UpdateSecond(
+                second: int.parse(state.seconds[state.initialSecondIndex])));
+          }
+        },
         builder: (context, state) {
           if (state is TimePickerSpinnerLoaded) {
             return SizedBox(

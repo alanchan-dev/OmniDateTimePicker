@@ -28,6 +28,7 @@ class SinglePickerDialog extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? insetPadding;
   final BorderRadiusGeometry? borderRadius;
+  final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
 
   const SinglePickerDialog({
@@ -51,6 +52,7 @@ class SinglePickerDialog extends StatelessWidget {
     this.padding,
     this.insetPadding,
     this.borderRadius,
+    this.constraints,
     this.type,
   });
 
@@ -66,46 +68,49 @@ class SinglePickerDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius:
               borderRadius ?? const BorderRadius.all(Radius.circular(16))),
-      child: Padding(
-        padding: padding ?? EdgeInsets.zero,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (title != null) title!,
-            if (title != null && titleSeparator != null) titleSeparator!,
-            OmniDateTimePicker(
-              onDateTimeChanged: (dateTime) {
-                selectedDateTime = dateTime;
-              },
-              initialDate: initialDate,
-              firstDate: firstDate,
-              lastDate: lastDate,
-              selectableDayPredicate: selectableDayPredicate,
-              amText: amText,
-              pmText: pmText,
-              isShowSeconds: isShowSeconds ?? false,
-              is24HourMode: is24HourMode ?? false,
-              minutesInterval: minutesInterval ?? 1,
-              secondsInterval: secondsInterval ?? 1,
-              isForce2Digits: isForce2Digits ?? true,
-              looping: looping ?? true,
-              selectionOverlay: selectionOverlay ??
-                  const CupertinoPickerDefaultSelectionOverlay(),
-              separator: separator,
-              type: type ?? OmniDateTimePickerType.dateAndTime,
-            ),
-            ButtonRow(
-              onCancelPressed: () {
-                Navigator.of(context).pop<DateTime>();
-              },
-              onSavePressed: () {
-                Navigator.pop<DateTime>(
-                  context,
-                  selectedDateTime,
-                );
-              },
-            ),
-          ],
+      child: ConstrainedBox(
+        constraints: constraints ?? const BoxConstraints.tightFor(),
+        child: Padding(
+          padding: padding ?? EdgeInsets.zero,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (title != null) title!,
+              if (title != null && titleSeparator != null) titleSeparator!,
+              OmniDateTimePicker(
+                onDateTimeChanged: (dateTime) {
+                  selectedDateTime = dateTime;
+                },
+                initialDate: initialDate,
+                firstDate: firstDate,
+                lastDate: lastDate,
+                selectableDayPredicate: selectableDayPredicate,
+                amText: amText,
+                pmText: pmText,
+                isShowSeconds: isShowSeconds ?? false,
+                is24HourMode: is24HourMode ?? false,
+                minutesInterval: minutesInterval ?? 1,
+                secondsInterval: secondsInterval ?? 1,
+                isForce2Digits: isForce2Digits ?? true,
+                looping: looping ?? true,
+                selectionOverlay: selectionOverlay ??
+                    const CupertinoPickerDefaultSelectionOverlay(),
+                separator: separator,
+                type: type ?? OmniDateTimePickerType.dateAndTime,
+              ),
+              ButtonRow(
+                onCancelPressed: () {
+                  Navigator.of(context).pop<DateTime>();
+                },
+                onSavePressed: () {
+                  Navigator.pop<DateTime>(
+                    context,
+                    selectedDateTime,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
