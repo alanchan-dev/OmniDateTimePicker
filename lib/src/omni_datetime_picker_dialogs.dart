@@ -73,6 +73,7 @@ Future<DateTime?> showOmniDateTimePicker({
           padding: padding,
           insetPadding: insetPadding,
           selectableDayPredicate: selectableDayPredicate,
+          constraints: constraints,
         ),
       );
     },

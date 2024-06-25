@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Fix: `constraints` on single date time picker (#61)
+
 ## 2.0.1
 
 - Fix: Issue #57 #58
