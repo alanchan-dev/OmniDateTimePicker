@@ -147,56 +147,62 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                 startWidget: widget.startLabelWidget,
                 endWidget: widget.endLabelWidget,
               ),
-              CustomTabView(
-                controller: _tabController,
-                children: [
-                  // Start
-                  OmniDateTimePicker(
-                    key: const ValueKey('start'),
-                    onDateTimeChanged: (dateTime) {
-                      _selectedStartDateTime = dateTime;
-                    },
-                    initialDate: widget.startInitialDate,
-                    firstDate: widget.startFirstDate,
-                    lastDate: widget.startLastDate,
-                    selectableDayPredicate: widget.startSelectableDayPredicate,
-                    amText: widget.amText,
-                    pmText: widget.pmText,
-                    isShowSeconds: widget.isShowSeconds ?? false,
-                    is24HourMode: widget.is24HourMode ?? false,
-                    minutesInterval: widget.minutesInterval ?? 1,
-                    secondsInterval: widget.secondsInterval ?? 1,
-                    isForce2Digits: widget.isForce2Digits ?? true,
-                    looping: widget.looping ?? true,
-                    selectionOverlay: widget.selectionOverlay ??
-                        const CupertinoPickerDefaultSelectionOverlay(),
-                    separator: widget.separator,
-                    type: widget.type ?? OmniDateTimePickerType.dateAndTime,
+              Flexible(
+                child: SingleChildScrollView(
+                  child: CustomTabView(
+                    controller: _tabController,
+                    children: [
+                      // Start
+                      OmniDateTimePicker(
+                        key: const ValueKey('start'),
+                        onDateTimeChanged: (dateTime) {
+                          _selectedStartDateTime = dateTime;
+                        },
+                        initialDate: widget.startInitialDate,
+                        firstDate: widget.startFirstDate,
+                        lastDate: widget.startLastDate,
+                        selectableDayPredicate:
+                            widget.startSelectableDayPredicate,
+                        amText: widget.amText,
+                        pmText: widget.pmText,
+                        isShowSeconds: widget.isShowSeconds ?? false,
+                        is24HourMode: widget.is24HourMode ?? false,
+                        minutesInterval: widget.minutesInterval ?? 1,
+                        secondsInterval: widget.secondsInterval ?? 1,
+                        isForce2Digits: widget.isForce2Digits ?? true,
+                        looping: widget.looping ?? true,
+                        selectionOverlay: widget.selectionOverlay ??
+                            const CupertinoPickerDefaultSelectionOverlay(),
+                        separator: widget.separator,
+                        type: widget.type ?? OmniDateTimePickerType.dateAndTime,
+                      ),
+                      // End
+                      OmniDateTimePicker(
+                        key: const ValueKey('end'),
+                        onDateTimeChanged: (dateTime) {
+                          _selectedEndDateTime = dateTime;
+                        },
+                        initialDate: widget.endInitialDate,
+                        firstDate: widget.endFirstDate,
+                        lastDate: widget.endLastDate,
+                        selectableDayPredicate:
+                            widget.endSelectableDayPredicate,
+                        amText: widget.amText,
+                        pmText: widget.pmText,
+                        isShowSeconds: widget.isShowSeconds ?? false,
+                        is24HourMode: widget.is24HourMode ?? false,
+                        minutesInterval: widget.minutesInterval ?? 1,
+                        secondsInterval: widget.secondsInterval ?? 1,
+                        isForce2Digits: widget.isForce2Digits ?? true,
+                        looping: widget.looping ?? true,
+                        selectionOverlay: widget.selectionOverlay ??
+                            const CupertinoPickerDefaultSelectionOverlay(),
+                        separator: widget.separator,
+                        type: widget.type ?? OmniDateTimePickerType.dateAndTime,
+                      ),
+                    ],
                   ),
-                  // End
-                  OmniDateTimePicker(
-                    key: const ValueKey('end'),
-                    onDateTimeChanged: (dateTime) {
-                      _selectedEndDateTime = dateTime;
-                    },
-                    initialDate: widget.endInitialDate,
-                    firstDate: widget.endFirstDate,
-                    lastDate: widget.endLastDate,
-                    selectableDayPredicate: widget.endSelectableDayPredicate,
-                    amText: widget.amText,
-                    pmText: widget.pmText,
-                    isShowSeconds: widget.isShowSeconds ?? false,
-                    is24HourMode: widget.is24HourMode ?? false,
-                    minutesInterval: widget.minutesInterval ?? 1,
-                    secondsInterval: widget.secondsInterval ?? 1,
-                    isForce2Digits: widget.isForce2Digits ?? true,
-                    looping: widget.looping ?? true,
-                    selectionOverlay: widget.selectionOverlay ??
-                        const CupertinoPickerDefaultSelectionOverlay(),
-                    separator: widget.separator,
-                    type: widget.type ?? OmniDateTimePickerType.dateAndTime,
-                  ),
-                ],
+                ),
               ),
               ButtonRow(
                 onCancelPressed: () {

@@ -1,3 +1,7 @@
+## 2.0.3
+
+- Fix: Overflow issue on very small screen
+
 ## 2.0.2
 
 - Fix: `constraints` on single date time picker (#61)
