@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'components/button_row.dart';
 import 'enums/default_tab.dart';
 import 'enums/omni_datetime_picker_type.dart';
 import 'prebuilt_dialogs/range_picker_dialog.dart';
@@ -9,32 +10,32 @@ import 'prebuilt_dialogs/single_picker_dialog.dart';
 ///
 /// Returns a DateTime
 ///
-Future<DateTime?> showOmniDateTimePicker({
-  required BuildContext context,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionBuilder,
-  Duration? transitionDuration,
-  bool? barrierDismissible,
-  Color? barrierColor,
-  Widget? title,
-  Widget? titleSeparator,
-  Widget? separator,
-  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
-  DateTime? initialDate,
-  DateTime? firstDate,
-  DateTime? lastDate,
-  bool? is24HourMode,
-  bool? isShowSeconds,
-  int? minutesInterval,
-  int? secondsInterval,
-  bool? isForce2Digits,
-  bool Function(DateTime)? selectableDayPredicate,
-  BorderRadiusGeometry? borderRadius,
-  EdgeInsets? padding,
-  EdgeInsets? insetPadding,
-  BoxConstraints? constraints,
-  ThemeData? theme,
-}) {
+Future<DateTime?> showOmniDateTimePicker(
+    {required BuildContext context,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transitionBuilder,
+    Duration? transitionDuration,
+    bool? barrierDismissible,
+    Color? barrierColor,
+    Widget? title,
+    Widget? titleSeparator,
+    Widget? separator,
+    OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
+    DateTime? initialDate,
+    DateTime? firstDate,
+    DateTime? lastDate,
+    bool? is24HourMode,
+    bool? isShowSeconds,
+    int? minutesInterval,
+    int? secondsInterval,
+    bool? isForce2Digits,
+    bool Function(DateTime)? selectableDayPredicate,
+    BorderRadiusGeometry? borderRadius,
+    EdgeInsets? padding,
+    EdgeInsets? insetPadding,
+    BoxConstraints? constraints,
+    ThemeData? theme,
+    ButtonRowBuilder? actionsBuilder}) {
   return showGeneralDialog(
     context: context,
     transitionBuilder: transitionBuilder ??
@@ -74,6 +75,7 @@ Future<DateTime?> showOmniDateTimePicker({
           insetPadding: insetPadding,
           selectableDayPredicate: selectableDayPredicate,
           constraints: constraints,
+          actionsBuilder: actionsBuilder,
         ),
       );
     },
@@ -86,41 +88,41 @@ Future<DateTime?> showOmniDateTimePicker({
 /// with index 0 as startDateTime
 /// and index 1 as endDateTime
 ///
-Future<List<DateTime>?> showOmniDateTimeRangePicker({
-  required BuildContext context,
-  DateTime? startInitialDate,
-  DateTime? startFirstDate,
-  DateTime? startLastDate,
-  DateTime? endInitialDate,
-  DateTime? endFirstDate,
-  DateTime? endLastDate,
-  bool? is24HourMode,
-  bool? isShowSeconds,
-  int? minutesInterval,
-  int? secondsInterval,
-  bool? isForce2Digits,
-  bool? isForceEndDateAfterStartDate,
-  void Function()? onStartDateAfterEndDateError,
-  BorderRadiusGeometry? borderRadius,
-  Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-      transitionBuilder,
-  Duration? transitionDuration,
-  bool? barrierDismissible,
-  Color? barrierColor,
-  Widget? title,
-  Widget? titleSeparator,
-  Widget? startWidget,
-  Widget? endWidget,
-  Widget? separator,
-  OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
-  bool Function(DateTime)? startSelectableDayPredicate,
-  bool Function(DateTime)? endSelectableDayPredicate,
-  DefaultTab defaultTab = DefaultTab.start,
-  EdgeInsets? padding,
-  EdgeInsets? insetPadding,
-  ThemeData? theme,
-  BoxConstraints? constraints,
-}) {
+Future<List<DateTime>?> showOmniDateTimeRangePicker(
+    {required BuildContext context,
+    DateTime? startInitialDate,
+    DateTime? startFirstDate,
+    DateTime? startLastDate,
+    DateTime? endInitialDate,
+    DateTime? endFirstDate,
+    DateTime? endLastDate,
+    bool? is24HourMode,
+    bool? isShowSeconds,
+    int? minutesInterval,
+    int? secondsInterval,
+    bool? isForce2Digits,
+    bool? isForceEndDateAfterStartDate,
+    void Function()? onStartDateAfterEndDateError,
+    BorderRadiusGeometry? borderRadius,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transitionBuilder,
+    Duration? transitionDuration,
+    bool? barrierDismissible,
+    Color? barrierColor,
+    Widget? title,
+    Widget? titleSeparator,
+    Widget? startWidget,
+    Widget? endWidget,
+    Widget? separator,
+    OmniDateTimePickerType type = OmniDateTimePickerType.dateAndTime,
+    bool Function(DateTime)? startSelectableDayPredicate,
+    bool Function(DateTime)? endSelectableDayPredicate,
+    DefaultTab defaultTab = DefaultTab.start,
+    EdgeInsets? padding,
+    EdgeInsets? insetPadding,
+    ThemeData? theme,
+    BoxConstraints? constraints,
+    ButtonRowBuilder? actionsBuilder}) {
   return showGeneralDialog(
     context: context,
     transitionBuilder: transitionBuilder ??
@@ -169,6 +171,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
           defaultTab: defaultTab,
           startSelectableDayPredicate: startSelectableDayPredicate,
           endSelectableDayPredicate: endSelectableDayPredicate,
+          actionsBuilder: actionsBuilder,
         ),
       );
     },
