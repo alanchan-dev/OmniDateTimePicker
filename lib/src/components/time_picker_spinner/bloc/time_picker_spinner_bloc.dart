@@ -91,18 +91,15 @@ class TimePickerSpinnerBloc
   }) {
     final index = findClosestIndex(minutes, now.minute);
     return index;
-    // return minutes.indexWhere((e) => e == now.minute.toString());
   }
 
   int _getInitialSecondIndex({
     required List<String> seconds,
     required DateTime now,
   }) {
-    final index = findClosestIndex(seconds, now.minute);
+    final index = findClosestIndex(seconds, now.second);
 
     return index;
-
-    // return seconds.indexWhere((e) => e == now.second.toString());
   }
 
   int _getInitialAbbreviationIndex({

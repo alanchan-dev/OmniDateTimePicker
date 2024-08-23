@@ -1,3 +1,7 @@
+## 2.0.4
+
+- Fix: "Seconds" field displays "Minutes" information (#68)
+
 ## 2.0.3
 
 - Fix: Overflow issue on very small screen
