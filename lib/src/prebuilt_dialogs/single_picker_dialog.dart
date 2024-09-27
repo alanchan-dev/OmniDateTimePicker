@@ -31,6 +31,8 @@ class SinglePickerDialog extends StatelessWidget {
   final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
 
+  final ButtonRowBuilder? actionsBuilder;
+
   const SinglePickerDialog({
     super.key,
     this.title,
@@ -54,6 +56,7 @@ class SinglePickerDialog extends StatelessWidget {
     this.borderRadius,
     this.constraints,
     this.type,
+    this.actionsBuilder,
   });
 
   @override
@@ -103,6 +106,7 @@ class SinglePickerDialog extends StatelessWidget {
                 ),
               ),
               ButtonRow(
+                actionsBuilder: actionsBuilder,
                 onCancelPressed: () {
                   Navigator.of(context).pop<DateTime>();
                 },

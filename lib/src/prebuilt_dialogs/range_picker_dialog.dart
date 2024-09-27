@@ -45,6 +45,8 @@ class RangePickerDialog extends StatefulWidget {
   final void Function()? onStartDateAfterEndDateError;
   final DefaultTab? defaultTab;
 
+  final ButtonRowBuilder? actionsBuilder;
+
   const RangePickerDialog({
     super.key,
     this.title,
@@ -77,6 +79,7 @@ class RangePickerDialog extends StatefulWidget {
     bool? isForceEndDateAfterStartDate,
     this.onStartDateAfterEndDateError,
     this.defaultTab,
+    this.actionsBuilder,
   }) : isForceEndDateAfterStartDate = isForceEndDateAfterStartDate ?? false;
 
   @override
@@ -205,6 +208,7 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                 ),
               ),
               ButtonRow(
+                actionsBuilder: widget.actionsBuilder,
                 onCancelPressed: () {
                   Navigator.of(context).pop<DateTime>();
                 },
