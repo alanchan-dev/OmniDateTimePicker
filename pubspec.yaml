@@ -1,6 +1,6 @@
 name: omni_datetime_picker
 description: "A datetime picker package with option to use a single datetime picker or a datetime range picker."
-version: 2.0.4
+version: 2.0.5
 repository: "https://github.com/alanchan-dev/OmniDateTimePicker"
 homepage: "https://alanchan.dev"
 
@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
-  rxdart: ^0.27.7
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:
