@@ -18,6 +18,7 @@ class OmniDateTimePicker extends StatefulWidget {
   final String? amText;
   final String? pmText;
   final bool isShowSeconds;
+  final bool isShowMinutes;
   final bool is24HourMode;
   final int minutesInterval;
   final int secondsInterval;
@@ -39,6 +40,7 @@ class OmniDateTimePicker extends StatefulWidget {
     this.amText,
     this.pmText,
     this.isShowSeconds = false,
+    this.isShowMinutes = true,
     this.is24HourMode = false,
     this.minutesInterval = 1,
     this.secondsInterval = 1,
@@ -99,6 +101,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker> {
                     pmText:
                         widget.pmText ?? localizations.postMeridiemAbbreviation,
                     isShowSeconds: widget.isShowSeconds,
+                    isShowMinutes: widget.isShowMinutes,
                     is24HourMode: widget.is24HourMode,
                     minutesInterval: widget.minutesInterval,
                     secondsInterval: widget.secondsInterval,

@@ -8,6 +8,7 @@ class TimePickerSpinner extends StatelessWidget {
   final String amText;
   final String pmText;
   final bool isShowSeconds;
+  final bool isShowMinutes;
   final bool is24HourMode;
   final int minutesInterval;
   final int secondsInterval;
@@ -33,6 +34,7 @@ class TimePickerSpinner extends StatelessWidget {
     required this.amText,
     required this.pmText,
     required this.isShowSeconds,
+    required this.isShowMinutes,
     required this.is24HourMode,
     required this.minutesInterval,
     required this.secondsInterval,
@@ -125,6 +127,7 @@ class TimePickerSpinner extends StatelessWidget {
                   ),
 
                   /// Minutes
+                  if(isShowMinutes)
                   Expanded(
                     child: CupertinoPicker(
                       scrollController: FixedExtentScrollController(
