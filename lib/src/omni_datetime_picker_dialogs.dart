@@ -85,7 +85,7 @@ Future<DateTime?> showOmniDateTimePicker({
 
 /// Show a dialog of the [OmniDateTimePicker]
 ///
-/// Returns a List<DateTime>
+/// Returns a [List<DateTime>]
 /// with index 0 as startDateTime
 /// and index 1 as endDateTime
 ///
