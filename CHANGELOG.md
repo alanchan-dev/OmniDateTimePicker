@@ -1,3 +1,9 @@
+## 2.0.6
+
+- Update: flutter_bloc version to 9.0.0
+- Update: equatable version to 2.0.7
+- Add: actionsBuilder
+
 ## 2.0.5
 
 - Update: rxdart version to 0.28.0

@@ -401,7 +401,7 @@ class _DatePickerModeToggleButtonState
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
+    final Color controlColor = colorScheme.onSurface.withValues(alpha: 0.60);
 
     return Container(
       padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
@@ -780,7 +780,7 @@ class _MonthPickerState extends State<_MonthPicker> {
   @override
   Widget build(BuildContext context) {
     final Color controlColor =
-        Theme.of(context).colorScheme.onSurface.withOpacity(0.60);
+        Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.60);
 
     return Semantics(
       child: Column(
