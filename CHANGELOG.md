@@ -1,3 +1,11 @@
+## 2.0.5
+
+- Update: rxdart version to 0.28.0
+
+## 2.0.4
+
+- Fix: "Seconds" field displays "Minutes" information (#68)
+
 ## 2.0.3
 
 - Fix: Overflow issue on very small screen
