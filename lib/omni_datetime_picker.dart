@@ -1,4 +1,4 @@
-library omni_datetime_picker;
+library;
 
 export 'src/omni_datetime_picker.dart';
 export 'src/omni_datetime_picker_dialogs.dart';

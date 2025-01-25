@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'components/button_row.dart';
 import 'enums/default_tab.dart';
 import 'enums/omni_datetime_picker_type.dart';
 import 'prebuilt_dialogs/range_picker_dialog.dart';
@@ -34,6 +35,7 @@ Future<DateTime?> showOmniDateTimePicker({
   EdgeInsets? insetPadding,
   BoxConstraints? constraints,
   ThemeData? theme,
+  ButtonRowBuilder? actionsBuilder,
 }) {
   return showGeneralDialog(
     context: context,
@@ -74,6 +76,7 @@ Future<DateTime?> showOmniDateTimePicker({
           insetPadding: insetPadding,
           selectableDayPredicate: selectableDayPredicate,
           constraints: constraints,
+          actionsBuilder: actionsBuilder,
         ),
       );
     },
@@ -82,7 +85,7 @@ Future<DateTime?> showOmniDateTimePicker({
 
 /// Show a dialog of the [OmniDateTimePicker]
 ///
-/// Returns a List<DateTime>
+/// Returns a [List<DateTime>]
 /// with index 0 as startDateTime
 /// and index 1 as endDateTime
 ///
@@ -120,6 +123,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   EdgeInsets? insetPadding,
   ThemeData? theme,
   BoxConstraints? constraints,
+  ButtonRowBuilder? actionsBuilder,
 }) {
   return showGeneralDialog(
     context: context,
@@ -169,6 +173,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
           defaultTab: defaultTab,
           startSelectableDayPredicate: startSelectableDayPredicate,
           endSelectableDayPredicate: endSelectableDayPredicate,
+          actionsBuilder: actionsBuilder,
         ),
       );
     },
