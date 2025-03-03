@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omni_datetime_picker/src/components/time_picker_spinner/bloc/utils.dart';
 
@@ -78,8 +78,14 @@ class TimePickerSpinnerBloc
     required List<String> hours,
     required DateTime now,
   }) {
-    if (now.hour >= 12 && !is24HourMode) {
-      return hours.indexWhere((e) => e == (now.hour - 12).toString());
+    if (!is24HourMode) {
+      if (now.hour >= 12) {
+        return hours.indexWhere((e) =>
+            e == (TimeOfDay.fromDateTime(now).hourOfPeriod - 12).toString());
+      } else {
+        return hours.indexWhere(
+            (e) => e == TimeOfDay.fromDateTime(now).hourOfPeriod.toString());
+      }
     }
 
     return hours.indexWhere((e) => e == now.hour.toString());
@@ -117,6 +123,9 @@ class TimePickerSpinnerBloc
     final List<String> hours = List.generate(
       is24HourMode ? 24 : 12,
       (index) {
+        if (!is24HourMode && index == 0) {
+          return '12';
+        }
         return '$index';
       },
     );
