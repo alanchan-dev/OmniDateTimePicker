@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Breaking: Minimum required Flutter version 3.27.0
+
 ## 2.0.7
 
 - Fix: Issue #82 (12-Hour format picker visual issue)
