@@ -100,9 +100,8 @@ class TimePickerSpinner extends StatelessWidget {
                                   ? 12
                                   : 0;
 
-                          datetimeBloc.add(UpdateHour(
-                              hour:
-                                  int.parse(state.hours[index]) + hourOffset));
+                          datetimeBloc
+                              .add(UpdateHour(hour: index + hourOffset));
                         } else {
                           datetimeBloc.add(
                               UpdateHour(hour: int.parse(state.hours[index])));
