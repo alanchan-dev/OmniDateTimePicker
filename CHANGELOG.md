@@ -1,3 +1,8 @@
+## 2.0.7
+
+- Fix: Issue #82 (12-Hour format picker visual issue)
+- Breaking: Minimum required Flutter version to 3.24.0
+
 ## 2.0.6
 
 - Update: flutter_bloc version to 9.0.0
