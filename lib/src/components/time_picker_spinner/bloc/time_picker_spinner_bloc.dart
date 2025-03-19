@@ -79,13 +79,12 @@ class TimePickerSpinnerBloc
     required DateTime now,
   }) {
     if (!is24HourMode) {
-      if (now.hour >= 12) {
-        return hours.indexWhere((e) =>
-            e == (TimeOfDay.fromDateTime(now).hourOfPeriod - 12).toString());
-      } else {
-        return hours.indexWhere(
-            (e) => e == TimeOfDay.fromDateTime(now).hourOfPeriod.toString());
-      }
+      int hourOfPeriod = TimeOfDay.fromDateTime(now).hourOfPeriod;
+
+      // Ensure 12 AM is displayed as '12' and not '0'
+      String hourString = hourOfPeriod == 0 ? '12' : hourOfPeriod.toString();
+
+      return hours.indexWhere((e) => e == hourString);
     }
 
     return hours.indexWhere((e) => e == now.hour.toString());
