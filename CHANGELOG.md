@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Fix: PR #84
+
 ## 2.1.0
 
 - Breaking: Minimum required Flutter version 3.27.0
