@@ -31,7 +31,7 @@ Add this to your package's pubspec.yaml file and run `flutter pub get`:
 
 ```yaml
 dependencies:
-  omni_datetime_picker: ^2.1.1
+  omni_datetime_picker: ^2.2.0
 ```
 
 Now in your Dart code, you can use:
@@ -73,6 +73,7 @@ DateTime? dateTime = await showOmniDateTimePicker(
                     isShowSeconds: false,
                     minutesInterval: 1,
                     secondsInterval: 1,
+                    isForce2Digits: false,
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                     constraints: const BoxConstraints(
                       maxWidth: 350,
@@ -91,6 +92,7 @@ DateTime? dateTime = await showOmniDateTimePicker(
                     },
                     transitionDuration: const Duration(milliseconds: 200),
                     barrierDismissible: true,
+                    barrierColor: const Color(0x80000000),
                     selectableDayPredicate: (dateTime) {
                       // Disable 25th Feb 2023
                       if (dateTime == DateTime(2023, 2, 25)) {
@@ -98,6 +100,28 @@ DateTime? dateTime = await showOmniDateTimePicker(
                       } else {
                         return true;
                       }
+                    },
+                    type: OmniDateTimePickerType.dateAndTime,
+                    title: Text('Select Date & Time'),
+                    titleSeparator: Divider(),
+                    separator: SizedBox(height: 16),
+                    padding: EdgeInsets.all(16),
+                    insetPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+                    theme: ThemeData.light(),
+                    actionsBuilder: (context, confirmCallback, cancelCallback) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton(
+                            onPressed: cancelCallback,
+                            child: Text('Cancel'),
+                          ),
+                          ElevatedButton(
+                            onPressed: confirmCallback,
+                            child: Text('Confirm'),
+                          ),
+                        ],
+                      );
                     },
                   );
 ```
@@ -124,6 +148,12 @@ List<DateTime>? dateTimeList =
                     isShowSeconds: false,
                     minutesInterval: 1,
                     secondsInterval: 1,
+                    isForce2Digits: false,
+                    isForceEndDateAfterStartDate: true,
+                    onStartDateAfterEndDateError: () {
+                      // Handle error when start date is after end date
+                      print('Start date cannot be after end date!');
+                    },
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                     constraints: const BoxConstraints(
                       maxWidth: 350,
@@ -142,13 +172,47 @@ List<DateTime>? dateTimeList =
                     },
                     transitionDuration: const Duration(milliseconds: 200),
                     barrierDismissible: true,
-                    selectableDayPredicate: (dateTime) {
-                      // Disable 25th Feb 2023
+                    barrierColor: Colors.black54,
+                    startSelectableDayPredicate: (dateTime) {
+                      // Disable 25th Feb 2023 for start date
                       if (dateTime == DateTime(2023, 2, 25)) {
                         return false;
                       } else {
                         return true;
                       }
+                    },
+                    endSelectableDayPredicate: (dateTime) {
+                      // Disable 26th Feb 2023 for end date
+                      if (dateTime == DateTime(2023, 2, 26)) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
+                    type: OmniDateTimePickerType.dateAndTime,
+                    title: Text('Select Date & Time Range'),
+                    titleSeparator: Divider(),
+                    startWidget: Text('Start'),
+                    endWidget: Text('End'),
+                    separator: SizedBox(height: 16),
+                    defaultTab: DefaultTab.start,
+                    padding: EdgeInsets.all(16),
+                    insetPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+                    theme: ThemeData.light(),
+                    actionsBuilder: (context, confirmCallback, cancelCallback) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton(
+                            onPressed: cancelCallback,
+                            child: Text('Cancel'),
+                          ),
+                          ElevatedButton(
+                            onPressed: confirmCallback,
+                            child: Text('Confirm'),
+                          ),
+                        ],
+                      );
                     },
                   );
 ```

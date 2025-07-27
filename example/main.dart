@@ -41,6 +41,37 @@ class OmniExample extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
+                final DateTime? result = await showOmniDateTimePicker(
+                  context: context,
+                  is24HourMode: true,
+                );
+
+                if (result != null) {
+                  // This should show the second and millisecond fields set to zero after the fix
+                  debugPrint('Selected DateTime: ${result.toUtc().toIso8601String()}');
+                  debugPrint('Seconds: ${result.second}, Milliseconds: ${result.millisecond}');
+                }
+              },
+              child: const Text('Test 24-Hour Mode (check seconds)'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final DateTime? result = await showOmniDateTimePicker(
+                  context: context,
+                  is24HourMode: true,
+                  isShowSeconds: true,
+                );
+
+                if (result != null) {
+                  // This should show microseconds as 0 even when seconds are enabled
+                  debugPrint('Selected DateTime with seconds: ${result.toUtc().toIso8601String()}');
+                  debugPrint('Seconds: ${result.second}, Microseconds: ${result.microsecond}');
+                }
+              },
+              child: const Text('Test with Seconds (check microseconds)'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
                 final List<DateTime>? dateTime =
                     await showOmniDateTimeRangePicker(context: context);
 

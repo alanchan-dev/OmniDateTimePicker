@@ -57,16 +57,38 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker> {
   @override
   Widget build(BuildContext context) {
     final localizations = MaterialLocalizations.of(context);
-    final defaultInitialDate = DateTime.now();
+    final now = DateTime.now();
+    final defaultInitialDate = widget.isShowSeconds
+        ? DateTime(
+            now.year, now.month, now.day, now.hour, now.minute, now.second)
+        : DateTime(now.year, now.month, now.day, now.hour, now.minute);
     final defaultFirstDate = DateTime.fromMillisecondsSinceEpoch(0);
     final defaultLastDate = DateTime(2100);
 
     return BlocProvider(
-      create: (context) => OmniDatetimePickerBloc(
-        initialDateTime: widget.initialDate ?? defaultInitialDate,
-        firstDate: widget.firstDate ?? defaultFirstDate,
-        lastDate: widget.lastDate ?? defaultLastDate,
-      ),
+      create: (context) {
+        final initialDateTime = widget.initialDate ?? defaultInitialDate;
+        final truncatedInitialDateTime = widget.isShowSeconds
+            ? DateTime(
+                initialDateTime.year,
+                initialDateTime.month,
+                initialDateTime.day,
+                initialDateTime.hour,
+                initialDateTime.minute,
+                initialDateTime.second)
+            : DateTime(
+                initialDateTime.year,
+                initialDateTime.month,
+                initialDateTime.day,
+                initialDateTime.hour,
+                initialDateTime.minute);
+
+        return OmniDatetimePickerBloc(
+          initialDateTime: truncatedInitialDateTime,
+          firstDate: widget.firstDate ?? defaultFirstDate,
+          lastDate: widget.lastDate ?? defaultLastDate,
+        );
+      },
       child: BlocConsumer<OmniDatetimePickerBloc, OmniDatetimePickerState>(
         listener: (context, state) {
           widget.onDateTimeChanged(state.dateTime);

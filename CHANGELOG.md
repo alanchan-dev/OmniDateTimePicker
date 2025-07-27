@@ -1,3 +1,11 @@
+## 2.2.0
+
+- Fix: Microseconds and milliseconds are now properly truncated when not using seconds (#91)
+- Fix: Incorrect hour conversion for PM times in 12-hour mode (#84)
+- Enhancement: Time picker text now uses TimePickerTheme.hourMinuteTextStyle for better theming support (#72)
+- Update: flutter_bloc dependency to ^9.1.1
+- Update: flutter_lints dependency to ^6.0.0
+
 ## 2.1.1
 
 - Fix: PR #84

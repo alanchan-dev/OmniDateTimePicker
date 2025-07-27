@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/omni_datetime_picker_bloc.dart';
@@ -42,6 +43,7 @@ class TimePickerSpinner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final datetimeBloc = context.read<OmniDatetimePickerBloc>();
+    final timePickerTheme = Theme.of(context).timePickerTheme;
 
     return BlocProvider(
       create: (context) => TimePickerSpinnerBloc(
@@ -70,8 +72,10 @@ class TimePickerSpinner extends StatelessWidget {
             datetimeBloc.add(UpdateMinute(
                 minute: int.parse(state.minutes[state.initialMinuteIndex])));
 
-            datetimeBloc.add(UpdateSecond(
-                second: int.parse(state.seconds[state.initialSecondIndex])));
+            if (isShowSeconds) {
+              datetimeBloc.add(UpdateSecond(
+                  second: int.parse(state.seconds[state.initialSecondIndex])));
+            }
           }
         },
         builder: (context, state) {
@@ -117,7 +121,9 @@ class TimePickerSpinner extends StatelessWidget {
                             hour = hour.padLeft(2, '0');
                           }
 
-                          return Center(child: Text(hour));
+                          return Center(
+                              child: Text(hour,
+                                  style: timePickerTheme.hourMinuteTextStyle));
                         },
                       ),
                     ),
@@ -147,7 +153,9 @@ class TimePickerSpinner extends StatelessWidget {
                           if (isForce2Digits) {
                             minute = minute.padLeft(2, '0');
                           }
-                          return Center(child: Text(minute));
+                          return Center(
+                              child: Text(minute,
+                                  style: timePickerTheme.hourMinuteTextStyle));
                         },
                       ),
                     ),
@@ -179,7 +187,10 @@ class TimePickerSpinner extends StatelessWidget {
                               second = second.padLeft(2, '0');
                             }
 
-                            return Center(child: Text(second));
+                            return Center(
+                                child: Text(second,
+                                    style:
+                                        timePickerTheme.hourMinuteTextStyle));
                           },
                         ),
                       ),
@@ -207,7 +218,8 @@ class TimePickerSpinner extends StatelessWidget {
                         childCount: state.abbreviations.length,
                         itemBuilder: (context, index) {
                           return Center(
-                              child: Text(state.abbreviations[index]));
+                              child: Text(state.abbreviations[index],
+                                  style: timePickerTheme.hourMinuteTextStyle));
                         },
                       ),
                     ),
