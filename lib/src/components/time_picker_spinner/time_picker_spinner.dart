@@ -70,8 +70,10 @@ class TimePickerSpinner extends StatelessWidget {
             datetimeBloc.add(UpdateMinute(
                 minute: int.parse(state.minutes[state.initialMinuteIndex])));
 
-            datetimeBloc.add(UpdateSecond(
-                second: int.parse(state.seconds[state.initialSecondIndex])));
+            if (isShowSeconds) {
+              datetimeBloc.add(UpdateSecond(
+                  second: int.parse(state.seconds[state.initialSecondIndex])));
+            }
           }
         },
         builder: (context, state) {
