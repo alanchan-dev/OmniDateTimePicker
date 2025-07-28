@@ -1,3 +1,11 @@
+## 2.3.0
+
+- Add: Tests for improved code coverage
+- Fix: Disable save button for range picker when invalid selection
+- Fix: Disabled time state handling
+- Fix: Use firstDate as default value when initialDate is not specified
+- Enhancement: Include time calculation for firstDate and lastDate constraints
+
 ## 2.2.0
 
 - Fix: Microseconds and milliseconds are now properly truncated when not using seconds (#91)
