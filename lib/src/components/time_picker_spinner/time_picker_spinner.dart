@@ -99,13 +99,13 @@ class TimePickerSpinner extends StatelessWidget {
                       selectionOverlay: selectionOverlay,
                       onSelectedItemChanged: (index) {
                         if (!is24HourMode) {
-                          final hourOffset =
-                              state.abbreviationController.hasClients && 
-                              state.abbreviationController.selectedItem == 1
-                                  ? 12
-                                  : 0;
+                          final hourOffset = state
+                                      .abbreviationController.hasClients &&
+                                  state.abbreviationController.selectedItem == 1
+                              ? 12
+                              : 0;
                           final hourValue = index + hourOffset;
-                          
+
                           datetimeBloc.add(UpdateHour(hour: hourValue));
                         } else {
                           final hourValue = int.parse(state.hours[index]);
@@ -118,11 +118,15 @@ class TimePickerSpinner extends StatelessWidget {
                         (index) {
                           String hour = state.hours[index];
                           // Calculate hour value based on current state rather than controller selection
-                          final int hourValue = is24HourMode ? int.parse(hour) : 
-                              (hour == '12' ? 0 : int.parse(hour)) + 
-                              (datetimeBloc.state.dateTime.hour >= 12 ? 12 : 0);
-                          
-                          final bool isDisabled = _isHourDisabled(hourValue, datetimeBloc.state);
+                          final int hourValue = is24HourMode
+                              ? int.parse(hour)
+                              : (hour == '12' ? 0 : int.parse(hour)) +
+                                  (datetimeBloc.state.dateTime.hour >= 12
+                                      ? 12
+                                      : 0);
+
+                          final bool isDisabled =
+                              _isHourDisabled(hourValue, datetimeBloc.state);
 
                           if (isForce2Digits) {
                             hour = hour.padLeft(2, '0');
@@ -130,11 +134,17 @@ class TimePickerSpinner extends StatelessWidget {
 
                           return Center(
                               child: Text(hour,
-                                  style: timePickerTheme.hourMinuteTextStyle?.copyWith(
-                                    color: isDisabled ? Colors.grey.withValues(alpha: 0.5) : null,
-                                  ) ?? TextStyle(
-                                    color: isDisabled ? Colors.grey.withValues(alpha: 0.5) : null,
-                                  )));
+                                  style: timePickerTheme.hourMinuteTextStyle
+                                          ?.copyWith(
+                                        color: isDisabled
+                                            ? Colors.grey.withValues(alpha: 0.5)
+                                            : null,
+                                      ) ??
+                                      TextStyle(
+                                        color: isDisabled
+                                            ? Colors.grey.withValues(alpha: 0.5)
+                                            : null,
+                                      )));
                         },
                       ),
                     ),
@@ -161,18 +171,25 @@ class TimePickerSpinner extends StatelessWidget {
                         (index) {
                           String minute = state.minutes[index];
                           final int minuteValue = int.parse(minute);
-                          final bool isDisabled = _isMinuteDisabled(minuteValue, datetimeBloc.state);
+                          final bool isDisabled = _isMinuteDisabled(
+                              minuteValue, datetimeBloc.state);
 
                           if (isForce2Digits) {
                             minute = minute.padLeft(2, '0');
                           }
                           return Center(
                               child: Text(minute,
-                                  style: timePickerTheme.hourMinuteTextStyle?.copyWith(
-                                    color: isDisabled ? Colors.grey.withValues(alpha: 0.5) : null,
-                                  ) ?? TextStyle(
-                                    color: isDisabled ? Colors.grey.withValues(alpha: 0.5) : null,
-                                  )));
+                                  style: timePickerTheme.hourMinuteTextStyle
+                                          ?.copyWith(
+                                        color: isDisabled
+                                            ? Colors.grey.withValues(alpha: 0.5)
+                                            : null,
+                                      ) ??
+                                      TextStyle(
+                                        color: isDisabled
+                                            ? Colors.grey.withValues(alpha: 0.5)
+                                            : null,
+                                      )));
                         },
                       ),
                     ),
@@ -200,7 +217,8 @@ class TimePickerSpinner extends StatelessWidget {
                           (index) {
                             String second = state.seconds[index];
                             final int secondValue = int.parse(second);
-                            final bool isDisabled = _isSecondDisabled(secondValue, datetimeBloc.state);
+                            final bool isDisabled = _isSecondDisabled(
+                                secondValue, datetimeBloc.state);
 
                             if (isForce2Digits) {
                               second = second.padLeft(2, '0');
@@ -208,11 +226,19 @@ class TimePickerSpinner extends StatelessWidget {
 
                             return Center(
                                 child: Text(second,
-                                    style: timePickerTheme.hourMinuteTextStyle?.copyWith(
-                                      color: isDisabled ? Colors.grey.withValues(alpha: 0.5) : null,
-                                    ) ?? TextStyle(
-                                      color: isDisabled ? Colors.grey.withValues(alpha: 0.5) : null,
-                                    )));
+                                    style: timePickerTheme.hourMinuteTextStyle
+                                            ?.copyWith(
+                                          color: isDisabled
+                                              ? Colors.grey
+                                                  .withValues(alpha: 0.5)
+                                              : null,
+                                        ) ??
+                                        TextStyle(
+                                          color: isDisabled
+                                              ? Colors.grey
+                                                  .withValues(alpha: 0.5)
+                                              : null,
+                                        )));
                           },
                         ),
                       ),
@@ -263,59 +289,59 @@ class TimePickerSpinner extends StatelessWidget {
         return true;
       }
     }
-    
+
     if (_isSameDate(state.dateTime, state.lastDate)) {
       if (hour > state.lastDate.hour) {
         return true;
       }
     }
-    
+
     return false;
   }
 
   bool _isMinuteDisabled(int minute, OmniDatetimePickerState state) {
     // For minute validation, compare at the minute level when on the exact hour
-    if (_isSameDate(state.dateTime, state.firstDate) && 
+    if (_isSameDate(state.dateTime, state.firstDate) &&
         state.dateTime.hour == state.firstDate.hour) {
       if (minute < state.firstDate.minute) {
         return true;
       }
     }
-    
-    if (_isSameDate(state.dateTime, state.lastDate) && 
+
+    if (_isSameDate(state.dateTime, state.lastDate) &&
         state.dateTime.hour == state.lastDate.hour) {
       if (minute > state.lastDate.minute) {
         return true;
       }
     }
-    
+
     return false;
   }
 
   bool _isSecondDisabled(int second, OmniDatetimePickerState state) {
     // For second validation, compare at the second level when on the exact hour and minute
-    if (_isSameDate(state.dateTime, state.firstDate) && 
+    if (_isSameDate(state.dateTime, state.firstDate) &&
         state.dateTime.hour == state.firstDate.hour &&
         state.dateTime.minute == state.firstDate.minute) {
       if (second < state.firstDate.second) {
         return true;
       }
     }
-    
-    if (_isSameDate(state.dateTime, state.lastDate) && 
+
+    if (_isSameDate(state.dateTime, state.lastDate) &&
         state.dateTime.hour == state.lastDate.hour &&
         state.dateTime.minute == state.lastDate.minute) {
       if (second > state.lastDate.second) {
         return true;
       }
     }
-    
+
     return false;
   }
 
   bool _isSameDate(DateTime date1, DateTime date2) {
     return date1.year == date2.year &&
-           date1.month == date2.month &&
-           date1.day == date2.day;
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 }

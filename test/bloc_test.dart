@@ -216,7 +216,9 @@ void main() {
         testBloc.close();
       });
 
-      test('isValidTime returns false when time is before firstDate time on same day', () {
+      test(
+          'isValidTime returns false when time is before firstDate time on same day',
+          () {
         final testBloc = OmniDatetimePickerBloc(
           initialDateTime: DateTime(2024, 1, 1, 7, 30), // Before 8:00 AM
           firstDate: DateTime(2024, 1, 1, 8, 0),
@@ -227,7 +229,9 @@ void main() {
         testBloc.close();
       });
 
-      test('isValidTime returns false when time is after lastDate time on same day', () {
+      test(
+          'isValidTime returns false when time is after lastDate time on same day',
+          () {
         final testBloc = OmniDatetimePickerBloc(
           initialDateTime: DateTime(2024, 12, 31, 19, 30), // After 6:00 PM
           firstDate: DateTime(2024, 1, 1, 8, 0),

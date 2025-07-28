@@ -48,8 +48,10 @@ class OmniExample extends StatelessWidget {
 
                 if (result != null) {
                   // This should show the second and millisecond fields set to zero after the fix
-                  debugPrint('Selected DateTime: ${result.toUtc().toIso8601String()}');
-                  debugPrint('Seconds: ${result.second}, Milliseconds: ${result.millisecond}');
+                  debugPrint(
+                      'Selected DateTime: ${result.toUtc().toIso8601String()}');
+                  debugPrint(
+                      'Seconds: ${result.second}, Milliseconds: ${result.millisecond}');
                 }
               },
               child: const Text('Test 24-Hour Mode (check seconds)'),
@@ -64,8 +66,10 @@ class OmniExample extends StatelessWidget {
 
                 if (result != null) {
                   // This should show microseconds as 0 even when seconds are enabled
-                  debugPrint('Selected DateTime with seconds: ${result.toUtc().toIso8601String()}');
-                  debugPrint('Seconds: ${result.second}, Microseconds: ${result.microsecond}');
+                  debugPrint(
+                      'Selected DateTime with seconds: ${result.toUtc().toIso8601String()}');
+                  debugPrint(
+                      'Seconds: ${result.second}, Microseconds: ${result.microsecond}');
                 }
               },
               child: const Text('Test with Seconds (check microseconds)'),

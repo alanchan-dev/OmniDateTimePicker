@@ -226,26 +226,28 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                 onCancelPressed: () {
                   Navigator.of(context).pop<DateTime>();
                 },
-                onSavePressed: (_canSaveStart && _canSaveEnd) ? () {
-                  if (widget.isForceEndDateAfterStartDate) {
-                    if (_selectedEndDateTime!
-                        .isBefore(_selectedStartDateTime!)) {
-                      if (widget.onStartDateAfterEndDateError != null) {
-                        widget.onStartDateAfterEndDateError!();
+                onSavePressed: (_canSaveStart && _canSaveEnd)
+                    ? () {
+                        if (widget.isForceEndDateAfterStartDate) {
+                          if (_selectedEndDateTime!
+                              .isBefore(_selectedStartDateTime!)) {
+                            if (widget.onStartDateAfterEndDateError != null) {
+                              widget.onStartDateAfterEndDateError!();
+                            }
+
+                            return;
+                          }
+                        }
+
+                        Navigator.pop<List<DateTime>>(
+                          context,
+                          [
+                            _selectedStartDateTime!,
+                            _selectedEndDateTime!,
+                          ],
+                        );
                       }
-
-                      return;
-                    }
-                  }
-
-                  Navigator.pop<List<DateTime>>(
-                    context,
-                    [
-                      _selectedStartDateTime!,
-                      _selectedEndDateTime!,
-                    ],
-                  );
-                } : null,
+                    : null,
               ),
             ],
           ),

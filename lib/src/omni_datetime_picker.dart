@@ -101,7 +101,7 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker> {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             widget.onCanSaveChanged?.call(state.isValidTime);
           });
-          
+
           return ScrollConfiguration(
             behavior: CustomScrollBehavior(),
             child: Column(

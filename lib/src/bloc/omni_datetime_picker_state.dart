@@ -39,17 +39,18 @@ sealed class OmniDatetimePickerState extends Equatable {
         return false;
       }
       // If same hour, check minute level
-      if (dateTime.hour == firstDate.hour && dateTime.minute < firstDate.minute) {
+      if (dateTime.hour == firstDate.hour &&
+          dateTime.minute < firstDate.minute) {
         return false;
       }
       // If same hour and minute, check second level
-      if (dateTime.hour == firstDate.hour && 
-          dateTime.minute == firstDate.minute && 
+      if (dateTime.hour == firstDate.hour &&
+          dateTime.minute == firstDate.minute &&
           dateTime.second < firstDate.second) {
         return false;
       }
     }
-    
+
     // If on lastDate, check individual time components
     if (isLastDate) {
       // Check hour level
@@ -61,13 +62,13 @@ sealed class OmniDatetimePickerState extends Equatable {
         return false;
       }
       // If same hour and minute, check second level
-      if (dateTime.hour == lastDate.hour && 
-          dateTime.minute == lastDate.minute && 
+      if (dateTime.hour == lastDate.hour &&
+          dateTime.minute == lastDate.minute &&
           dateTime.second > lastDate.second) {
         return false;
       }
     }
-    
+
     return true;
   }
 
