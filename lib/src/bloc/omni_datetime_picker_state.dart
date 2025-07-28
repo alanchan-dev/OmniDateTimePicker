@@ -32,14 +32,40 @@ sealed class OmniDatetimePickerState extends Equatable {
   }
 
   bool get isValidTime {
-    // If on firstDate, time must not be before firstDate's time
-    if (isFirstDate && dateTime.isBefore(firstDate)) {
-      return false;
+    // If on firstDate, check individual time components
+    if (isFirstDate) {
+      // Check hour level
+      if (dateTime.hour < firstDate.hour) {
+        return false;
+      }
+      // If same hour, check minute level
+      if (dateTime.hour == firstDate.hour && dateTime.minute < firstDate.minute) {
+        return false;
+      }
+      // If same hour and minute, check second level
+      if (dateTime.hour == firstDate.hour && 
+          dateTime.minute == firstDate.minute && 
+          dateTime.second < firstDate.second) {
+        return false;
+      }
     }
     
-    // If on lastDate, time must not be after lastDate's time  
-    if (isLastDate && dateTime.isAfter(lastDate)) {
-      return false;
+    // If on lastDate, check individual time components
+    if (isLastDate) {
+      // Check hour level
+      if (dateTime.hour > lastDate.hour) {
+        return false;
+      }
+      // If same hour, check minute level
+      if (dateTime.hour == lastDate.hour && dateTime.minute > lastDate.minute) {
+        return false;
+      }
+      // If same hour and minute, check second level
+      if (dateTime.hour == lastDate.hour && 
+          dateTime.minute == lastDate.minute && 
+          dateTime.second > lastDate.second) {
+        return false;
+      }
     }
     
     return true;

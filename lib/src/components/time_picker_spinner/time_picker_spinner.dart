@@ -106,14 +106,10 @@ class TimePickerSpinner extends StatelessWidget {
                                   : 0;
                           final hourValue = index + hourOffset;
                           
-                          if (!_isHourDisabled(hourValue, datetimeBloc.state)) {
-                            datetimeBloc.add(UpdateHour(hour: hourValue));
-                          }
+                          datetimeBloc.add(UpdateHour(hour: hourValue));
                         } else {
                           final hourValue = int.parse(state.hours[index]);
-                          if (!_isHourDisabled(hourValue, datetimeBloc.state)) {
-                            datetimeBloc.add(UpdateHour(hour: hourValue));
-                          }
+                          datetimeBloc.add(UpdateHour(hour: hourValue));
                         }
                       },
                       children: List.generate(
@@ -121,9 +117,10 @@ class TimePickerSpinner extends StatelessWidget {
                         state.hours.length,
                         (index) {
                           String hour = state.hours[index];
+                          // Calculate hour value based on current state rather than controller selection
                           final int hourValue = is24HourMode ? int.parse(hour) : 
                               (hour == '12' ? 0 : int.parse(hour)) + 
-                              (state.abbreviationController.hasClients && state.abbreviationController.selectedItem == 1 ? 12 : 0);
+                              (datetimeBloc.state.dateTime.hour >= 12 ? 12 : 0);
                           
                           final bool isDisabled = _isHourDisabled(hourValue, datetimeBloc.state);
 
@@ -157,9 +154,7 @@ class TimePickerSpinner extends StatelessWidget {
                       selectionOverlay: selectionOverlay,
                       onSelectedItemChanged: (index) {
                         final minuteValue = int.parse(state.minutes[index]);
-                        if (!_isMinuteDisabled(minuteValue, datetimeBloc.state)) {
-                          datetimeBloc.add(UpdateMinute(minute: minuteValue));
-                        }
+                        datetimeBloc.add(UpdateMinute(minute: minuteValue));
                       },
                       children: List.generate(
                         state.minutes.length,
@@ -198,9 +193,7 @@ class TimePickerSpinner extends StatelessWidget {
                         selectionOverlay: selectionOverlay,
                         onSelectedItemChanged: (index) {
                           final secondValue = int.parse(state.seconds[index]);
-                          if (!_isSecondDisabled(secondValue, datetimeBloc.state)) {
-                            datetimeBloc.add(UpdateSecond(second: secondValue));
-                          }
+                          datetimeBloc.add(UpdateSecond(second: secondValue));
                         },
                         children: List.generate(
                           state.seconds.length,
