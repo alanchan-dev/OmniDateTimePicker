@@ -91,6 +91,8 @@ class _RangePickerDialogState extends State<RangePickerDialog>
   late final TabController _tabController;
   DateTime? _selectedStartDateTime;
   DateTime? _selectedEndDateTime;
+  bool _canSaveStart = true;
+  bool _canSaveEnd = true;
 
   @override
   void initState() {
@@ -161,6 +163,11 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                         onDateTimeChanged: (dateTime) {
                           _selectedStartDateTime = dateTime;
                         },
+                        onCanSaveChanged: (canSaveValue) {
+                          setState(() {
+                            _canSaveStart = canSaveValue;
+                          });
+                        },
                         initialDate:
                             widget.startInitialDate ?? widget.startFirstDate,
                         firstDate: widget.startFirstDate,
@@ -185,6 +192,11 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                         key: const ValueKey('end'),
                         onDateTimeChanged: (dateTime) {
                           _selectedEndDateTime = dateTime;
+                        },
+                        onCanSaveChanged: (canSaveValue) {
+                          setState(() {
+                            _canSaveEnd = canSaveValue;
+                          });
                         },
                         initialDate:
                             widget.endInitialDate ?? widget.endFirstDate,
@@ -214,7 +226,7 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                 onCancelPressed: () {
                   Navigator.of(context).pop<DateTime>();
                 },
-                onSavePressed: () {
+                onSavePressed: (_canSaveStart && _canSaveEnd) ? () {
                   if (widget.isForceEndDateAfterStartDate) {
                     if (_selectedEndDateTime!
                         .isBefore(_selectedStartDateTime!)) {
@@ -233,7 +245,7 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                       _selectedEndDateTime!,
                     ],
                   );
-                },
+                } : null,
               ),
             ],
           ),
