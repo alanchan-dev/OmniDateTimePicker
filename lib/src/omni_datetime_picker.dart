@@ -14,6 +14,7 @@ class OmniDateTimePicker extends StatefulWidget {
   final DateTime? lastDate;
   final bool Function(DateTime)? selectableDayPredicate;
   final ValueChanged<DateTime> onDateTimeChanged;
+  final ValueChanged<bool>? onCanSaveChanged;
 
   final String? amText;
   final String? pmText;
@@ -36,6 +37,7 @@ class OmniDateTimePicker extends StatefulWidget {
     this.lastDate,
     this.selectableDayPredicate,
     required this.onDateTimeChanged,
+    this.onCanSaveChanged,
     this.amText,
     this.pmText,
     this.isShowSeconds = false,
@@ -92,8 +94,14 @@ class _OmniDateTimePickerState extends State<OmniDateTimePicker> {
       child: BlocConsumer<OmniDatetimePickerBloc, OmniDatetimePickerState>(
         listener: (context, state) {
           widget.onDateTimeChanged(state.dateTime);
+          widget.onCanSaveChanged?.call(state.isValidTime);
         },
         builder: (context, state) {
+          // Call the callback in builder to ensure it's called for initial state too
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            widget.onCanSaveChanged?.call(state.isValidTime);
+          });
+          
           return ScrollConfiguration(
             behavior: CustomScrollBehavior(),
             child: Column(

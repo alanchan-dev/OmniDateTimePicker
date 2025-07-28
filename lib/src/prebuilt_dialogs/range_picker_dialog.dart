@@ -91,6 +91,8 @@ class _RangePickerDialogState extends State<RangePickerDialog>
   late final TabController _tabController;
   DateTime? _selectedStartDateTime;
   DateTime? _selectedEndDateTime;
+  bool _canSaveStart = true;
+  bool _canSaveEnd = true;
 
   @override
   void initState() {
@@ -161,7 +163,13 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                         onDateTimeChanged: (dateTime) {
                           _selectedStartDateTime = dateTime;
                         },
-                        initialDate: widget.startInitialDate,
+                        onCanSaveChanged: (canSaveValue) {
+                          setState(() {
+                            _canSaveStart = canSaveValue;
+                          });
+                        },
+                        initialDate:
+                            widget.startInitialDate ?? widget.startFirstDate,
                         firstDate: widget.startFirstDate,
                         lastDate: widget.startLastDate,
                         selectableDayPredicate:
@@ -185,7 +193,13 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                         onDateTimeChanged: (dateTime) {
                           _selectedEndDateTime = dateTime;
                         },
-                        initialDate: widget.endInitialDate,
+                        onCanSaveChanged: (canSaveValue) {
+                          setState(() {
+                            _canSaveEnd = canSaveValue;
+                          });
+                        },
+                        initialDate:
+                            widget.endInitialDate ?? widget.endFirstDate,
                         firstDate: widget.endFirstDate,
                         lastDate: widget.endLastDate,
                         selectableDayPredicate:
@@ -212,7 +226,7 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                 onCancelPressed: () {
                   Navigator.of(context).pop<DateTime>();
                 },
-                onSavePressed: () {
+                onSavePressed: (_canSaveStart && _canSaveEnd) ? () {
                   if (widget.isForceEndDateAfterStartDate) {
                     if (_selectedEndDateTime!
                         .isBefore(_selectedStartDateTime!)) {
@@ -231,7 +245,7 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                       _selectedEndDateTime!,
                     ],
                   );
-                },
+                } : null,
               ),
             ],
           ),

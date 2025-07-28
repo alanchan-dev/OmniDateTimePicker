@@ -31,6 +31,46 @@ sealed class OmniDatetimePickerState extends Equatable {
     return false;
   }
 
+  bool get isValidTime {
+    // If on firstDate, check individual time components
+    if (isFirstDate) {
+      // Check hour level
+      if (dateTime.hour < firstDate.hour) {
+        return false;
+      }
+      // If same hour, check minute level
+      if (dateTime.hour == firstDate.hour && dateTime.minute < firstDate.minute) {
+        return false;
+      }
+      // If same hour and minute, check second level
+      if (dateTime.hour == firstDate.hour && 
+          dateTime.minute == firstDate.minute && 
+          dateTime.second < firstDate.second) {
+        return false;
+      }
+    }
+    
+    // If on lastDate, check individual time components
+    if (isLastDate) {
+      // Check hour level
+      if (dateTime.hour > lastDate.hour) {
+        return false;
+      }
+      // If same hour, check minute level
+      if (dateTime.hour == lastDate.hour && dateTime.minute > lastDate.minute) {
+        return false;
+      }
+      // If same hour and minute, check second level
+      if (dateTime.hour == lastDate.hour && 
+          dateTime.minute == lastDate.minute && 
+          dateTime.second > lastDate.second) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+
   @override
   List<Object> get props => [
         dateTime,
