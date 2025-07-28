@@ -1,3 +1,7 @@
+## 2.3.1
+
+- dart format
+
 ## 2.3.0
 
 - Add: Tests for improved code coverage
