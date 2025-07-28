@@ -75,15 +75,14 @@ class _SinglePickerDialogState extends State<SinglePickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-
     return Dialog(
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
       alignment: Alignment.center,
       clipBehavior: Clip.hardEdge,
       insetPadding: widget.insetPadding,
       shape: RoundedRectangleBorder(
-          borderRadius:
-              widget.borderRadius ?? const BorderRadius.all(Radius.circular(16))),
+          borderRadius: widget.borderRadius ??
+              const BorderRadius.all(Radius.circular(16))),
       child: ConstrainedBox(
         constraints: widget.constraints ?? const BoxConstraints.tightFor(),
         child: Padding(
@@ -92,7 +91,8 @@ class _SinglePickerDialogState extends State<SinglePickerDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.title != null) widget.title!,
-              if (widget.title != null && widget.titleSeparator != null) widget.titleSeparator!,
+              if (widget.title != null && widget.titleSeparator != null)
+                widget.titleSeparator!,
               Flexible(
                 child: SingleChildScrollView(
                   child: OmniDateTimePicker(
@@ -104,7 +104,7 @@ class _SinglePickerDialogState extends State<SinglePickerDialog> {
                         canSave = canSaveValue;
                       });
                     },
-                    initialDate: widget.initialDate,
+                    initialDate: widget.initialDate ?? widget.firstDate,
                     firstDate: widget.firstDate,
                     lastDate: widget.lastDate,
                     selectableDayPredicate: widget.selectableDayPredicate,
@@ -128,12 +128,14 @@ class _SinglePickerDialogState extends State<SinglePickerDialog> {
                 onCancelPressed: () {
                   Navigator.of(context).pop<DateTime>();
                 },
-                onSavePressed: canSave ? () {
-                  Navigator.pop<DateTime>(
-                    context,
-                    selectedDateTime,
-                  );
-                } : null,
+                onSavePressed: canSave
+                    ? () {
+                        Navigator.pop<DateTime>(
+                          context,
+                          selectedDateTime,
+                        );
+                      }
+                    : null,
               ),
             ],
           ),

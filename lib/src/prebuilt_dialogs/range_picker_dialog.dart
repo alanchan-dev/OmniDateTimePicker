@@ -161,7 +161,8 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                         onDateTimeChanged: (dateTime) {
                           _selectedStartDateTime = dateTime;
                         },
-                        initialDate: widget.startInitialDate,
+                        initialDate:
+                            widget.startInitialDate ?? widget.startFirstDate,
                         firstDate: widget.startFirstDate,
                         lastDate: widget.startLastDate,
                         selectableDayPredicate:
@@ -185,7 +186,8 @@ class _RangePickerDialogState extends State<RangePickerDialog>
                         onDateTimeChanged: (dateTime) {
                           _selectedEndDateTime = dateTime;
                         },
-                        initialDate: widget.endInitialDate,
+                        initialDate:
+                            widget.endInitialDate ?? widget.endFirstDate,
                         firstDate: widget.endFirstDate,
                         lastDate: widget.endLastDate,
                         selectableDayPredicate:
