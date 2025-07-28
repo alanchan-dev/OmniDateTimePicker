@@ -124,6 +124,7 @@ class OmniDatetimePickerBloc
     );
   }
 
+
   EventTransformer<Event> debounce<Event>(Duration duration) {
     return (events, mapper) =>
         events.debounceTime(duration).asyncExpand(mapper);

@@ -31,6 +31,20 @@ sealed class OmniDatetimePickerState extends Equatable {
     return false;
   }
 
+  bool get isValidTime {
+    // If on firstDate, time must not be before firstDate's time
+    if (isFirstDate && dateTime.isBefore(firstDate)) {
+      return false;
+    }
+    
+    // If on lastDate, time must not be after lastDate's time  
+    if (isLastDate && dateTime.isAfter(lastDate)) {
+      return false;
+    }
+    
+    return true;
+  }
+
   @override
   List<Object> get props => [
         dateTime,

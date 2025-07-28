@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 typedef ButtonRowBuilder = List<Widget> Function(
   void Function() onCancelPressed,
   String cancelText,
-  void Function() onSavePressed,
+  void Function()? onSavePressed,
   String saveText,
 );
 
@@ -16,7 +16,7 @@ class ButtonRow extends StatelessWidget {
   });
 
   final void Function() onCancelPressed;
-  final void Function() onSavePressed;
+  final void Function()? onSavePressed;
 
   final ButtonRowBuilder? actionsBuilder;
 
