@@ -100,6 +100,7 @@ class TimePickerSpinner extends StatelessWidget {
                       onSelectedItemChanged: (index) {
                         if (!is24HourMode) {
                           final hourOffset =
+                              state.abbreviationController.hasClients && 
                               state.abbreviationController.selectedItem == 1
                                   ? 12
                                   : 0;
@@ -122,7 +123,7 @@ class TimePickerSpinner extends StatelessWidget {
                           String hour = state.hours[index];
                           final int hourValue = is24HourMode ? int.parse(hour) : 
                               (hour == '12' ? 0 : int.parse(hour)) + 
-                              (state.abbreviationController.selectedItem == 1 ? 12 : 0);
+                              (state.abbreviationController.hasClients && state.abbreviationController.selectedItem == 1 ? 12 : 0);
                           
                           final bool isDisabled = _isHourDisabled(hourValue, datetimeBloc.state);
 
