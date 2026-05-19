@@ -182,7 +182,8 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
           DateUtils.isSameDay(widget.currentDate, _selectedDate);
       final String semanticLabelSuffix =
           isToday ? ', ${_localizations.currentDateLabel}' : '';
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         '${_localizations.formatFullDate(_selectedDate!)}$semanticLabelSuffix',
         _textDirection,
       );
@@ -208,12 +209,14 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
       _mode = mode;
       if (_selectedDate != null) {
         if (_mode == DatePickerMode.day) {
-          SemanticsService.announce(
+          SemanticsService.sendAnnouncement(
+            View.of(context),
             _localizations.formatMonthYear(_selectedDate!),
             _textDirection,
           );
         } else {
-          SemanticsService.announce(
+          SemanticsService.sendAnnouncement(
+            View.of(context),
             _localizations.formatYear(_selectedDate!),
             _textDirection,
           );
@@ -269,7 +272,8 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
               DateUtils.isSameDay(widget.currentDate, _selectedDate);
           final String semanticLabelSuffix =
               isToday ? ', ${_localizations.currentDateLabel}' : '';
-          SemanticsService.announce(
+          SemanticsService.sendAnnouncement(
+            View.of(context),
             '${_localizations.selectedDateLabel} ${_localizations.formatFullDate(_selectedDate!)}$semanticLabelSuffix',
             _textDirection,
           );
@@ -588,7 +592,8 @@ class _MonthPickerState extends State<_MonthPicker> {
           // the same day of the month.
           _focusedDay = _focusableDayForMonth(_currentMonth, _focusedDay!.day);
         }
-        SemanticsService.announce(
+        SemanticsService.sendAnnouncement(
+          View.of(context),
           _localizations.formatMonthYear(_currentMonth),
           _textDirection,
         );

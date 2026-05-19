@@ -1,3 +1,8 @@
+## 2.3.2
+
+- Breaking: Minimum required Flutter version 3.35.0
+- Fix: Deprecated `announce` usage.
+
 ## 2.3.1
 
 - dart format
