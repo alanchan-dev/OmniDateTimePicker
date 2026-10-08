@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   flutter_bloc: ^9.1.1
-  equatable: ^2.0.8
+  equatable: ^3.0.0
   rxdart: ^0.28.0
 
   cupertino_ui: any
