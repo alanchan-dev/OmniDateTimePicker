@@ -1,3 +1,7 @@
+## 2.3.3
+
+- Breaking: Minimum required Flutter version 3.47.0
+
 ## 2.3.2
 
 - Breaking: Minimum required Flutter version 3.35.0
