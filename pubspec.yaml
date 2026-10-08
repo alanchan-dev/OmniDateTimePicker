@@ -16,8 +16,8 @@ dependencies:
   equatable: ^3.0.0
   rxdart: ^0.28.0
 
-  cupertino_ui: any
-  material_ui: any
+  cupertino_ui: ^1.0.0
+  material_ui: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
