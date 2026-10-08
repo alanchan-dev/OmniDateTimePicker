@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'components/button_row.dart';
 import 'enums/default_tab.dart';
